@@ -1,0 +1,87 @@
+/* COLORSET */
+/* COLORSET */
+/* COLORSET */
+
+.header-container,
+.footer-container,
+.main aside {
+    background: #272727;
+}
+
+
+nav a {
+    background: #FB503C;
+}
+
+
+.header-container {
+    border-bottom: 13px solid #FB503C;
+}
+
+.footer-container,
+.main aside {
+    border-top: 20px solid #FB503C;
+}
+
+
+
+/* HEADER */
+
+header h1.title {
+    font-family: Ubuntu, sans-serif;
+}
+
+header h1 img {
+    height: 32px;
+    margin-right: 12px;
+}
+
+
+
+/* TWEETS */
+/* TWEETS */
+/* TWEETS */
+
+aside {
+    height: 550px;
+    overflow: auto;
+}
+
+#tweets .loading {
+    padding: 10px 20px;
+    color: #ccc;
+}
+
+.tweet {
+    font-size: 13px;
+    margin: 4px 0;
+    padding: 8px;
+    border-bottom:1px solid #fb503c;
+}
+
+.tweet a{
+    color: #fb503c;
+}
+
+.tweet img {
+    float: left;
+}
+.tweet .text {
+    margin: 0;
+    margin-left: 44px;
+}
+.tweet .username {
+    display: block;
+}
+.tweet .username a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #ccc;
+}
+.tweet .time a {
+    font-size: 80%;
+    color: #888;
+    white-space: nowrap;
+    text-decoration: none;
+    padding-left: 8px;
+}
