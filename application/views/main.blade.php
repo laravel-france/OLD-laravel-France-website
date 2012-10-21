@@ -12,13 +12,14 @@
 
         {{ HTML::style('css/vendors/normalize.min.css') }}
         {{ HTML::style('css/vendors/initializr.css') }}
+        {{ HTML::style('css/vendors/prettify.css') }}
 
         {{ HTML::style('http://fonts.googleapis.com/css?family=Ubuntu') }}
 
 
         {{ HTML::style('css/main.css') }}
 
-        {{ HTML::script('js/vendor/modernizr-2.6.1-respond-1.1.0.min.js') }}
+        {{ HTML::script('js/vendors/modernizr-2.6.1-respond-1.1.0.min.js') }}
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -56,11 +57,16 @@
         </div>
 
         {{ HTML::script('http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js') }}
-        {{ HTML::script('https://raw.github.com/elektronaut/jquery.livetwitter/master/jquery.livetwitter.min.js') }}
+        {{ HTML::script('js/vendors/jquery.livetwitter.min.js') }}
+        {{ HTML::script('js/vendors/prettify/prettify.js')}}
+        <script>prettyPrint();</script>
+
+
         {{ HTML::script('js/plugins.js') }}
         {{ HTML::script('js/main.js') }}
 
         @yield('javascript')
+
 
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

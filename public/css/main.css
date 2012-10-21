@@ -1,3 +1,11 @@
+body {
+    font-family: Ubuntu, sans-serif;
+}
+
+a {
+    color: #FB503C;
+}
+
 /* COLORSET */
 /* COLORSET */
 /* COLORSET */
@@ -23,7 +31,9 @@ nav a {
     border-top: 20px solid #FB503C;
 }
 
-
+h2 {
+    border-bottom: 1px solid #FB503C;
+}
 
 /* HEADER */
 
@@ -36,15 +46,28 @@ header h1 img {
     margin-right: 12px;
 }
 
+/* BODY */
 
+.inline-quote {
+    font-style: italic;
+    border-bottom: 1px dotted gray;
+}
+
+
+/* prettyPrint */
+pre.prettyprint {
+    padding-left: 5px;
+}
 
 /* TWEETS */
 /* TWEETS */
 /* TWEETS */
 
-aside {
+aside#livetweet{
     height: 550px;
     overflow: auto;
+    -webkit-box-shadow: 3px 3px 10px #999, -3px 3px 10px #999, 3px -3px 10px #999, -3px -3px 10px #999;
+    box-shadow: 3px 3px 10px #999, -3px 3px 10px #999, 3px -3px 10px #999, -3px -3px 10px #999;
 }
 
 #tweets .loading {
@@ -56,11 +79,11 @@ aside {
     font-size: 13px;
     margin: 4px 0;
     padding: 8px;
-    border-bottom:1px solid #fb503c;
+    border-bottom:1px solid #FB503C;
 }
 
 .tweet a{
-    color: #fb503c;
+    color: #FB503C;
 }
 
 .tweet img {
