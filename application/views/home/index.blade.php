@@ -1,6 +1,6 @@
 @layout('main')
 
-@section('container')
+@section('content')
     
     <article>
         
@@ -76,7 +76,7 @@ $ php artistan bundle:install laravel-oauth2
 
         <footer>
             <h3>Convaincu ?</h3>
-            <p>Alors ne perdez plus une minute ! Téléchargez dès à présent la {{ HTML::link('http://laravel.com/download','dernière version de laravel') }}, et suivez le guide !</p>
+            <p>Alors ne perdez plus une minute ! Téléchargez dès à présent la {{ HTML::link('http://laravel.com/download','dernière version de laravel') }}, et suivez le guides !</p>
         </footer>
     </article>
 
@@ -110,6 +110,4 @@ $ php artistan bundle:install laravel-oauth2
 	        }});
 	});
 	</script>
-
-    
 @endsection

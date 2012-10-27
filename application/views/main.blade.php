@@ -29,13 +29,15 @@
         <div class="header-container">
             <header class="wrapper clearfix">
                 <h1 class="title">
-                    {{ HTML::image(URL::to_asset('img/laravel_logo.png'), 'Laravel Logo') }}
-                    laravel France
+                    <a href="{{ URL::home() }}">
+                        {{ HTML::image(URL::to_asset('img/laravel_logo.png'), 'Laravel Logo') }}
+                        laravel France
+                    </a>
                 </h1>
                 <nav>
                     <ul>
-                        <li><a href="#">Accueil</a></li>
-                        <li><a href="#">Tutoriels</a></li>
+                        <li>{{ HTML::link(URL::home(), 'Accueil') }}</li>
+                        <li>{{ HTML::link(URL::to('guides'), 'Tutoriels') }}</li>
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
@@ -45,7 +47,7 @@
         <div class="main-container">
             <div class="main wrapper clearfix">
 
-                @yield("container")
+                @yield("content")
 
             </div> <!-- #main -->
         </div> <!-- #main-container -->
