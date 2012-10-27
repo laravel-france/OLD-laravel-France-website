@@ -1,0 +1,3 @@
+[submodule "bundles/guides"]
+	path = bundles/guides
+	url = git@github.com:laravel-france/laravel-france-doc.git
