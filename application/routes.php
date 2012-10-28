@@ -3,8 +3,17 @@
 
 Route::get('/', function()
 {
-	return View::make('home.index');
+    return View::make('home.index');
 });
+
+
+Route::get('telecharger, download', array('as'=>'telecharger', function()
+{
+    // later: count number of download from this button
+
+    // Redirect to laravel.com/download
+    return Redirect::to('http://laravel.com/download');
+}));
 
 /*
 |--------------------------------------------------------------------------
