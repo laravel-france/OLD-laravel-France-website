@@ -15,6 +15,9 @@ Route::get('telecharger, download', array('as'=>'telecharger', function()
     return Redirect::to('http://laravel.com/download');
 }));
 
+Route::controller(array('contact'));
+
+
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers

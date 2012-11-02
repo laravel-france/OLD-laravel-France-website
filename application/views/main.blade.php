@@ -6,7 +6,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>
+        @section('title')
+            Bienvenue sur Laravel France
+        @yield_section
+        </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -37,8 +41,8 @@
                 <nav>
                     <ul>
                         <li>{{ HTML::link(URL::home(), 'Accueil') }}</li>
-                        <li>{{ HTML::link(URL::to('guides'), 'Tutoriels') }}</li>
-                        <li><a href="#">Contact</a></li>
+                        <li>{{ HTML::link(URL::to('guides'), 'Guides') }}</li>
+                        <li>{{ HTML::link(URL::to_action('contact'), 'Contact') }}</li>
                     </ul>
                 </nav>
             </header>
@@ -54,7 +58,15 @@
 
         <div class="footer-container">
             <footer class="wrapper">
-                <h3>footer</h3>
+                <ul>
+                    <div id="download_footer">
+                        {{ HTML::link('telecharger','Télécharger',array('id'=>'download_in_footer')) }}
+                    </div>
+
+                    <li>{{ HTML::link(URL::home(), 'Accueil') }}</li>
+                    <li>{{ HTML::link(URL::to('guides'), 'Guides') }}</li>
+                    <li>{{ HTML::link(URL::to_action('contact'), 'Contact') }}</li>
+                </ul>
             </footer>
         </div>
 

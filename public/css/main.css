@@ -1,12 +1,13 @@
 @media only screen and (min-width: 1280px) {
     .wrapper {
-        width: 1152px; /* 1280px - 10% for margins */
-        margin: 0 auto;
-    }
+    width: 1152px; /* 1280px -10% for margins */
+    margin: 0 auto;
+}
 
-    .main aside{
-        padding: 0px 3% 10px;
-    }
+.main aside {
+    padding: 0px 3% 10px;
+}
+
 }
 
 body {
@@ -20,25 +21,19 @@ a {
 /* COLORSET */
 /* COLORSET */
 /* COLORSET */
-
-.header-container,
-.footer-container,
-.main aside {
+.header-container,.footer-container,.main aside {
     background: #272727;
 }
-
 
 nav a {
     background: #FB503C;
 }
 
-
 .header-container {
     border-bottom: 13px solid #FB503C;
 }
 
-.footer-container,
-.main aside {
+.footer-container,.main aside {
     border-top: 20px solid #FB503C;
 }
 
@@ -47,7 +42,6 @@ h2 {
 }
 
 /* HEADER */
-
 header h1.title {
     font-family: Ubuntu, sans-serif;
 }
@@ -63,12 +57,10 @@ header h1 img {
 }
 
 /* BODY */
-
 .inline-quote {
     font-style: italic;
     border-bottom: 1px dotted gray;
 }
-
 
 /* prettyPrint */
 pre.prettyprint {
@@ -78,10 +70,10 @@ pre.prettyprint {
 /* TWEETS */
 /* TWEETS */
 /* TWEETS */
-
-aside#livetweet{
+aside#livetweet {
     height: 550px;
     overflow: auto;
+
     -webkit-box-shadow: 3px 3px 10px #999, -3px 3px 10px #999, 3px -3px 10px #999, -3px -3px 10px #999;
     box-shadow: 3px 3px 10px #999, -3px 3px 10px #999, 3px -3px 10px #999, -3px -3px 10px #999;
 }
@@ -95,28 +87,32 @@ aside#livetweet{
     font-size: 13px;
     margin: 4px 0;
     padding: 8px;
-    border-bottom:1px solid #FB503C;
+    border-bottom: 1px solid #FB503C;
 }
 
-.tweet a{
+.tweet a {
     color: #FB503C;
 }
 
 .tweet img {
     float: left;
 }
+
 .tweet .text {
     margin: 0;
     margin-left: 44px;
 }
+
 .tweet .username {
     display: block;
 }
+
 .tweet .username a {
     font-weight: bold;
     text-decoration: none;
     color: #ccc;
 }
+
 .tweet .time a {
     font-size: 80%;
     color: #888;
@@ -125,15 +121,42 @@ aside#livetweet{
     padding-left: 8px;
 }
 
-
-#guides aside#menu{
-    float:left;
+#guides aside#menu {
+    float: left;
 }
 
-#guides aside#menu ul{
-    margin-top:0em;
+#guides aside#menu ul {
+    margin-top: 0em;
 }
 
-#guides article{
-    float:right;
+#guides article {
+    float: right;
+}
+
+input#name {
+    display: none;
+}
+
+form#contact_form p>span {
+    color: red;
+}
+
+.footer-container li {
+    display: inline-block;
+    margin-right: 25px;
+}
+
+#download_footer {
+    float: right;
+}
+
+#download_in_footer {
+    background-color: #FB503C;
+    color: #272727;
+    padding: 7px;
+    padding: 10px 25px 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.1em;
 }
