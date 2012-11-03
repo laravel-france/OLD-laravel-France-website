@@ -1,162 +1,123 @@
-@media only screen and (min-width: 1280px) {
-    .wrapper {
-    width: 1152px; /* 1280px -10% for margins */
-    margin: 0 auto;
-}
-
-.main aside {
-    padding: 0px 3% 10px;
-}
-
-}
-
 body {
-    font-family: Ubuntu, sans-serif;
+    font-family: Ubuntu, Arial, Helvetica, sans-serif;
 }
 
-a {
-    color: #FB503C;
+
+/**
+    HEADER
+*/
+.navbar-inner {
+    background: #272727 none;
 }
 
-/* COLORSET */
-/* COLORSET */
-/* COLORSET */
-.header-container,.footer-container,.main aside {
-    background: #272727;
+.navbar-fixed-top .navbar-inner,.navbar-static-top .navbar-inner {
+    border-bottom: 7px solid #FB503C;
 }
 
-nav a {
-    background: #FB503C;
+.navbar .brand {
+    color: white;
+    text-shadow: none;
+    font-family: Ubuntu, Arial, Helvetica, sans-serif;
 }
 
-.header-container {
-    border-bottom: 13px solid #FB503C;
-}
-
-.footer-container,.main aside {
-    border-top: 20px solid #FB503C;
-}
-
-h2 {
-    border-bottom: 1px solid #FB503C;
-}
-
-/* HEADER */
-header h1.title {
-    font-family: Ubuntu, sans-serif;
-}
-
-header h1.title a {
-    color: inherit;
-    text-decoration: none;
-}
-
-header h1 img {
-    height: 32px;
-    margin-right: 12px;
-}
-
-/* BODY */
-.inline-quote {
-    font-style: italic;
-    border-bottom: 1px dotted gray;
-}
-
-/* prettyPrint */
-pre.prettyprint {
-    padding-left: 5px;
-}
-
-/* TWEETS */
-/* TWEETS */
-/* TWEETS */
-aside#livetweet {
-    height: 550px;
-    overflow: auto;
-
-    -webkit-box-shadow: 3px 3px 10px #999, -3px 3px 10px #999, 3px -3px 10px #999, -3px -3px 10px #999;
-    box-shadow: 3px 3px 10px #999, -3px 3px 10px #999, 3px -3px 10px #999, -3px -3px 10px #999;
-}
-
-#tweets .loading {
-    padding: 10px 20px;
-    color: #ccc;
-}
-
-.tweet {
-    font-size: 13px;
-    margin: 4px 0;
-    padding: 8px;
-    border-bottom: 1px solid #FB503C;
-}
-
-.tweet a {
-    color: #FB503C;
-}
-
-.tweet img {
-    float: left;
-}
-
-.tweet .text {
+.navbar h1 {
     margin: 0;
-    margin-left: 44px;
+    font-weight: bold;
 }
 
-.tweet .username {
+.navbar h1 img {
+    margin-right: 10px;
+}
+
+.navbar .nav > li {
+    line-height: 50px;
+}
+
+.navbar .nav > li a {
+    color: white;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.navbar .nav > li a:hover,.navbar .nav > li a:focus,.navbar .nav > .active > a,.navbar .nav > .active > a:hover,.navbar .nav > .active > a:focus, .navbar .nav li a.downloadlink {
+    background: #FB503C;
+    color: white;
+    text-shadow: none;
+}
+
+.navbar .btn, .navbar .btn-group {
+    margin-top: 15px;
+}
+
+.navbar .nav > li.divider{
+    content:" ";
+    width:15px;
+}
+
+
+/**
+    LIVETWEET
+*/
+
+aside#livetweet {
+    background-color: #272727;
+    border: 2px solid #FB503C;
+    border-radius: 4px;
+}
+
+aside#livetweet h3 {
+    background-color: #fb503c;
+    color: white;
+    margin: 0;
+    padding-left: 10px;
+}
+
+aside#livetweet div#tweets {
+    max-height:450px;
+    overflow: auto;
+    padding:5px 10px 5px 10px;
+}
+
+aside#livetweet .tweet img {
+    float:left;
+    margin: 6px;
+}
+
+aside#livetweet .tweet p {
+    margin-left: 35px;
+    color:white;
+}
+
+
+aside#livetweet .tweet span {
     display: block;
 }
 
-.tweet .username a {
+aside#livetweet .tweet span.username a {
     font-weight: bold;
-    text-decoration: none;
     color: #ccc;
 }
 
-.tweet .time a {
-    font-size: 80%;
-    color: #888;
-    white-space: nowrap;
-    text-decoration: none;
-    padding-left: 8px;
+
+/* SIZE DEPENDING - RESPONSIVE */
+@media (min-width: 979px) {
+    body {
+        margin-top: 95px;
+    }
+
+    .navbar .nav > li {
+        margin-right: 10px;
+    }
 }
 
-#guides aside#menu {
-    float: left;
-}
+@media (max-width: 979px) {
+    .navbar .btn-navbar {
+    display: block;
+    margin-top: 20px;
+    }
 
-#guides aside#menu ul {
-    margin-top: 0em;
-}
+    .nav-collapse .nav > li.divider {
+        height:15px;
+    }
 
-#guides article {
-    float: right;
-}
-
-input#name {
-    display: none;
-}
-
-form#contact_form p>span {
-    color: red;
-}
-
-.footer-container li {
-    display: inline-block;
-    margin-right: 25px;
-}
-
-#download_footer {
-    float: right;
-}
-
-#download_in_footer {
-    background-color: #FB503C;
-    color: #272727;
-    padding: 7px;
-    padding: 10px 25px 10px 25px;
-    border-radius: 5px;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 1.1em;
 }

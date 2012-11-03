@@ -2,8 +2,10 @@
 
 @section('content')
     
+<div class="row">
+    <div class="span7">
+
     <article>
-        
         <header>
             <h1>Un framework simple &amp; élégant</h1>
             <p>laravel est un framework MVC PHP 5.3, créé par {{ HTML::link('https://twitter.com/taylorotwell', 'Taylor Otwell') }}, pour rendre le développement d'application web plus facile et rapide. La recette utilisée pour laravel marche : simplicité, intuitivité, puissance et flexibilité. Jetez un oeil vous même :</p>
@@ -79,17 +81,27 @@ $ php artistan bundle:install laravel-oauth2
             <p>Alors ne perdez plus une minute ! Téléchargez dès à présent la {{ HTML::link('http://laravel.com/download','dernière version de laravel') }}, et suivez le guides !</p>
         </footer>
     </article>
+</div>
+
+<div class="span4 offset1">
 
     <aside id="livetweet">
         <h3>LiveTweet</h3>
 
-        <div id="tweets"></div>
+        <div id="tweets">
+            <div style="margin:20px auto; width:100%; text-align:center">
+                {{ HTML::image(URL::to_asset('img/loading_nam.gif'),'Chargement....',array('width'=>'50px')) }}
+            </div>
+        </div>
     </aside>
 
+
+</div>
 @endsection
 
 
 @section('javascript')
+    {{ HTML::script('js/vendors/jquery.livetwitter.min.js') }}
 
 	<script>
 	$(document).ready(function($){
