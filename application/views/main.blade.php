@@ -6,10 +6,12 @@
     Bienvenue sur Laravel France
     @yield_section</title>
     <!-- Bootstrap -->
+    @section('css')
     {{ HTML::style('css/bootstrap.min.css') }}
     {{ HTML::style('css/vendors/prettify.css') }}
     {{ HTML::style('css/main.css') }}
     {{ HTML::style('http://fonts.googleapis.com/css?family=Ubuntu') }}
+    @yield_section
   </head>
   <body>
 
@@ -34,6 +36,7 @@
                 <ul class="nav pull-right">
                   <li class="{{ URI::is('/') ? 'active' : '' }}">{{ HTML::link(URL::home(), 'Accueil'); }}</li>
                   <li class="{{ URI::is( '^guides*') ? 'active' : '' }}">{{ HTML::link(URL::to('guides'), 'Guide'); }}</li>
+                  <li class="{{ URI::is( '^blog*') ? 'active' : '' }}">{{ HTML::link(URL::to('blog'), 'Blog'); }}</li>
                   <li class="{{ URI::is( '^contact*') ? 'active' : '' }}">{{ HTML::link(URL::to_action('contact'), 'Contact'); }}</li>
                   <li><a href="{{URL::to('telecharger')}}" class='downloadlink btn btn-large'><i class="icon-download-alt icon-white"></i> Télécharger</a></li>
                 </ul>
@@ -43,7 +46,7 @@
         </div>
     </header>
 
-    <div class="container">
+    <div id="page" class="container">
         @yield('content')
 
       <footer>
@@ -58,7 +61,13 @@
         {{ HTML::script('http://code.jquery.com/jquery-latest.js') }}
         {{ HTML::script('js/bootstrap.min.js') }}
         {{ HTML::script('js/vendors/prettify/prettify.js')}}
-        <script>prettyPrint();</script>
+        <script>
+            prettyPrint();
+
+            var shiftWindow = function() { scrollBy(0, -77) };
+            if (location.hash) shiftWindow();
+            window.addEventListener("hashchange", shiftWindow);
+        </script>
         @yield('javascript')
   </body>
-</html>s
+</html>

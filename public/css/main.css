@@ -1,5 +1,11 @@
 body {
     font-family: Ubuntu, Arial, Helvetica, sans-serif;
+    margin-bottom:100px;
+}
+
+#page h1{
+    border-bottom:2px solid #fb503c;
+    color: #272727;
 }
 
 
@@ -76,6 +82,10 @@ aside#livetweet div#tweets {
     max-height:450px;
     overflow: auto;
     padding:5px 10px 5px 10px;
+}
+
+aside#livetweet .tweet {
+    border-bottom: 1px solid #2C2D41;
 }
 
 aside#livetweet .tweet img {

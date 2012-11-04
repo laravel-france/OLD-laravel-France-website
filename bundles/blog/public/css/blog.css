@@ -1,0 +1,33 @@
+.p-time {
+    padding-left: 0px;
+    width: 90px;
+    margin: 8px 15px 0 0;
+    float: left;
+    border-right: 3px solid #000000;
+}
+
+.p-time strong {
+    letter-spacing: -1px;
+    float: left;
+}
+
+.p-time .day {
+    font: normal 34px/30px 'Ubuntu';
+    color: #000;
+    padding-right: 7px;
+}
+
+.p-time .month-year {
+    font: bold 14px/15px 'Ubuntu';
+    text-transform: lowercase;
+    color: #999;
+}
+
+.single h1.postTitle {
+margin-top: 3px;
+font-size: 35px;
+}
+
+.single h1.postTitle a {
+    color: #272727;
+}

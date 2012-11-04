@@ -36,5 +36,9 @@
 return array(
 
 	'guides' => array('handles' => 'guides'),
+    'blog' => array(
+        'handles' => 'blog',
+        'auto' => true
+    )
 
 );
