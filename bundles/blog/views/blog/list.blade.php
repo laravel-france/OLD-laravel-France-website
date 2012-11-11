@@ -13,7 +13,7 @@
 
 <div class="row">
     <div class="span12">
-    @foreach($posts as $post)
+    @forelse($posts as $post)
         <div class="single well">
 
             <div class="p-time">
@@ -38,7 +38,10 @@
 
             </div>
         </div>
-    @endforeach
+        
+    @empty
+        <h2>Aucun article</h2>
+    @endforelse
     </div>
 </div>
 @endsection
