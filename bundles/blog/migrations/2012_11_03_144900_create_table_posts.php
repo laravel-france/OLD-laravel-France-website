@@ -20,10 +20,9 @@ class Blog_Create_Table_Posts {
             $table->text('content');
 
             $table->integer('author_id')->unsigned();
-            $table->integer('category_id')->unsigned();
-            
             $table->foreign('author_id')->references('id')->on('users')->on_update('CASCADE')->on_delete('RESTRICT');
-            $table->foreign('category_id')->references('id')->on('categories')->on_update('CASCADE')->on_delete('RESTRICT');
+
+            $table->date('publicated_at');
 
             $table->timestamps();
         });

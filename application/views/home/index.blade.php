@@ -1,5 +1,7 @@
 @layout('main')
 
+@section('page_class')homepage@endsection
+
 @section('content')
     
 <div class="row">
@@ -84,6 +86,21 @@ $ php artistan bundle:install laravel-oauth2
 </div>
 
 <div class="span4 offset1">
+
+@if(count($posts) > 0)
+    <aside>
+        <h3>En direct du blog</h3>
+        <ul id="posts">
+            @foreach($posts as $post)
+            <li class="post">
+                <a href="{{ URL::to_action('blog::home@resolve', array($post->id)) }}">{{ $post->title }}</a><br />
+                <small>Le {{ $post->publicated_at->format('d-m-Y') }}</small>
+            </li>
+            @endforeach
+        </ul>
+        <p style="text-align:right"><a href="{{ URL::to_action('blog::home@list') }}">Aller au blog &gt;&gt;&nbsp;</a></p>
+    </aside>
+@endif
 
     <aside id="livetweet">
         <h3>LiveTweet</h3>

@@ -13,41 +13,35 @@
 
 <div class="row">
     <div class="span12">
-    @forelse($posts as $post)
+        @forelse($posts as $post)
         <div class="single well">
 
             <div class="p-time">
                 <strong class="day">{{ $post->created_at->format('d') }}</strong>
                 <strong class="month-year">{{ $post->created_at->format('M') }}<br>{{ $post->created_at->format('Y') }}</strong>
             </div>
-                        
+
             <h1 id="post-{{$post->id}}" class="postTitle">
                 <a href="{{ URL::to_action('blog::home@show',array($post->id, $post->slug)) }}" rel="bookmark">
                     {{ $post->title }}
                 </a>
             </h1>
-                        
+
             <div class="entry">
-                <div class="texty">
-                    <p>
-                        {{ $post->content }}
-                    </p>
-                </div>
-
-                <p class="postmetadata"><small>Catégorie : <a href="{{ URL::to_action('blog::category@index', array($post->category->slug)); }}" rel="category">{{ $post->category->name }}</a> | <a href="{{ URL::to_action('blog::home@show',array($post->id, $post->slug)) }}#disqus_thread">X COMMENTS »</a></p>
-
+                {{ $post->content }}
             </div>
+
+            <p class="postmetadata"><a href="{{ URL::to_action('blog::home@show',array($post->id, $post->slug)) }}#disqus_thread" data-disqus-identifier="disqus_blog_{{$post->id}}"></a></small></p>
+
         </div>
-        
-    @empty
+        @empty
         <h2>Aucun article</h2>
-    @endforelse
+        @endforelse
     </div>
 </div>
 @endsection
 
-{{ $pagination }}
-
+@section('afterhtml')
 <script type="text/javascript">
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 var disqus_shortname = 'laravelfr'; // required: replace example with your forum shortname
@@ -60,3 +54,4 @@ var disqus_shortname = 'laravelfr'; // required: replace example with your forum
     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
 }());
 </script>
+@endsection

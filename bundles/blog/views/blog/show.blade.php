@@ -19,60 +19,48 @@
                 <strong class="day">{{ $post->created_at->format('d') }}</strong>
                 <strong class="month-year">{{ $post->created_at->format('M') }}<br>{{ $post->created_at->format('Y') }}</strong>
             </div>
-                        
+
             <h1 id="post-{{$post->id}}" class="postTitle">
                 <a href="{{ URL::to_action('blog::home@show',array($post->id, $post->slug)) }}" rel="bookmark">
                     {{ $post->title }}
                 </a>
             </h1>
-                        
+
             <div class="entry">
-                <div class="texty">
-                    {{ $post->content }}
-                </div>
-
-                <p class="postmetadata"><small>Catégorie : <a href="LIEN-CAT" rel="category">{{ $post->category->name }}</a>
-
+                {{ $post->content }}
             </div>
+            
+            <p class="postmetadata"><a href="{{ URL::to_action('blog::home@show',array($post->id, $post->slug)) }}#disqus_thread" data-disqus-identifier="disqus_blog_{{$post->id}}"></a></small></p>
         </div>
+    </div>
+</div>
 
 
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'laravelfr'; // required: replace example with your forum shortname
+        var disqus_identifier = 'disqus_blog_{{$post->id}}';
 
-
-
-
-        <div id="disqus_thread"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = 'laravelfr'; // required: replace example with your forum shortname
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        
-
-
-
-
-
-
-
-
-
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
     </div>
 </div>
 @endsection
 
+@section('afterhtml')
 <script type="text/javascript">
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 var disqus_shortname = 'laravelfr'; // required: replace example with your forum shortname
+var disqus_identifier = 'disqus_blog_{{$post->id}}';
 
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function () {
@@ -82,3 +70,4 @@ var disqus_shortname = 'laravelfr'; // required: replace example with your forum
     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
 }());
 </script>
+@endsection

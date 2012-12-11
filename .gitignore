@@ -1,39 +1,35 @@
-# Numerous always-ignore extensions
-*.diff
-*.err
-*.orig
-*.log
-*.rej
-*.swo
-*.swp
-*.vi
-*~
-*.sass-cache
-
-# OS or Editor folders
-.DS_Store
-Thumbs.db
-.cache
-.project
-.settings
-.tmproj
-*.esproj
-nbproject
-
-# Dreamweaver added files
 _notes
-dwsync.xml
-
-# Komodo
+.project
+*~
+*.rej
+*.sass-cache
+*.err
+*.log
+.cache
 *.komodoproject
-.komodotools
-
-# Folders to ignore
-.hg
-.svn
-.CVS
-intermediate
+nbproject
+Thumbs.db
+*.diff
+# Komodo
 publish
-.idea
-
+intermediate
+*.sublime-*
+.DS_Store
+.svn
+.hg
 application/config/database.php
+*.orig
+*.swp
+*.swo
+# OS or Editor folders
+.tmproj
+.komodotools
+# Dreamweaver added files
+.idea
+# Folders to ignore
+dwsync.xml
+.settings
+*.esproj
+.CVS
+# Numerous always-ignore extensions
+*.vi

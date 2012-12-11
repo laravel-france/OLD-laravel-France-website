@@ -12,8 +12,10 @@
     {{ HTML::style('css/main.css') }}
     {{ HTML::style('http://fonts.googleapis.com/css?family=Ubuntu') }}
     @yield_section
+
+    <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="{{ URL::to_action('blog::home@rss') }}" />
   </head>
-  <body>
+  <body class="@yield('page_class')">
 
     <header>
         <div class="navbar navbar-fixed-top">
@@ -71,3 +73,4 @@
         @yield('javascript')
   </body>
 </html>
+@yield('afterhtml')

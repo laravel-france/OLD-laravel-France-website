@@ -65,17 +65,28 @@ body {
     LIVETWEET
 */
 
-aside#livetweet {
+.homepage aside {
     background-color: #272727;
     border: 2px solid #FB503C;
     border-radius: 4px;
+    margin-bottom:20px;
+    color:white;
 }
 
-aside#livetweet h3 {
+.homepage aside h3 {
     background-color: #fb503c;
     color: white;
     margin: 0;
     padding-left: 10px;
+}
+
+.homepage aside #posts {
+    list-style-type: none;
+    padding: 0;
+}
+
+.homepage aside #posts .post {
+    border-bottom: 1px solid #2C2D41;
 }
 
 aside#livetweet div#tweets {

@@ -3,17 +3,41 @@
 
 Route::get('/', function()
 {
-    return View::make('home.index');
+    $posts = \Blog\Models\Post::order_by('created_at','desc')->take(5)->get();
+
+    return View::make('home.index')
+        ->with("posts", $posts);
 });
 
 
 Route::get('telecharger, download', array('as'=>'telecharger', function()
 {
-    // later: count number of download from this button
-
-    // Redirect to laravel.com/download
     return Redirect::to('http://laravel.com/download');
 }));
+
+Route::get('login', function() {
+    return View::make('login.login');
+});
+
+Route::post('login', function() {
+    if ( Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password'))))
+    {
+        return Redirect::to('/');
+    }
+    else
+    {
+        return Redirect::to('login')
+            ->with('login_errors', true);
+    }
+});
+
+
+Route::get('logout', function() {
+    Auth::logout();
+    return Redirect::to('login');
+});
+
+
 
 
 Route::controller(array('contact'));

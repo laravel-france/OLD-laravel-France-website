@@ -40,5 +40,4 @@ return array(
         'handles' => 'blog',
         'auto' => true
     )
-
 );
