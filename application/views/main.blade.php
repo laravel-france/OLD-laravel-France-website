@@ -14,6 +14,7 @@
     @yield_section
 
     <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="{{ URL::to_action('blog::home@rss') }}" />
+    <link rel="shortcut icon" href="{{ URL::to_asset('img/favicon.png') }}">
   </head>
   <body class="@yield('page_class')">
 
