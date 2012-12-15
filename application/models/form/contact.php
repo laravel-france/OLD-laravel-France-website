@@ -3,9 +3,9 @@
 class Form_Contact {
 
     public static $rules = array(
-        'nom' => 'required|alpha',
+        'nom' => 'required',
         'email' => 'required|email',
-        'sujet' => 'alpha_num',
+        'sujet' => '',
         'message' => 'required|min:10'
     );
 
