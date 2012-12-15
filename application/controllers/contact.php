@@ -30,7 +30,7 @@ class Contact_Controller extends Base_Controller {
 
             return Redirect::to_action('contact@sent');
         } else {
-            return Redirect::to_action('contact')->with_errors($validation->errors);
+            return Redirect::to_action('contact')->with_errors($validation->errors)->with_input();
         }
     }
 

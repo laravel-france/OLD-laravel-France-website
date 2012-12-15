@@ -21,7 +21,7 @@
             <div class="control-group @if($errors->has('nom'))error@endif">
                 {{ Form::label('nom','Nom* :',array('class'=>'control-label')) }}
                 <div class="controls">
-                {{ Form::text('nom') }}
+                {{ Form::text('nom', Input::old('nom')) }}
                 {{ $errors->first('nom', '<span class="help-inline">:message</span>') }}
                 </div>
             </div>
@@ -29,7 +29,7 @@
             <div class="control-group @if($errors->has('email'))error@endif">
                 {{ Form::label('email','Email* :',array('class'=>'control-label')) }}
                 <div class="controls">
-                {{ Form::text('email') }}
+                {{ Form::text('email', Input::old('email')) }}
                 {{ $errors->first('email', '<span class="help-inline">:message</span>') }}
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <div class="control-group @if($errors->has('sujet'))error@endif">
                 {{ Form::label('sujet','Sujet :',array('class'=>'control-label')) }}
                 <div class="controls">
-                {{ Form::text('sujet') }}
+                {{ Form::text('sujet', Input::old('sujet')) }}
                 {{ $errors->first('sujet', '<span class="help-inline">:message</span>') }}
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <div class="control-group @if($errors->has('message'))error@endif">
                 {{ Form::label('message', 'Message* :',array('class'=>'control-label'))}}
                 <div class="controls">
-                {{ Form::textarea('message',null,array('class'=>'span8')) }}
+                {{ Form::textarea('message', Input::old('message'),array('class'=>'span8')) }}
                 {{ $errors->first('message', '<span class="help-inline">:message</span>') }}
                 </div>
             </div>
