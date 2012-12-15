@@ -16,8 +16,17 @@ class Contact_Controller extends Base_Controller {
         if ( $validation === true ) {
 
             $email = Config::get('email.contact');
-            // may fix that, one day...
-            mail($email,'Contact depuis Laravel.fr', print_r(Input::all(), true));
+            
+
+
+            $body = "Nom: ". Input::get('nom') ."\n";
+            $body .= "Email: ". Input::get('email') ."\n";
+            if(Input::has('sujet'))
+                $body .= "Sujet: ". Input::get('sujet') ."\n";
+            $body .= "Message:"."\n". Input::get('message');
+
+
+            mail($email,'Contact depuis Laravel.fr', $body);
 
             return Redirect::to_action('contact@sent');
         } else {
