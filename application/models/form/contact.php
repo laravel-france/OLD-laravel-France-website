@@ -5,7 +5,6 @@ class Form_Contact {
     public static $rules = array(
         'nom' => 'required',
         'email' => 'required|email',
-        'sujet' => '',
         'message' => 'required|min:10'
     );
 
