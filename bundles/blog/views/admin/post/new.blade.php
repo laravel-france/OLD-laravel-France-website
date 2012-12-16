@@ -53,26 +53,6 @@
         </div>
     </div>
 
-
-
-
-
-
-    <style>
-        .ace_wrapper {
-            position: relative;
-            width: 100%;
-            height:250px;
-        }
-
-        #intro_div, #content_div {
-            top:0;
-            right:0;
-            bottom:0;
-            left:0;
-        }
-    </style>
-
     <h4>Aperçu</h4>
     <div class="row">
         <div class="single well">
@@ -167,7 +147,7 @@
 
             if(content === "") return;
             $.post('/mdparse',{content: content},function(result){
-                $("#pw_content").html(result);
+                $("#pw_intro").html(result);
             });
         });
 
