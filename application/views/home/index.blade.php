@@ -18,7 +18,7 @@
             <p>laravel est simple, voyez par vous même :</p>
             
 <pre class="prettyprint">
-Route::get('/', function() {
+Route::get('/users/(:num)', function($user_id) {
     // On récupère l'utilisateur
     $user = User::find($user_id);
 
@@ -98,7 +98,7 @@ $ php artistan bundle:install laravel-oauth2
             </li>
             @endforeach
         </ul>
-        <p style="text-align:right"><a href="{{ URL::to_action('blog::home@list') }}">Aller au blog &gt;&gt;&nbsp;</a></p>
+        <p style="text-align:right"><a href="{{ URL::to_action('blog::home@index') }}">Aller au blog &gt;&gt;&nbsp;</a></p>
     </aside>
 @endif
 

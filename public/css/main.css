@@ -83,6 +83,7 @@ body {
 .homepage aside #posts {
     list-style-type: none;
     padding: 0;
+    padding-top:10px;
 }
 
 .homepage aside #posts .post {

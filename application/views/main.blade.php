@@ -32,7 +32,7 @@
               <h1>
                 <a class="brand" href="{{ URL::home() }}">
                     {{ HTML::image(URL::to_asset('img/laravel_logo.png'), 'logo', array('style'=>'max-width:24%')) }}
-                    laravel France</h1>
+                    laravel France
                 </a>
             </h1>
               <div class="nav-collapse collapse">
