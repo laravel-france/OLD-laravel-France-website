@@ -27,7 +27,13 @@
             </h1>
 
             <div class="entry">
-                {{ $post->content }}
+                @if($post->intro)
+                    <div class="intro">
+                        {{ MdParser\Markdown($post->intro) }}    
+                    </div>
+                    <hr />
+                @endif
+                {{ MdParser\Markdown($post->content) }}
             </div>
             
             <p class="postmetadata"><a href="{{ URL::to_action('blog::home@show',array($post->id, $post->slug)) }}#disqus_thread" data-disqus-identifier="disqus_blog_{{$post->id}}"></a></small></p>

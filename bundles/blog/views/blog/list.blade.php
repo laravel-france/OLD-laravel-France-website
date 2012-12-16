@@ -28,7 +28,16 @@
             </h1>
 
             <div class="entry">
-                {{ $post->content }}
+                @if($post->intro)
+                    {{ MdParser\Markdown($post->intro) }}
+
+                    <div class="pull-right">
+                        <a href="{{ URL::to_action('blog::home@show',array($post->id, $post->slug)) }}" rel="bookmark">Lire la suite &gt;&gt;</a>
+                    </div>
+                @else
+                    {{ MdParser\Markdown($post->content) }}
+                @endif
+
             </div>
 
             <p class="postmetadata"><a href="{{ URL::to_action('blog::home@show',array($post->id, $post->slug)) }}#disqus_thread" data-disqus-identifier="disqus_blog_{{$post->id}}"></a></small></p>

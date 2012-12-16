@@ -20,7 +20,7 @@
         @foreach($posts as $post)
             <tr>
                 <td>{{ $post->id }}</td>
-                <td>{{ $post->title }}</td>
+                <td>{{ HTML::link_to_action('blog::admin.post@edit', $post->title, array('id'=> $post->id)) }}</td>
                 <td>{{ $post->publicated_at->format('d-m-Y H:i:s') }}</td>
                 <td>{{ $post->updated_at->format('d-m-Y H:i:s') }}</td>
                 <td>{{ HTML::link_to_action('blog::admin.post@remove', 'Supprimer', array('id' => $post->id), array('class'=>'btn btn-danger')) }}</td>

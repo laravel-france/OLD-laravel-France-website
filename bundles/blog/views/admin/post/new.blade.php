@@ -1,7 +1,13 @@
 @layout('blog::admin.layout')
 
 @section('admincontent')
-    <h3>Nouvel article</h3>
+    <h3>
+        @if($editMode)
+        Edition d'un article
+        @else
+        Nouvel article
+        @endif
+    </h3>
 
     {{ Form::open(null,null,array('id'=>'new_post_form', 'class'=>'form')) }}
 
@@ -12,7 +18,7 @@
     <div class="control-group @if($errors->has('title'))error@endif">
         {{ Form::label('title','Titre* :',array('class'=>'control-label')) }}
         <div class="controls">
-        {{ Form::text('title', Input::old('title')) }}
+        {{ Form::text('title', Input::old('title', ($editMode ? $post->title : null) )) }}
         {{ $errors->first('title', '<span class="help-inline">:message</span>') }}
         </div>
     </div>
@@ -20,25 +26,73 @@
     <div class="control-group @if($errors->has('slug'))error@endif">
         {{ Form::label('slug','Slug* :',array('class'=>'control-label')) }}
         <div class="controls">
-        {{ Form::text('slug', Input::old('slug')) }}
+        {{ Form::text('slug', Input::old('slug', ($editMode ? $post->slug : null) )) }}
         {{ $errors->first('slug', '<span class="help-inline">:message</span>') }}
+        </div>
+    </div>
+
+    <div class="control-group @if($errors->has('intro'))error@endif">
+        {{ Form::label('intro','Introduction :',array('class'=>'control-label')) }}
+        <div class="controls">
+        <div class="ace_wrapper">
+            <div id="intro_div">{{ HTML::entities(Input::old('intro', ($editMode ? $post->intro : null) )) }}</div>
+        </div>
+        {{ Form::textarea('intro', null, array('class'=>'span9 hide')) }}
+        {{ $errors->first('intro', '<span class="help-inline">Veuillez insérer une introduction</span>') }}
         </div>
     </div>
 
     <div class="control-group @if($errors->has('content'))error@endif">
         {{ Form::label('content','Contenu* :',array('class'=>'control-label')) }}
         <div class="controls">
-        {{ Form::textarea('content', Input::old('content') ,array('class'=>'span9')) }}
+        <div class="ace_wrapper">
+            <div id="content_div">{{ HTML::entities(Input::old('content', ($editMode ? $post->content : null) )) }}</div>
+        </div>
+        {{ Form::textarea('content', null, array('class'=>'span9 hide')) }}
         {{ $errors->first('content', '<span class="help-inline">Veuillez insérer un message</span>') }}
         </div>
     </div>
+
+
+
+
+
+
+    <style>
+        .ace_wrapper {
+            position: relative;
+            width: 100%;
+            height:250px;
+        }
+
+        #intro_div, #content_div {
+            top:0;
+            right:0;
+            bottom:0;
+            left:0;
+        }
+    </style>
+
+    <h4>Aperçu</h4>
+    <div class="row">
+        <div class="single well">
+            <div class="entry">
+                <div id="pw_intro"></div>
+                <div id="pw_content"></div>
+            </div>
+        </div>
+    </div>
+
+
 
     <div class="control-group @if($errors->has('publicated_at'))error@endif">
         {{ Form::label('publicated_at','Date de publication* :',array('class'=>'control-label')) }}
         <div class="controls">
         <div class="input-append">
-            <input type="date" name="publicated_at_date" id="publicated_at_date" value="{{ date('Y-m-d') }}" />
-            <input type="time" name="publicated_at_time" id="publicated_at_time" value="{{ date('H:i') }}" style="width: auto;" />
+            
+            
+            <input type="date" name="publicated_at_date" id="publicated_at_date" value="{{ Input::old('publicated_at_date', ($editMode ? $post->publicated_at->format('Y-m-d') : date('Y-m-d')) ) }}" />
+            <input type="time" name="publicated_at_time" id="publicated_at_time" value="{{ Input::old('publicated_at_time', ($editMode ? $post->publicated_at->format('H:i') : date('H:i')) ) }}" style="width: auto;" />
             <button class="btn btn-success" type="submit" onclick="setPublicatedAt(); return false;">Maintenant</button>
         </div>
         {{ $errors->first('publicated_at', '<span class="help-inline">:message</span>') }}
@@ -75,4 +129,53 @@
         $('#publicated_at_time').val(time);
     }
     </script>
+
+<script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    jQuery(document).ready(function(){
+
+        var content_editor = ace.edit("content_div");
+        content_editor.getSession().setMode("ace/mode/markdown");
+        content_editor.setHighlightActiveLine(false);
+        content_editor.setShowPrintMargin(false);
+        content_editor.getSession().setTabSize(4);
+        content_editor.getSession().setUseSoftTabs(true);
+
+        content_editor.getSession().on('change', function(e) {
+            content = content_editor.getValue();
+            $('#content').val(content);
+            
+
+            if(content === "") return;
+            $.post('/mdparse',{content: content},function(result){
+                $("#pw_content").html(result);
+            });
+        });
+
+
+        var intro_editor = ace.edit("intro_div");
+        intro_editor.setHighlightActiveLine(false);
+        intro_editor.getSession().setMode("ace/mode/markdown");
+        intro_editor.setShowPrintMargin(false);
+        intro_editor.getSession().setTabSize(4);
+        intro_editor.getSession().setUseSoftTabs(true);
+
+        intro_editor.getSession().on('change', function(e) {
+            content = intro_editor.getValue();
+            $('#intro').val(intro_editor.getValue())
+            
+
+            if(content === "") return;
+            $.post('/mdparse',{content: content},function(result){
+                $("#pw_content").html(result);
+            });
+        });
+
+        $('#intro').val(intro_editor.getValue())
+        $('#content').val(content_editor.getValue())
+
+
+    });
+</script>
+
 @endsection
