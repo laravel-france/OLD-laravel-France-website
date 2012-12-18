@@ -137,6 +137,13 @@ $ php artistan bundle:install laravel-oauth2
 	          day:     'hier',
 	          days:    'jours'
 	        }});
+
+
+        $('#tweets a').live('click',function(e){
+            e.preventDefault();
+            window.open(this.href);
+        });
+
 	});
 	</script>
 @endsection
