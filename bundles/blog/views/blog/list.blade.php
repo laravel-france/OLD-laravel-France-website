@@ -11,6 +11,13 @@
 
 @section('content')
 
+<ul class="breadcrumb">
+    <li><a title="Retour à la page d'accueil" href="/"><i class="icon-home"></i></a> <span class="divider">/</span></li>
+    <li>Blog</li>
+</ul>
+
+
+
 <div class="row">
     <div class="span12">
         @forelse($posts as $post)

@@ -11,6 +11,12 @@
 
 @section('content')
 
+    <ul class="breadcrumb">
+        <li><a title="Retour à la page d'accueil" href="/"><i class="icon-home"></i></a> <span class="divider">/</span></li>
+        <li><a href="/blog">Blog</a> <span class="divider">/</span></li>
+        <li>{{ $post->title }}</li>
+    </ul>
+
 <div class="row">
     <div class="span12">
         <div class="single well">

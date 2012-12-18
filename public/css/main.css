@@ -143,3 +143,8 @@ aside#livetweet .tweet span.username a {
     }
 
 }
+
+
+ul#books img {
+    max-height: 200px;
+}
