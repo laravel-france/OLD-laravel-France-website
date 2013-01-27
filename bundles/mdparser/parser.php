@@ -200,7 +200,7 @@ if (strcasecmp(substr(__FILE__, -16), "classTextile.php") == 0) {
     # Fake Textile class. It calls Markdown instead.
     class Textile {
         function TextileThis($text, $lite='', $encode='') {
-            if ($lite == '' && $encode == '')    $text = Markdown($text);
+            if ($lite == '' and $encode == '')    $text = Markdown($text);
             if (function_exists('SmartyPants'))  $text = SmartyPants($text);
             return $text;
         }
@@ -935,7 +935,7 @@ class Markdown_Parser {
     }
     function _doHeaders_callback_setext($matches) {
         # Terrible hack to check we haven't found an empty list item.
-        if ($matches[2] == '-' && preg_match('{^-(?: |$)}', $matches[1]))
+        if ($matches[2] == '-' and preg_match('{^-(?: |$)}', $matches[1]))
             return $matches[0];
         
         $level = $matches[2]{0} == '=' ? 1 : 2;
@@ -1513,7 +1513,7 @@ class Markdown_Parser {
                 $r = ($seed * (1 + $key)) % 100; # Pseudo-random function.
                 # roughly 10% raw, 45% hex, 45% dec
                 # '@' *must* be encoded. I insist.
-                if ($r > 90 && $char != '@') /* do nothing */;
+                if ($r > 90 and $char != '@') /* do nothing */;
                 else if ($r < 45) $chars[$key] = '&#x'.dechex($ord).';';
                 else              $chars[$key] = '&#'.$ord.';';
             }
@@ -1985,8 +1985,8 @@ class MarkdownExtra_Parser extends Markdown_Parser {
             #               used as a block tag (tag is alone on it's line).
             #
             else if (preg_match('{^<(?:'.$this->block_tags_re.')\b}', $tag) ||
-                (   preg_match('{^<(?:'.$this->context_block_tags_re.')\b}', $tag) &&
-                    preg_match($newline_before_re, $parsed) &&
+                (   preg_match('{^<(?:'.$this->context_block_tags_re.')\b}', $tag) and
+                    preg_match($newline_before_re, $parsed) and
                     preg_match($newline_after_re, $text)    )
                 )
             {
@@ -2014,7 +2014,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
             #
             # Check for: Tag with same name as enclosing tag.
             #
-            else if ($enclosing_tag_re !== '' &&
+            else if ($enclosing_tag_re !== '' and
                 # Same name as enclosing tag.
                 preg_match('{^</?(?:'.$enclosing_tag_re.')\b}', $tag))
             {
@@ -2156,8 +2156,8 @@ class MarkdownExtra_Parser extends Markdown_Parser {
                 #
                 # Check for `markdown="1"` attribute and handle it.
                 #
-                if ($md_attr && 
-                    preg_match($markdown_attr_re, $tag, $attr_m) &&
+                if ($md_attr and 
+                    preg_match($markdown_attr_re, $tag, $attr_m) and
                     preg_match('/^1|block|span$/', $attr_m[2] . $attr_m[3]))
                 {
                     # Remove `markdown` attribute from opening tag.
@@ -2165,7 +2165,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
                     
                     # Check if text inside this tag must be parsed in span mode.
                     $this->mode = $attr_m[2] . $attr_m[3];
-                    $span_mode = $this->mode == 'span' || $this->mode != 'block' &&
+                    $span_mode = $this->mode == 'span' || $this->mode != 'block' and
                         preg_match('{^<(?:'.$this->contain_span_tags_re.')\b}', $tag);
                     
                     # Calculate indent before tag.
@@ -2272,7 +2272,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
         return " id=\"$attr\"";
     }
     function _doHeaders_callback_setext($matches) {
-        if ($matches[3] == '-' && preg_match('{^- }', $matches[1]))
+        if ($matches[3] == '-' and preg_match('{^- }', $matches[1]))
             return $matches[0];
         $level = $matches[3]{0} == '=' ? 1 : 2;
         $attr  = $this->_doHeaders_attr($id =& $matches[2]);

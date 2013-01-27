@@ -786,7 +786,7 @@ EOT;
             $bits = explode(':', $arg);
             $name = $bits[0];
 
-            if ( isset($bits[1]) && strtolower($bits[1]) === 'get' || !isset($bits[1]) ) {
+            if ( isset($bits[1]) and strtolower($bits[1]) === 'get' || !isset($bits[1]) ) {
                 $views[] = $name;
             }
         }
