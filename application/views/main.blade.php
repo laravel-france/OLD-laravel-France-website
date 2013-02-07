@@ -38,7 +38,7 @@
               <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
                   <li class="{{ URI::is('/') ? 'active' : '' }}">{{ HTML::link(URL::home(), 'Accueil'); }}</li>
-                  <li class="{{ URI::is( '^guides*') ? 'active' : '' }}">{{ HTML::link(URL::to('guides'), 'Guides'); }}</li>
+                  <li class="{{ URI::is( '^docs*') ? 'active' : '' }}">{{ HTML::link(URL::to('docs'), 'Documentation'); }}</li>
                   <li class="{{ URI::is( '^blog*') ? 'active' : '' }}">{{ HTML::link(URL::to('blog'), 'Blog'); }}</li>
                   <li class="{{ URI::is( '^contact*') ? 'active' : '' }}">{{ HTML::link(URL::to_action('contact'), 'Contact'); }}</li>
                   <li><a href="{{URL::to('telecharger')}}" class='downloadlink btn btn-large'><i class="icon-download-alt icon-white"></i> Télécharger</a></li>

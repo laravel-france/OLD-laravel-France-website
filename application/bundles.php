@@ -35,7 +35,7 @@
 
 return array(
     'mdparser' => array('auto' => true),
-	'guides' => array('handles' => 'guides'),
+	'docs' => array('handles' => 'docs'),
     'blog' => array(
         'handles' => 'blog',
         'auto' => true
