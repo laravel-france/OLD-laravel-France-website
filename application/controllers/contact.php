@@ -26,7 +26,7 @@ class Contact_Controller extends Base_Controller {
             $body .= "Message:"."\n". Input::get('message');
 
             $headers ='From: "'.Input::get('nom').' "<'.Input::get('email').'>'."\n"; 
-            $headers .='Reply-To: '.Input::get('email')"\n"; 
+            $headers .='Reply-To: '.Input::get('email') . "\n"; 
             $headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
             $headers .='Content-Transfer-Encoding: 8bit'; 
 
