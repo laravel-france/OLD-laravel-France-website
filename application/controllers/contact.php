@@ -25,8 +25,13 @@ class Contact_Controller extends Base_Controller {
                 $body .= "Sujet: ". Input::get('sujet') ."\n";
             $body .= "Message:"."\n". Input::get('message');
 
+            $headers ='From: "'.Input::get('nom').' "<'.Input::get('email').'>'."\n"; 
+            $headers .='Reply-To: '.Input::get('email')"\n"; 
+            $headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
+            $headers .='Content-Transfer-Encoding: 8bit'; 
 
-            mail($email,'Contact depuis Laravel.fr', $body);
+
+            mail($email,'Contact depuis Laravel.fr', $body, $headers);
 
             return Redirect::to_action('contact@sent');
         } else {
