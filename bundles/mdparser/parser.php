@@ -2384,7 +2384,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
         $col_count  = count($headers);
         
         # Write column headers.
-        $text = "<table>\n";
+        $text = "<table class='table table-striped'>\n";
         $text .= "<thead>\n";
         $text .= "<tr>\n";
         foreach ($headers as $n => $header)
