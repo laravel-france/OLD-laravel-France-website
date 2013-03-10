@@ -124,7 +124,7 @@ aside#livetweet .tweet span.username a {
 /* SIZE DEPENDING - RESPONSIVE */
 @media (min-width: 979px) {
     body {
-        margin-top: 95px;
+        padding-top: 95px;
     }
 
     .navbar .nav > li {
