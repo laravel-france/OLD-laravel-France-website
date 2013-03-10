@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
     @section('css')
     {{ HTML::style('css/bootstrap.min.css') }}
+    {{ HTML::style('css/bootstrap-responsive.min.css') }}
     {{ HTML::style('css/vendors/prettify.css') }}
     {{ HTML::style('css/main.css') }}
     {{ HTML::style('http://fonts.googleapis.com/css?family=Ubuntu') }}
