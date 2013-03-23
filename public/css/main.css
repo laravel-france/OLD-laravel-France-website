@@ -62,7 +62,7 @@ body {
 
 
 /**
-    LIVETWEET
+    Homepage aside
 */
 
 .homepage aside {
@@ -89,37 +89,6 @@ body {
 .homepage aside #posts .post {
     border-bottom: 1px solid #2C2D41;
 }
-
-aside#livetweet div#tweets {
-    max-height:450px;
-    overflow: auto;
-    padding:5px 10px 5px 10px;
-}
-
-aside#livetweet .tweet {
-    border-bottom: 1px solid #2C2D41;
-}
-
-aside#livetweet .tweet img {
-    float:left;
-    margin: 6px;
-}
-
-aside#livetweet .tweet p {
-    margin-left: 35px;
-    color:white;
-}
-
-
-aside#livetweet .tweet span {
-    display: block;
-}
-
-aside#livetweet .tweet span.username a {
-    font-weight: bold;
-    color: #ccc;
-}
-
 
 /* SIZE DEPENDING - RESPONSIVE */
 @media (min-width: 979px) {
