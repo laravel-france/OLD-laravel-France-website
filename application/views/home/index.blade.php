@@ -101,5 +101,17 @@ $ php artistan bundle:install laravel-oauth2
         <p style="text-align:right"><a href="{{ URL::to_action('blog::home@index') }}">Aller au blog &gt;&gt;&nbsp;</a></p>
     </aside>
 @endif
+
+    <aside id="hp_loginform">
+        <h3>Mon compte</h3>
+
+        @if(Auth::guest())
+            {{ render('panel::partials.login_form_homepage') }}
+        @else
+            {{ render('panel::partials.panel_homepage') }}
+        @endif
+
+    </aside>
+
 </div>
 @endsection

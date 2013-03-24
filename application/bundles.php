@@ -34,10 +34,12 @@
 */
 
 return array(
-    'mdparser' => array('auto' => true),
+	'mdparser' => array('auto' => true),
 	'docs' => array('handles' => 'docs'),
-    'blog' => array(
-        'handles' => 'blog',
-        'auto' => true
-    )
-);
+	'blog' => array(
+		'handles' => 'blog',
+		'auto' => true
+		),
+	'verify' => array('auto' => true),
+	'panel' => array('auto' => true),
+	);

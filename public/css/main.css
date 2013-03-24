@@ -117,3 +117,11 @@ body {
 ul#books img {
     max-height: 200px;
 }
+
+#hp_loginform ul {
+    list-style-type: none;
+ }
+
+#hp_loginform form{
+    padding: 10px;
+}
