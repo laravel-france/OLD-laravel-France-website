@@ -1,6 +1,11 @@
-@layout('blog::admin.layout')
+@layout('panel::panel.layout')
 
-@section('admincontent')
+@section('css')
+    @parent
+    {{ HTML::style(URL::to_asset('bundles/blog/css/blog.css')) }}
+@endsection
+
+@section('panel_content')
     <h3>Billets</h3>
 
     @if(!$posts)

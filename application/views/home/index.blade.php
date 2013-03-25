@@ -102,48 +102,16 @@ $ php artistan bundle:install laravel-oauth2
     </aside>
 @endif
 
-    <aside id="livetweet">
-        <h3>LiveTweet</h3>
+    <aside id="hp_loginform">
+        <h3>Mon compte</h3>
 
-        <div id="tweets">
-            <div style="margin:20px auto; width:100%; text-align:center">
-                {{ HTML::image(URL::to_asset('img/loading_nam.gif'),'Chargement....',array('width'=>'50px')) }}
-            </div>
-        </div>
+        @if(Auth::guest())
+            {{ render('panel::partials.login_form_homepage') }}
+        @else
+            {{ render('panel::partials.panel_homepage') }}
+        @endif
+
     </aside>
 
-
 </div>
-@endsection
-
-
-@section('javascript')
-    {{ HTML::script('js/vendors/jquery.livetwitter.min.js') }}
-
-	<script>
-	$(document).ready(function($){
-		$('#tweets').liveTwitter('laravel', {
-	        limit: 100,
-	        rpp: 100,
-	        filter: function(tweet){
-	            return ($.inArray(tweet.iso_language_code, ['fr', 'en']) > -1); 
-	        },
-	        localization: {
-	          seconds: 'secondes',
-	          minute:  'minute',
-	          minutes: 'minutes',
-	          hour:    'Une heure',
-	          hours:   'heures',
-	          day:     'hier',
-	          days:    'jours'
-	        }});
-
-
-        $('#tweets a').live('click',function(e){
-            e.preventDefault();
-            window.open(this.href);
-        });
-
-	});
-	</script>
 @endsection

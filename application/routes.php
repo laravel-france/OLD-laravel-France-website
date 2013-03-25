@@ -15,29 +15,6 @@ Route::get('telecharger, download', array('as'=>'telecharger', function()
     return Redirect::to('http://laravel.com/download');
 }));
 
-Route::get('login', function() {
-    return View::make('login.login');
-});
-
-Route::post('login', function() {
-    if ( Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password'))))
-    {
-        return Redirect::to('/');
-    }
-    else
-    {
-        return Redirect::to('login')
-            ->with('login_errors', true);
-    }
-});
-
-
-Route::get('logout', function() {
-    Auth::logout();
-    return Redirect::to('login');
-});
-
-
 
 
 Route::controller(array('contact'));
@@ -80,5 +57,8 @@ Route::filter('csrf', function()
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::to('login');
+	if (Auth::guest()) {
+        Session::flash('from_url', URL::full());
+        return Redirect::to('login');
+    }
 });
