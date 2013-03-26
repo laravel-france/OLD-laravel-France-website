@@ -6,7 +6,7 @@ class Post extends \Eloquent {
 
     public function author()
     {
-        return $this->belongs_to('Blog\Models\User','author_id');
+        return $this->belongs_to('User','author_id');
     }
 
     public function category()

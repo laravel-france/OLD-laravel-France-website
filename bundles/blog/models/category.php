@@ -2,11 +2,10 @@
 
 namespace Blog\Models;
 
-class User extends \Eloquent {
+class Category extends \Eloquent {
 
     public function posts()
     {
         return $this->has_many('Blog\Models\Post');
     }
-
 }

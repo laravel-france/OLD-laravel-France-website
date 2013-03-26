@@ -1,9 +1,5 @@
 @layout('main')
 
-@section('css')
-    @parent
-    {{ HTML::style(URL::to_asset('bundles/blog/css/blog.css')) }}
-@endsection
 
 
 @section('content')

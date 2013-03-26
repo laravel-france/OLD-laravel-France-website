@@ -1,6 +1,6 @@
 <?php
 
-class Blog_Create_Table_User {
+class Blog_Create_Category {
 
 	/**
 	 * Make changes to the database.
@@ -9,14 +9,15 @@ class Blog_Create_Table_User {
 	 */
 	public function up()
 	{
-		Schema::create('users', function($table)
+        Schema::create('categories', function($table)
         {
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->string('username');
-            $table->string('email')->unique();
-            $table->string("password", 64);
+
+            $table->string('name');
+            $table->string('slug')->unique();
+
             $table->timestamps();
         });
 
@@ -29,7 +30,7 @@ class Blog_Create_Table_User {
 	 */
 	public function down()
 	{
-		Schema::drop('users');
+		Schema::drop('categories');
 	}
 
 }

@@ -45,10 +45,19 @@ body {
     font-weight: bold;
 }
 
-.navbar .nav > li a:hover,.navbar .nav > li a:focus,.navbar .nav > .active > a,.navbar .nav > .active > a:hover,.navbar .nav > .active > a:focus, .navbar .nav li a.downloadlink {
+.navbar .nav > li a:hover,.navbar .nav > li a:focus,.navbar .nav > .active > a,.navbar .nav > .active > a:hover,.navbar .nav > .active > a:focus, .navbar .nav li a.downloadlink,
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus 
+.navbar .nav li.dropdown.open>.dropdown-toggle, .navbar .nav li.dropdown.active>.dropdown-toggle, .navbar .nav li.dropdown.open.active>.dropdown-toggle
+{
     background: #FB503C;
     color: white;
     text-shadow: none;
+}
+
+.navbar .nav li.dropdown>.dropdown-toggle .caret {
+    margin-top: 23px;
+    border-top-color: white;
+    border-bottom-color: white;
 }
 
 .navbar .btn, .navbar .btn-group {
@@ -62,7 +71,7 @@ body {
 
 
 /**
-    LIVETWEET
+    Homepage aside
 */
 
 .homepage aside {
@@ -90,37 +99,6 @@ body {
     border-bottom: 1px solid #2C2D41;
 }
 
-aside#livetweet div#tweets {
-    max-height:450px;
-    overflow: auto;
-    padding:5px 10px 5px 10px;
-}
-
-aside#livetweet .tweet {
-    border-bottom: 1px solid #2C2D41;
-}
-
-aside#livetweet .tweet img {
-    float:left;
-    margin: 6px;
-}
-
-aside#livetweet .tweet p {
-    margin-left: 35px;
-    color:white;
-}
-
-
-aside#livetweet .tweet span {
-    display: block;
-}
-
-aside#livetweet .tweet span.username a {
-    font-weight: bold;
-    color: #ccc;
-}
-
-
 /* SIZE DEPENDING - RESPONSIVE */
 @media (min-width: 979px) {
     body {
@@ -147,4 +125,20 @@ aside#livetweet .tweet span.username a {
 
 ul#books img {
     max-height: 200px;
+}
+
+#hp_loginform ul {
+    list-style-type: none;
+ }
+
+#hp_loginform form{
+    padding: 10px;
+}
+
+.dropdown-menu {
+    background: black;
+}
+
+.navbar .nav>li>.dropdown-menu:after {
+    border-bottom: 6px solid black;
 }

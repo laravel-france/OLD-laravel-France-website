@@ -38,6 +38,7 @@ class Blog_Admin_Post_Controller extends \Base_Controller
                 $post->intro = Input::get('intro');
                 $post->content = Input::get('content');
                 $post->author_id = Input::get('author_id');
+                $post->category_id = Input::get('category_id');
                 $post->publicated_at = Input::get('publicated_at_date').' '.Input::get('publicated_at_time');
 
                 $post->save();
@@ -54,8 +55,15 @@ class Blog_Admin_Post_Controller extends \Base_Controller
         }
         else
         {
+
+            $originalCategories = \Blog\Models\Category::all();
+            foreach ($originalCategories as $cat) {
+                $categories[$cat->id] = $cat->name;
+            }
+
             return View::make('blog::admin.post.new')
-                ->with('editMode', false);;
+                ->with('editMode', false)
+                ->with('categories', $categories);
         }
     }
 
@@ -82,6 +90,7 @@ class Blog_Admin_Post_Controller extends \Base_Controller
                 $post->intro = Input::get('intro');
                 $post->content = Input::get('content');
                 $post->author_id = Input::get('author_id');
+                $post->category_id = Input::get('category_id');
                 $post->publicated_at = Input::get('publicated_at_date').' '.Input::get('publicated_at_time');
 
                 $post->save();
@@ -98,9 +107,15 @@ class Blog_Admin_Post_Controller extends \Base_Controller
         }
         else
         {
+            $originalCategories = \Blog\Models\Category::all();
+            foreach ($originalCategories as $cat) {
+                $categories[$cat->id] = $cat->name;
+            }
+
             return View::make('blog::admin.post.new')
                 ->with_post($post)
-                ->with('editMode', true);
+                ->with('editMode', true)
+                ->with('categories', $categories);
         }
     }
 

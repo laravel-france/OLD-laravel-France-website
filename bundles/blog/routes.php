@@ -12,4 +12,5 @@ Route::filter('pattern: blog/admin*', 'auth');
 
 
 Route::controller('blog::admin.post');
+Route::controller('blog::admin.category');
 Route::controller('blog::admin');

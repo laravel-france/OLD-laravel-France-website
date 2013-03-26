@@ -1,6 +1,11 @@
-@layout('blog::admin.layout')
+@layout('panel::panel.layout')
 
-@section('admincontent')
+@section('css')
+    @parent
+    {{ HTML::style(URL::to_asset('bundles/blog/css/blog.css')) }}
+@endsection
+
+@section('panel_content')
     <h3>
         @if($editMode)
         Edition d'un article
@@ -31,6 +36,14 @@
         </div>
     </div>
 
+    <div class="control-group @if($errors->has('category_id'))error@endif">
+        {{ Form::label('category_id','Catégorie * :',array('class'=>'control-label')) }}
+        <div class="controls">
+        {{ Form::select('category_id', $categories, Input::old('category_id', ($editMode ? $post->category_id : null) )) }}
+        {{ $errors->first('category_id', '<span class="help-inline">:message</span>') }}
+        </div>
+    </div>
+
     <div class="control-group @if($errors->has('intro'))error@endif">
         {{ Form::label('intro','Introduction :',array('class'=>'control-label')) }}
         <div class="controls">
@@ -53,7 +66,7 @@
         </div>
     </div>
 
-    <h4>Aperçu</h4>
+    <h4>Aperçu <small><a href="javascript: refreshPreview();">(Rafraichir)</a></small></h4>
     <div class="row">
         <div class="single well">
             <div class="entry">
@@ -127,7 +140,7 @@
             
 
             if(content === "") return;
-            $.post('/mdparse',{content: content},function(result){
+            $.post('{{ URL::to('mdparse') }}',{content: content},function(result){
                 $("#pw_content").html(result);
             });
         });
@@ -146,14 +159,29 @@
             
 
             if(content === "") return;
-            $.post('/mdparse',{content: content},function(result){
+            $.post('{{ URL::to('mdparse') }}',{content: content},function(result){
                 $("#pw_intro").html(result);
             });
         });
 
+        window.refreshPreview = function() {
+
+            content = content_editor.getValue();
+            if(content === "") return;
+            $.post('{{ URL::to('mdparse') }}',{content: content},function(result){
+                $("#pw_content").html(result);
+            });
+
+            content = intro_editor.getValue();
+            if(content === "") return;
+            $.post('{{ URL::to('mdparse') }}',{content: content},function(result){
+                $("#pw_intro").html(result);
+            });
+        }
+
         $('#intro').val(intro_editor.getValue())
         $('#content').val(content_editor.getValue())
-
+        refreshPreview();
 
     });
 </script>

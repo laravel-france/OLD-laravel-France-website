@@ -22,6 +22,18 @@
     <header>
         <div class="navbar navbar-fixed-top">
           <div class="navbar-inner">
+
+          <div style="width:100%; background: #FB503C; padding:10px 0;">
+            <div class="container">
+              <h4>Version de développement.</h4>
+              <p>
+                Ce site est encore en cours de développement. Vous trouverez plus d'info sur le billet suivant :<br />
+                <a style="color: black;" href="#">Avancement du site</a>
+              </p>
+            </div>
+          </div>
+
+
             <div class="container">
 
               <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -40,7 +52,19 @@
                 <ul class="nav pull-right">
                   <li class="{{ URI::is('/') ? 'active' : '' }}">{{ HTML::link(URL::home(), 'Accueil'); }}</li>
                   <li class="{{ URI::is( '^docs*') ? 'active' : '' }}">{{ HTML::link(URL::to('docs'), 'Documentation'); }}</li>
-                  <li class="{{ URI::is( '^blog*') ? 'active' : '' }}">{{ HTML::link(URL::to('blog'), 'Blog'); }}</li>
+                  <li class="dropdown {{ URI::is( '^(blog|docs|blog)*') ? 'active' : '' }}">
+                    <a class="dropdown-toggle"
+                       data-toggle="dropdown"
+                       href="#">
+                        Communauté
+                        <b class="caret"></b>
+                      </a>
+                    <ul class="dropdown-menu">
+                      <li class="{{ URI::is( '^blog*') ? 'active' : '' }}">{{ HTML::link(URL::to('blog'), 'Blog'); }}</li>
+                    </ul>
+                  </li>
+
+
                   <li class="{{ URI::is( '^contact*') ? 'active' : '' }}">{{ HTML::link(URL::to_action('contact'), 'Contact'); }}</li>
                   <li><a href="{{URL::to('telecharger')}}" class='downloadlink btn btn-large'><i class="icon-download-alt icon-white"></i> Télécharger</a></li>
                 </ul>
