@@ -22,6 +22,18 @@
     <header>
         <div class="navbar navbar-fixed-top">
           <div class="navbar-inner">
+
+          <div style="width:100%; background: #FB503C; padding:10px 0;">
+            <div class="container">
+              <h4>Version de développement.</h4>
+              <p>
+                Ce site est encore en cours de développement. Vous trouverez plus d'info sur le billet suivant :<br />
+                <a style="color: black;" href="#">Avancement du site</a>
+              </p>
+            </div>
+          </div>
+
+
             <div class="container">
 
               <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
