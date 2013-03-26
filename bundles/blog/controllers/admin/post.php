@@ -56,6 +56,7 @@ class Blog_Admin_Post_Controller extends \Base_Controller
         else
         {
 
+            $categories = array();
             $originalCategories = \Blog\Models\Category::all();
             foreach ($originalCategories as $cat) {
                 $categories[$cat->id] = $cat->name;
@@ -107,6 +108,7 @@ class Blog_Admin_Post_Controller extends \Base_Controller
         }
         else
         {
+            $categories = array();
             $originalCategories = \Blog\Models\Category::all();
             foreach ($originalCategories as $cat) {
                 $categories[$cat->id] = $cat->name;
