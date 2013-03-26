@@ -8,6 +8,12 @@
 @section('panel_content')
     <h3>Billets</h3>
 
+    <p>
+        <a class="btn btn-primary pull-right" href="{{ URL::to_action("blog::admin.post@new") }}">
+            <i class="icon-plus icon-white"></i> Nouveau billet
+        </a>
+    </p>
+
     @if(!$posts)
         Aucun billet créé.
     @else

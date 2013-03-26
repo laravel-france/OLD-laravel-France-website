@@ -11,9 +11,14 @@
 @if($user->is('Blog'))
 <nav class="well">
     <h3>Blog</h3>
+    <h4>Billets</h4>
     <ul>
         <li>{{ HTML::link_to_action('blog::admin.post@new','Nouvel article') }}</li>
-        <li>{{ HTML::link_to_action('blog::admin.post@list','Gestion des articles') }}</li>
+        <li>{{ HTML::link_to_action('blog::admin.post@list','Liste des articles') }}</li>
+    </ul>
+    <h4>Catégories</h4>
+    <ul>
+        <li>{{ HTML::link_to_action('blog::admin.category@list','Gestion des categories') }}</li>
     </ul>
 </nav>
 @endif

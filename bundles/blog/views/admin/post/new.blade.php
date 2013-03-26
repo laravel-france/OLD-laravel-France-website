@@ -36,6 +36,14 @@
         </div>
     </div>
 
+    <div class="control-group @if($errors->has('category_id'))error@endif">
+        {{ Form::label('category_id','Catégorie * :',array('class'=>'control-label')) }}
+        <div class="controls">
+        {{ Form::select('category_id', $categories, Input::old('category_id', ($editMode ? $post->category_id : null) )) }}
+        {{ $errors->first('category_id', '<span class="help-inline">:message</span>') }}
+        </div>
+    </div>
+
     <div class="control-group @if($errors->has('intro'))error@endif">
         {{ Form::label('intro','Introduction :',array('class'=>'control-label')) }}
         <div class="controls">
