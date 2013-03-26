@@ -34,7 +34,7 @@ class Blog_Admin_Category_Controller extends \Base_Controller
     {
         $slug = '';
         if (trim(Input::get('slug')) != "") {
-            $slug = trim(Input::get('slug'));
+            $slug = Str::slug(trim(Input::get('slug')));
         } else {
             $slug = Str::slug(trim(Input::get('name')));
         }
