@@ -1,6 +1,15 @@
 body {
-    font-family: Ubuntu, Arial, Helvetica, sans-serif;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
     margin-bottom:100px;
+    font-size: 12px;
+}
+
+h1 {
+font-size: 33.5px;
+}
+
+h3 {
+font-size: 20.5px;
 }
 
 #page h1{
@@ -23,7 +32,7 @@ body {
 .navbar .brand {
     color: white;
     text-shadow: none;
-    font-family: Ubuntu, Arial, Helvetica, sans-serif;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 .navbar h1 {
@@ -36,13 +45,12 @@ body {
 }
 
 .navbar .nav > li {
-    line-height: 50px;
+    line-height: 52px;
 }
 
 .navbar .nav > li a {
     color: white;
     text-shadow: none;
-    font-weight: bold;
 }
 
 .navbar .nav > li a:hover,.navbar .nav > li a:focus,.navbar .nav > .active > a,.navbar .nav > .active > a:hover,.navbar .nav > .active > a:focus, .navbar .nav li a.downloadlink,
