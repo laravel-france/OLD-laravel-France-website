@@ -129,6 +129,7 @@
 
         var content_editor = ace.edit("content_div");
         content_editor.getSession().setMode("ace/mode/markdown");
+        content_editor.getSession().setUseWrapMode(true);
         content_editor.setHighlightActiveLine(false);
         content_editor.setShowPrintMargin(false);
         content_editor.getSession().setTabSize(4);
@@ -148,6 +149,7 @@
 
         var intro_editor = ace.edit("intro_div");
         intro_editor.setHighlightActiveLine(false);
+        intro_editor.getSession().setUseWrapMode(true);
         intro_editor.getSession().setMode("ace/mode/markdown");
         intro_editor.setShowPrintMargin(false);
         intro_editor.getSession().setTabSize(4);
