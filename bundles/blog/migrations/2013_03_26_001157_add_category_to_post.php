@@ -22,8 +22,11 @@ class Blog_Add_Category_To_Post {
 	 */
 	public function down()
 	{
-		$table->drop_foreign('posts_category_id_foreign');
-		$table->drop_column('category_id');
+        Schema::table('posts', function($table)
+        {
+            $table->drop_foreign('posts_category_id_foreign');
+            $table->drop_column('category_id');
+        });
 	}
 
 }
