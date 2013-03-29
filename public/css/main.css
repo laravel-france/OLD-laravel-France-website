@@ -17,7 +17,6 @@ font-size: 20.5px;
     color: #272727;
 }
 
-
 /**
     HEADER
 */
@@ -153,4 +152,8 @@ ul#books img {
 
 .dropdown-menu>li>a {
     color: white;
+}
+
+#docs .well li {
+    line-height: normal;
 }
