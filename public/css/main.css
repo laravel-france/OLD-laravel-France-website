@@ -150,3 +150,7 @@ ul#books img {
 .navbar .nav>li>.dropdown-menu:after {
     border-bottom: 6px solid black;
 }
+
+.dropdown-menu>li>a {
+    color: white;
+}
