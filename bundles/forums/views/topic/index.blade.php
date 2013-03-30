@@ -14,7 +14,7 @@
 <div class="row">
     <div class="span12">
         <ul class="breadcrumb">
-        <li><a title="Retour à la page d'accueil" href="/"><i class="icon-home"></i></a> <span class="divider">/</span></li>
+        <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
         <li><a href="{{ URL::to_action('forums::home@index') }}">Forums</a> <span class="divider">/</span></li>
         <li><a href="{{ URL::to_action('forums::category@index', array($category->id, $category->slug)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
         <li>{{ $topic->title }}</li>
