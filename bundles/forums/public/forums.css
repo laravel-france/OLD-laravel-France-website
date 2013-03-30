@@ -34,12 +34,8 @@ div.forum-message.bg2 {
 	background-color: #E6E6E6;
 }
 
-div.forum-message.span12, div.forum-message .span9 {
-	margin-left: 0;
-}
-
 div.forum-message .span9 {
-	margin-left: 28px;
+	margin-left: -5px;
 }
 
 div.forum-message-sep {
