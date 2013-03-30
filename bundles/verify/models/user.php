@@ -4,7 +4,6 @@ namespace Verify\Models;
 
 class User extends EloquentVerifyBase
 {
-
 	/**
 	 * Accessible
 	 *
@@ -202,4 +201,9 @@ class User extends EloquentVerifyBase
 		return $to_check;
 	}
 
+
+	public function get_gravatar()
+	{
+		return 'http://www.gravatar.com/avatar/'.md5(strtolower($this->get_attribute('email')));
+	}
 }

@@ -10,12 +10,12 @@
     <article>
         <header>
             <h1>Un framework simple &amp; élégant</h1>
-            <p>laravel est un framework MVC PHP 5.3, créé par {{ HTML::link('https://twitter.com/taylorotwell', 'Taylor Otwell') }}, pour rendre le développement d'application web plus facile et rapide. La recette utilisée pour laravel marche : simplicité, intuitivité, puissance et flexibilité. Jetez un oeil vous même :</p>
+            <p>Laravel est un framework MVC PHP 5.3, créé par {{ HTML::link('https://twitter.com/taylorotwell', 'Taylor Otwell') }}, pour rendre le développement d'application web plus facile et rapide. La recette utilisée pour Laravel marche : simplicité, intuitivité, puissance et flexibilité. Jetez un oeil vous même :</p>
         </header>
 
         <section>
             <h2>Simple</h2>
-            <p>laravel est simple, voyez par vous même :</p>
+            <p>Laravel est simple, voyez par vous même :</p>
             
 <pre class="prettyprint">
 Route::get('/users/(:num)', function($user_id) {
@@ -29,7 +29,7 @@ Route::get('/users/(:num)', function($user_id) {
 
         <section>
             <h2>Intuitif</h2>
-            <p>laravel est intuitif, "<span class="inline-quote" title="Phill Sparks">Il parle votre langage</span>" :</p>
+            <p>Laravel est intuitif, "<span class="inline-quote" title="Phill Sparks">Il parle votre langage</span>" :</p>
 <pre class="prettyprint lang-php">
 Route::post('login', function() {
     // On récupère les données du formulaire
@@ -52,7 +52,7 @@ Route::post('login', function() {
 
         <section>
             <h2>Puissant</h2>
-            <p>laravel est puissant, et nous offre des outils puissants, mais simple d'utilisation :</p>
+            <p>Laravel est puissant, et nous offre des outils puissants, mais simple d'utilisation :</p>
 <pre class="prettyprint lang-php">
 // application/start.php
 IoC::singleton('mailer', function()
@@ -70,7 +70,7 @@ $monMailer = IoC::resolve('mailer');
 
         <section>
             <h2>Flexible</h2>
-            <p>laravel est flexible, et des développeurs ont déjà créé des {{ HTML::link('http://bundles.laravel.com/','bundles') }} pour vous :</p>
+            <p>Laravel est flexible, et des développeurs ont déjà créé des {{ HTML::link('http://bundles.laravel.com/','bundles') }} pour vous :</p>
 <pre class="prettyprint lang-php">
 // Besoin d'utiliser oauth2 ?
 // http://bundles.laravel.com/bundle/laravel-oauth2
@@ -80,7 +80,7 @@ $ php artistan bundle:install laravel-oauth2
 
         <footer>
             <h3>Convaincu ?</h3>
-            <p>Alors ne perdez plus une minute ! Téléchargez dès à présent la {{ HTML::link('http://laravel.com/download','dernière version de laravel') }}, et suivez le docs !</p>
+            <p>Alors ne perdez plus une minute ! Téléchargez dès à présent la {{ HTML::link('http://laravel.com/download','dernière version de Laravel') }}, et suivez le docs !</p>
         </footer>
     </article>
 </div>

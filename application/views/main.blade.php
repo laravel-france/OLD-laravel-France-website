@@ -20,7 +20,7 @@
   <body class="@yield('page_class')">
 
     <header>
-        <div class="navbar navbar-fixed-top">
+        <div class="navbar">
           <div class="navbar-inner">
             <div class="container">
 
@@ -33,7 +33,7 @@
               <h1>
                 <a class="brand" href="{{ URL::home() }}">
                     {{ HTML::image(URL::to_asset('img/laravel_logo.png'), 'logo', array('style'=>'max-width:24%')) }}
-                    laravel France
+                    Laravel France
                 </a>
             </h1>
               <div class="nav-collapse collapse">

@@ -42,4 +42,13 @@ return array(
 		),
 	'verify' => array('auto' => true),
 	'panel' => array('auto' => true),
-	);
+	'forums' => array(
+		'handles' => 'forums',
+		'auto' => true,
+		'autoloads' => array(
+	        'directories' => array(
+	            '(:bundle)/models',
+	        ),
+	    ),
+	),
+);

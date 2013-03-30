@@ -24,7 +24,7 @@ font-size: 20.5px;
     background: #272727 none;
 }
 
-.navbar-fixed-top .navbar-inner,.navbar-static-top .navbar-inner {
+.navbar-inner,.navbar-static-top .navbar-inner {
     border-bottom: 7px solid #FB503C;
 }
 
@@ -108,9 +108,6 @@ font-size: 20.5px;
 
 /* SIZE DEPENDING - RESPONSIVE */
 @media (min-width: 979px) {
-    body {
-        padding-top: 95px;
-    }
 
     .navbar .nav > li {
         margin-right: 10px;
