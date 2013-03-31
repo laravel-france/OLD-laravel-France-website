@@ -18,8 +18,8 @@
         <ul class="breadcrumb">
         <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
         <li><a href="{{ URL::to_action('forums::home@index') }}">Forums</a> <span class="divider">/</span></li>
-        <li><a href="{{ URL::to_action('forums::category@index', array($category->id, $category->slug)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
-        <li><a href="{{ URL::to_action('forums::topic@index', array($category->id, $category->slug, $topic->id, $topic->slug)) }}">{{ $topic->title }}</a> <span class="divider">/</span></li>
+        <li><a href="{{ URL::to_action('forums::category@index', array($category->slug)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
+        <li><a href="{{ URL::to_action('forums::topic@index', array($category->slug, $topic->slug)) }}">{{ $topic->title }}</a> <span class="divider">/</span></li>
         <li>Écrire une réponse</li>
         </ul>
     </div>
@@ -27,7 +27,7 @@
 
 
 
-	{{ Form::open(URL::to_action('forums::topic@reply', array($category->id, $category->slug, $topic->id, $topic->slug)), null, array('id'=>'new_reply_form', 'class'=>'form')) }}
+	{{ Form::open(URL::to_action('forums::topic@reply', array($category->slug, $topic->slug)), null, array('id'=>'new_reply_form', 'class'=>'form')) }}
     {{ Form::token() }}
 
 	<div class="control-group @if($errors->has('content'))error@endif">

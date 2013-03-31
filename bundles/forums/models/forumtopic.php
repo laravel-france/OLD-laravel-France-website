@@ -4,6 +4,18 @@ class Forumtopic extends Eloquent {
 
 	public $includes = array('user');
 
+
+    public static function findBySlug($slug)
+    {
+        return static::where('slug', '=', $slug)->first();
+    }
+
+    public function view()
+    {
+        $this->nb_views++;
+        static::where('id', '=', $this->id)->update(array('nb_views' => ($this->nb_views)));
+    }
+
 	public function user()
 	{
 		return $this->belongs_to('User');

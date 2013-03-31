@@ -2,6 +2,11 @@
 
 class Forumcategory extends Eloquent {
 
+    public static function findBySlug($slug)
+    {
+        return static::where('slug', '=', $slug)->first();
+    }
+
 	public function topics()
 	{
 		return $this->has_many('Forumtopic')->order_by('updated_at', 'desc');

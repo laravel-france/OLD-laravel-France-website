@@ -33,7 +33,7 @@
                     <td width="37"></td>
                     <td>
                         <strong>
-                            <a href="{{ URL::to_action('forums::category@index', array($category->id, $category->slug)) }}">
+                            <a href="{{ URL::to_action('forums::category@index', array($category->slug)) }}">
                                 {{ $category->title }}
                             </a>
                         </strong>
@@ -45,7 +45,7 @@
                     <td class="text-center" width="127">{{ $category->nb_posts }}</td>
                     <td width="350">
                         @if($lm = $category->last_message)
-                            <a href="{{ URL::to_action('forums::topic@index', array($category->id, $category->slug, $lm[0]->topic->id, $lm[0]->topic->slug)) }}">
+                            <a href="{{ URL::to_action('forums::topic@index', array($category->slug, $lm[0]->topic->slug)) }}">
                                 {{ $lm[0]->topic->title }}<br />
                                 {{ date('d/m/Y H:i:s',strtotime($lm[0]->created_at)) }}
                             </a><br />

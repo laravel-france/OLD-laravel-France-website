@@ -23,7 +23,9 @@
 </div>
 <div class="row">
     <div class="span12">
+
         <div class="pull-right">
+            @include('forums::partials.new_topic')
         </div>
 
     	@if($category->topics)
@@ -42,7 +44,7 @@
                     <td width="37"></td>
                     <td>
                         <strong>
-                            <a href="{{ URL::to_action('forums::topic@index', array($category->id, $category->slug, $topic->id, $topic->slug)) }}">
+                            <a href="{{ URL::to_action('forums::topic@index', array($category->slug, $topic->slug)) }}">
                                 {{ $topic->title }}
                             </a>
                         </strong><br />
@@ -52,11 +54,7 @@
                     <td class="text-center" width="127">{{ $topic->nb_views }}</td>
                     <td width="350">
                         <?php $lm = $topic->last_message; ?>
-
-                        @if(!isset($lm[0]))
-                            {{ dd($lm) }}
-                        @endif
-                        <a href="{{ URL::to_action('forums::topic@index', array($category->id, $category->slug, $topic->id, $topic->slug)) }}">
+                        <a href="{{ URL::to_action('forums::topic@index', array($category->slug, $topic->slug)) }}#message{{ $lm[0]->id }}">
                             {{ date('d/m/Y H:i:s',strtotime($lm[0]->created_at)) }}
                         </a><br />
                         <small>Par {{ $lm[0]->user->username }}</small>
@@ -70,6 +68,7 @@
         @endif
 
         <div class="pull-right">
+            @include('forums::partials.new_topic')
         </div>
 
     </div>

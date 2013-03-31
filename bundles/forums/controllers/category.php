@@ -3,9 +3,9 @@
 class Forums_Category_Controller extends Base_Controller
 {
 
-    public function action_index($id, $slug)
+    public function action_index($slug)
     {
-    	$category = Forumcategory::find($id)->with('topics');
+    	$category = Forumcategory::findBySlug($slug)->with('topics');
     	if (!$category) Event::fire('404');
 
     	return View::make(
