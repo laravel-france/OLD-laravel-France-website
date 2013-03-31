@@ -1,0 +1,56 @@
+.table th.text-center, .table td.text-center {
+	text-align: center;
+}
+
+.table td {
+	vertical-align: middle;
+}
+
+div.forum-message {
+	padding-top:10px;
+	padding-bottom:10px;
+	min-height: 75px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+
+	border: 1px solid #e3e3e3;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+	box-shadow: inset 0 1px 1;
+
+	position: relative;
+}
+
+div.forum-message.span12 {
+	width: auto;
+}
+
+div.forum-message.bg1 {
+	background-color: #F5F5F5;
+}
+
+div.forum-message.bg2 {
+	background-color: #E6E6E6;
+}
+
+div.forum-message .span9 {
+	margin-left: -5px;
+}
+
+div.forum-message-sep {
+	height:5px;
+	content: '';
+}
+
+div#message_list {
+	margin-top:20px;
+	margin-bottom: 20px;
+}
+
+div.info_posted {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    color: gray;
+}

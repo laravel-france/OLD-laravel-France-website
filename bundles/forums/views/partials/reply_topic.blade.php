@@ -1,0 +1,1 @@
+<a class="btn btn-success" href="{{ URL::to_action('forums::topic@reply', array($category->id, $category->slug, $topic->id, $topic->slug)) }}"><i class="icon-share-alt icon-white"></i> Répondre</a>

@@ -35,6 +35,7 @@
 
 return array(
 	'mdparser' => array('auto' => true),
+	'bbcodeparser' => array('auto' => true),
 	'docs' => array('handles' => 'docs'),
 	'blog' => array(
 		'handles' => 'blog',
@@ -42,4 +43,13 @@ return array(
 		),
 	'verify' => array('auto' => true),
 	'panel' => array('auto' => true),
-	);
+	'forums' => array(
+		'handles' => 'forums',
+		'auto' => true,
+		'autoloads' => array(
+	        'directories' => array(
+	            '(:bundle)/models',
+	        ),
+	    ),
+	),
+);
