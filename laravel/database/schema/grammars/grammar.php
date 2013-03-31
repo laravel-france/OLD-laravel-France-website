@@ -32,9 +32,6 @@ abstract class Grammar extends \Laravel\Database\Grammar {
 
 		$sql = "ALTER TABLE $table ADD CONSTRAINT $name ";
 
-		die(var_dump(($name)));
-
-
 		$sql .= "FOREIGN KEY ($foreign) REFERENCES $on ($referenced)";
 
 		// Finally we will check for any "on delete" or "on update" options for
