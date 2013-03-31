@@ -35,6 +35,7 @@
 
 return array(
 	'mdparser' => array('auto' => true),
+	'bbcodeparser' => array('auto' => true),
 	'docs' => array('handles' => 'docs'),
 	'blog' => array(
 		'handles' => 'blog',

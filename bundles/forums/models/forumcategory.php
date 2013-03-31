@@ -14,6 +14,6 @@ class Forumcategory extends Eloquent {
 
     public function last_message()
     {
-    	return $this->messages()->with('user')->order_by('updated_at', 'desc')->take(1);
+    	return $this->messages()->with('user')->order_by('created_at', 'desc')->take(1);
     }
 }

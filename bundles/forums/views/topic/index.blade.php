@@ -38,9 +38,10 @@
     ?>
     @foreach($messages as $k => $message)
     <?php $i++; ?>
+    <a name="message{{ $message->id }}"></a>
     <div class="row">
         <div class="forum-message span12 @if(!($k%2))bg1@elsebg2@endif"> 
-            <div class="info_posted"><small><em><a href="#">Posté le {{ date('d/m/Y - H:i:s', strtotime($message->created_at)) }}</a></em></small></div>
+            <div class="info_posted"><small><em><a href="#message{{ $message->id }}">Posté le {{ date('d/m/Y - H:i:s', strtotime($message->created_at)) }}</a></em></small></div>
 
         	<div class="span3">
         		<div class="pull-left">
@@ -48,9 +49,9 @@
         		</div>
 
         		<div style="padding:10px; margin-left: 90px;">
-        			<strong>{{ $message->user->username }}</strong><br />
-        			Inscrit le xx/xx/xx<br />
-        			Message : X
+                    <strong>{{ $message->user->username }}</strong><br />
+                    Inscrit le {{ date('d/m/Y', strtotime($message->user->created_at)) }}<br />
+                    Messages : {{ $message->user->nb_messages }}
         		</div>
         	</div>
 
