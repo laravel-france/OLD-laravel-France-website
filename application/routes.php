@@ -58,7 +58,7 @@ Route::filter('csrf', function()
 Route::filter('auth', function()
 {
 	if (Auth::guest()) {
-        Session::flash('from_url', URL::full());
+        Session::put('from_url', URL::full());
         return Redirect::to('login');
     }
 });

@@ -1,7 +1,7 @@
 @layout('main')
 
 @section('content')
-            <?php $messages = array('Où est la carte ?.', 'Je pense que nous sommes perdu.', 'On s\'est trompé de virage !'); ?>
+            <?php $messages = array('Où est la carte ?', 'Je pense que nous sommes perdu.', 'On s\'est trompé de virage !'); ?>
 
             <h1><?php echo $messages[mt_rand(0, 2)]; ?></h1>
 

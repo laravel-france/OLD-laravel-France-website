@@ -21,10 +21,23 @@
                 <td>{{ HTML::link_to_action('panel::site@editusers', $oneUser->username, array($oneUser->id)) }}</td>
                 <td>{{ $oneUser->email }}</td>
                 <td>{{ date('d-m-Y',strtotime($oneUser->created_at)) }}</td>
-                <td>{{ HTML::link('/', 'Supprimer', array('id' => $oneUser->id), array('class'=>'btn btn-danger')) }}</td>
+                <td>{{ HTML::link_to_action('panel::site@removeuser', 'Supprimer', array('id' => $oneUser->id), array('class'=>'btn btn-danger confirm')) }}</td>
             </tr>
         @endforeach
         </tbody>
     </table>
+@endsection
 
+
+@section('javascript')
+<script>
+$('a.confirm').click(function(e){
+
+    if (!confirm('Êtes vous sûr de vouloir supprimer cet utilisateur ?')) {
+        e.preventDefault();
+    }
+
+
+})
+</script>
 @endsection

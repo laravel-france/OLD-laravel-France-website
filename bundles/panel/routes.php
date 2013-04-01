@@ -5,9 +5,13 @@ Route::group(array('before' => 'isGuest'), function() {
 	    return View::make('panel::login.login');
 	});
 
+	Route::get('login/special', function() {
+	    return View::make('panel::login.login_special');
+	});
+
 
 	Route::post('login', function() {
-		$from_url = Input::get('from_url', '/');
+		$from_url = Session::get('from_url', '/');
 		try
 		{
 		    Auth::attempt(
@@ -17,11 +21,11 @@ Route::group(array('before' => 'isGuest'), function() {
 		    	)
 		    );
 
+		    Session::forget('from_url');
 		    return Redirect::to($from_url ? $from_url : '/');
 		}
 		catch (Exception $e)
 		{
-	    	Session::flash('from_url', $from_url);
 	        return Redirect::to('login')
 	            ->with('login_errors', true);
 		}
@@ -35,10 +39,10 @@ Route::group(array('before' => 'auth'), function() {
 	    return Redirect::to('login');
 	});
 
-	Route::get('panel', array('before' => 'auth', function(){
+	Route::get('panel', function(){
 
 		return View::make('panel::panel.index');
-	}));
+	});
 
 
 
@@ -46,13 +50,17 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('panel/password', 'panel::password@show');
 	Route::post('panel/password', 'panel::password@submit');
 
+	Route::get('panel/application', 'panel::applications@show');
+});
+
+
+Route::group(array('before' => 'superadmin'), function() {
 	Route::get('panel/site/users', 'panel::site@listusers');
+	Route::get('panel/site/users/(:num)/remove', 'panel::site@removeuser');
 	Route::get('panel/site/users/(:num)/edit', 'panel::site@editusers');
 	Route::put('panel/site/users/(:num)', 'panel::site@updateusers');
 
 });
-
-
 
 
 
@@ -61,6 +69,12 @@ Route::filter('isGuest', function()
 	if (!Auth::guest()) return Redirect::to('/');
 });
 
+Route::filter('superadmin', function()
+{
+	if (Auth::guest() || !Auth::user()->is('Super Admin')) {
+		return Response::error('404');
+	}
+});
 
 
 View::composer('panel::panel.layout', function($view)

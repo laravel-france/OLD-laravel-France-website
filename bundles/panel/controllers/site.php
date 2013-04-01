@@ -26,4 +26,12 @@ class Panel_Site_Controller extends Base_Controller {
 	    return Redirect::to_action('panel::site@editusers', array($user_id))->with('success', '1');
 	}
 
+	public function action_removeuser($user_id)
+	{
+		$user = User::find($user_id);
+        if($user) $user->delete();
+
+        return Redirect::back();
+	}
+
 }

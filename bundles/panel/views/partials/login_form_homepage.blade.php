@@ -1,12 +1,17 @@
-{{ Form::open('login') }}
-    {{ Form::hidden('from_url', Session::get('from_url')) }}
+<p>
+	<a class="btn btn-github" href="{{ URL::to('oneauth/session/github') }}">
+		<i class="icon-github"></i> Se connecter avec Github
+	</a>
+</p>
 
-    <!-- username field -->
-    <p>{{ Form::label('username', 'Nom d\'utilisateur') }}</p>
-    <p>{{ Form::text('username') }}</p>
-    <!-- password field -->
-    <p>{{ Form::label('password', 'Mot de passe') }}</p>
-    <p>{{ Form::password('password') }}</p>
-    <!-- submit button -->
-    <p>{{ Form::submit('Connexion') }}</p>
-{{ Form::close() }}
+<p>
+	<a class="btn btn-twitter" href="{{ URL::to('oneauth/session/twitter') }}">
+		<i class="icon-twitter"></i> Se connecter avec Twitter
+	</a>
+</p>
+
+<p>
+	<a class="btn btn-google" href="{{ URL::to('oneauth/session/google') }}">
+		<i class="icon-google-plus-sign"></i> Se connecter avec Google
+	</a>
+</p>

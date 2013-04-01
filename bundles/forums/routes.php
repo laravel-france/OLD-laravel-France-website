@@ -1,5 +1,10 @@
 <?php
 
+Route::filter('pattern: forums/admin*', 'forummer');
+Route::controller('forums::admin.category');
+Route::controller('forums::admin');
+
+
 
 // Index of the forums
 Route::get(
@@ -58,3 +63,10 @@ Route::get(
 	)
 );
 
+
+Route::filter('forummer', function()
+{
+	if (\Auth::guest() || !\Auth::user()->is('Forumer')) {
+		return \Response::error('404');
+	}
+});

@@ -102,16 +102,14 @@ $ php artistan bundle:install laravel-oauth2
     </aside>
 @endif
 
-    <aside id="hp_loginform">
-        <h3>Mon compte</h3>
-
         @if(Auth::guest())
+            <h3>Se connecter</h3>
             {{ render('panel::partials.login_form_homepage') }}
         @else
-            {{ render('panel::partials.panel_homepage') }}
+            <aside id="hp_loginform">
+                <h3>Mon compte</h3>
+                {{ render('panel::partials.panel_homepage') }}
+            </aside>
         @endif
-
-    </aside>
-
 </div>
 @endsection

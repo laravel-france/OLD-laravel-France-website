@@ -52,6 +52,11 @@ class User extends EloquentVerifyBase
 		return \Hash::check($this->salt . $password, $this->password);
 	}
 
+	public function oauth()
+	{
+		return $this->has_many('OneAuth\\Auth\\Client', 'user_id');
+	}
+
 	/**
 	 * Can the User do something
 	 *

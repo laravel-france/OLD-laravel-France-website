@@ -1,5 +1,5 @@
 <?php
-
+/*
 class Panel_Password_Controller extends Base_Controller {
 
 	public function action_show()
@@ -40,4 +40,4 @@ class Panel_Password_Controller extends Base_Controller {
 	}
 
 
-}
+}*/

@@ -11,7 +11,7 @@
     {{ HTML::style('css/bootstrap-responsive.min.css') }}
     {{ HTML::style('css/vendors/prettify.css') }}
     {{ HTML::style('css/main.css') }}
-    {{ HTML::style('http://fonts.googleapis.com/css?family=Ubuntu') }}
+    {{ HTML::style('css/font-awesome.min.css') }}
     @yield_section
 
     <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="{{ URL::to_action('blog::home@rss') }}" />
