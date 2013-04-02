@@ -2,10 +2,10 @@
 
 Vous souhaitez voir une fonctionnalité sur le site laravel.fr ? N'hesitez pas à faire des propositions en éditant ce fichier !
 
-## Site :
+## Site
 - Ajout d'une page contribution
 
-## Forums : 
+## Forums
 - Ajout d'annonces et/ou de post it
 
 ## Blog
