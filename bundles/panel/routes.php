@@ -59,7 +59,10 @@ Route::group(array('before' => 'superadmin'), function() {
 	Route::get('panel/site/users/(:num)/remove', 'panel::site@removeuser');
 	Route::get('panel/site/users/(:num)/edit', 'panel::site@editusers');
 	Route::put('panel/site/users/(:num)', 'panel::site@updateusers');
+	Route::put('panel/site/users/(:num)/roles', 'panel::site@updateuserroles');
 
+	Route::get('panel/site/roles', 'panel::site@listroles');
+	Route::post('panel/site/roles', 'panel::site@newrole');
 });
 
 

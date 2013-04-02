@@ -62,7 +62,6 @@ Event::listen('oneauth.logged', function ($client, $user_data)
 
 Event::listen('oneauth.sync', function ($user_id)
 {
-	file_put_contents('log', 'SYNC' . "\n" ,FILE_APPEND);
 	OneAuth\Auth\Core::sync($user_id);
 });
 
@@ -70,8 +69,6 @@ Event::listen('oneauth.sync', function ($user_id)
 
 Event::listen('laravel.auth: login', function()
 {
-	file_put_contents('log', 'EVENT LOGIN' . "\n" ,FILE_APPEND);
-
 	$user = IoC::resolve('oneauth.driver: auth.user');
 
 	Event::fire('oneauth.sync', array($user->id));

@@ -40,6 +40,7 @@
     <h3>Laravel.fr</h3>
     <ul>
         <li><a href="{{ URL::to_action('panel::site@listusers') }}">Utilisateurs</a></li>
+        <li><a href="{{ URL::to_action('panel::site@listroles') }}">Rôles</a></li>
     </ul>
 </nav>
 @endif
