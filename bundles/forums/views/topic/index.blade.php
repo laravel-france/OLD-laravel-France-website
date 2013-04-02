@@ -6,7 +6,7 @@
 @endsection
 
 @section('title')
-    {{ $category->title }} - Forums de Laravel France
+    {{ $topic->title }} - Forums de Laravel France
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
         <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
         <li><a href="{{ URL::to_action('forums::home@index') }}">Forums</a> <span class="divider">/</span></li>
         <li><a href="{{ URL::to_action('forums::category@index', array($category->slug)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
-        <li>{{ $topic->title }}</li>
+        <li><strong>{{ $topic->title }}</strong></li>
         <li class="pull-right">Page 1</li>
         </ul>
     </div>

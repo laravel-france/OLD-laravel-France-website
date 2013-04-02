@@ -32,7 +32,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th colspan="2"><strong>{{ $category->title }}</strong></th>
+                    <th colspan="3"><strong>{{ $category->title }}</strong></th>
                     <th class="text-center">Messages</th>
                     <th class="text-center">Vues</th>
                     <th>Dernier message</th>
@@ -41,7 +41,8 @@
             <tbody>
                 @foreach($category->topics as $topic)
                 <tr>
-                    <td width="37"></td>
+                    <td width="1" style="padding:0"><div style="min-height:61px"></div></td>
+                    <td width="37" class="ico-read">@if($topic->isUnread())<i class="icon-circle"></i>@else<i class="icon-circle-blank"></i>@endif</td>
                     <td>
                         <strong>
                             <a href="{{ URL::to_action('forums::topic@index', array($category->slug, $topic->slug)) }}">
@@ -63,6 +64,16 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div>
+            <strong>Légende :</strong>
+            <p class="ico-read">
+                <i class="icon-circle"></i> : Messages non lus<br />
+                <i class="icon-circle-blank"></i> : Messages lus
+            </p>
+        </div>
+
+
         @else
             <h3>Aucun topic dans la catégorie <em>{{ $category->title }}</em></h3>
         @endif

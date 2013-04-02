@@ -7,10 +7,10 @@ class Forums_Topic_Controller extends Base_Controller
     {
 
         $category = Forumcategory::findBySlug($catslug);
-        if (!$category) Event::fire('404');
+        if (is_null($category)) return Event::first('404');
 
         $topic = Forumtopic::findBySlug($topic_slug);
-        if (!$topic) Event::fire('404');
+        if (is_null($topic)) return Event::first('404');
 
         $topic->view();
 
@@ -75,8 +75,8 @@ class Forums_Topic_Controller extends Base_Controller
 
         $message->save();
 
-
-        return Redirect::to_action('forums::topic@index', compact('catslug', 'topic_slug'));
+        $url = URL::to_action('forums::topic@index', compact('catslug', 'topic_slug')).'#message'.$message->id;        
+        return Redirect::to($url);
     }
 
     public function action_create($catslug)
@@ -124,9 +124,10 @@ class Forums_Topic_Controller extends Base_Controller
 
 
         $topic_id = $topic->id;
-        $topic_idslug = $topic->slug;
+        $topic_slug = $topic->slug;
 
-        return Redirect::to_action('forums::topic@index', compact('catslug', 'topic_slug'));
+        $url = URL::to_action('forums::topic@index', compact('catslug', 'topic_slug')).'#message'.$message->id;        
+        return Redirect::to($url);
     }
 
 

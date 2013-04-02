@@ -54,3 +54,13 @@ div.info_posted {
     right: 5px;
     color: gray;
 }
+
+table td.ico-read {
+	text-align: center;
+}
+
+.ico-read i {
+	font-size: 1.3em;
+	color: #FB503C;
+}
+

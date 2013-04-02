@@ -21,7 +21,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th colspan="2"><strong>Forums</strong></th>
+                    <th colspan="3"><strong>Forums</strong></th>
                     <th class="text-center">Sujets</th>
                     <th class="text-center">Messages</th>
                     <th>Dernier message</th>
@@ -30,7 +30,8 @@
             <tbody>
                 @foreach($categories as $category)
                 <tr>
-                    <td width="37"></td>
+                    <td width="1" style="padding:0"><div style="min-height:78px"></div></td>
+                    <td width="37" class="ico-read">@if($category->isUnread())<i class="icon-circle"></i>@else<i class="icon-circle-blank"></i>@endif</td>
                     <td>
                         <strong>
                             <a href="{{ URL::to_action('forums::category@index', array($category->slug)) }}">
@@ -45,7 +46,7 @@
                     <td class="text-center" width="127">{{ $category->nb_posts }}</td>
                     <td width="350">
                         @if($lm = $category->last_message)
-                            <a href="{{ URL::to_action('forums::topic@index', array($category->slug, $lm[0]->topic->slug)) }}">
+                            <a href="{{ URL::to_action('forums::topic@index', array($category->slug, $lm[0]->topic->slug)) }}#message{{ $lm[0]->id }}">
                                 {{ $lm[0]->topic->title }}<br />
                                 {{ date('d/m/Y H:i:s',strtotime($lm[0]->created_at)) }}
                             </a><br />
@@ -58,6 +59,14 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div>
+            <strong>Légende :</strong>
+            <p class="ico-read">
+                <i class="icon-circle"></i> : Messages non lus<br />
+                <i class="icon-circle-blank"></i> : Messages lus
+            </p>
+        </div>
     </div>
 </div>
 @endsection
