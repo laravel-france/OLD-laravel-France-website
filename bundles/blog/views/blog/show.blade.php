@@ -15,6 +15,11 @@
         <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
         <li><a href="{{ URL::to('blog') }}">Blog</a> <span class="divider">/</span></li>
         <li>{{ $post->title }}</li>
+        <li class="pull-right">
+            <a target="_blank" href="{{ URL::to_action('blog::home@rss') }}">
+                <i class="icon-rss"></i> S'abonner au flux RSS
+            </a>
+        </li>
     </ul>
 
 <div class="row">
