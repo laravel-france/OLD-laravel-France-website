@@ -65,4 +65,11 @@ class Forums_Admin_Category_Controller extends Base_Controller
         return Response::make('NOK', 400);
     }
 
+    public function action_remove($id)
+    {
+        $category = Forumcategory::find($id);
+        if($category) $category->delete();
+
+        return Redirect::back();
+    }
 }

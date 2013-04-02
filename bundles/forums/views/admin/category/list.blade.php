@@ -15,11 +15,13 @@
     @if(!$categories)
         Aucune catégorie créée.
     @else
+    <strong>Vous pouvez changer l'ordre des catégories en faisant du drag & drop</strong>
     <table class="table table-striped" id="sortable">
         <thead>
             <tr>
-                <th>#</th>
+                <th width="32">#</th>
                 <th>Nom</th>
+                <th width="100">Suppression</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +29,7 @@
             <tr id="{{ $category->id }}" data-item='{{ json_encode($category->to_array()) }}'>
                 <td>{{ $category->id }}</td>
                 <td>{{ $category->title }}</td>
+                <td>{{ HTML::link_to_action('forums::admin.category@remove', 'Supprimer', array('id' => $category->id), array('class'=>'btn btn-danger confirm')) }}</td>
             </tr>
         @endforeach
         </tbody>
@@ -148,6 +151,15 @@
         $("#myModalEdit").modal('show')
 
         
+    });
+
+    $('a.confirm').click(function(e){
+
+        if (!confirm('Êtes vous sûr de vouloir supprimer cette catégorie ?')) {
+            e.preventDefault();
+        }
+
+
     });
     </script>
 @endsection

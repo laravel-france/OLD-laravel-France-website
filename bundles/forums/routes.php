@@ -10,14 +10,14 @@ Route::controller('forums::admin');
 Route::get(
 	'(:bundle)', 
 	array(
-		'uses' => 'forums::home@index'
+		'uses' => 'forums::home@index',
 	)
 );
 // View topics in a cat
 Route::get(
 	'(:bundle)/(:any)', 
 	array(
-		'uses' => 'forums::category@index'
+		'uses' => 'forums::category@index',
 	)
 );
 
@@ -26,7 +26,7 @@ Route::get(
 	'(:bundle)/(:any)/topic/create', 
 	array(
 		'uses' => 'forums::topic@create',
-		'before' => 'auth'
+		'before' => 'auth',
 	)
 );
 
@@ -34,7 +34,7 @@ Route::get(
 Route::post('(:bundle)/(:any)/topic/create', 
 	array(
 		'uses' => 'forums::topic@postcreate',
-		'before' => 'csrf|auth'
+		'before' => 'csrf|auth',
 	)
 );
 
@@ -43,7 +43,7 @@ Route::get(
 	'(:bundle)/(:any)/(:any)/reply', 
 	array(
 		'uses' => 'forums::topic@reply',
-		'before' => 'auth'
+		'before' => 'auth',
 	)
 );
 
@@ -51,7 +51,24 @@ Route::get(
 Route::post('(:bundle)/(:any)/(:any)/reply', 
 	array(
 		'uses' => 'forums::topic@postreply',
-		'before' => 'csrf|auth'
+		'before' => 'csrf|auth',
+	)
+);
+
+// Edit a message
+Route::get(
+	'(:bundle)/(:any)/(:any)/edit/(:num)', 
+	array(
+		'uses' => 'forums::topic@edit',
+		'before' => 'auth',
+	)
+);
+
+Route::post(
+	'(:bundle)/(:any)/(:any)/edit/(:num)', 
+	array(
+		'uses' => 'forums::topic@postedit',
+		'before' => 'csrf|auth',
 	)
 );
 
@@ -59,7 +76,7 @@ Route::post('(:bundle)/(:any)/(:any)/reply',
 Route::get(
 	'(:bundle)/(:any)/(:any)', 
 	array(
-		'uses' => 'forums::topic@index'
+		'uses' => 'forums::topic@index',
 	)
 );
 

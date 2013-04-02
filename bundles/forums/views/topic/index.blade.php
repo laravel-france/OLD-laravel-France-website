@@ -41,7 +41,14 @@
     <a name="message{{ $message->id }}"></a>
     <div class="row">
         <div class="forum-message span12 @if(!($k%2))bg1@elsebg2@endif"> 
-            <div class="info_posted"><small><em><a href="#message{{ $message->id }}">Posté le {{ date('d/m/Y - H:i:s', strtotime($message->created_at)) }}</a></em></small></div>
+            <div class="info_posted">
+                <small><em>
+                    @if(Auth::user()->id == $message->user->id || Auth::user()->is('Forumer'))
+                        <a href="{{ URL::to_action('forums::topic@edit', array($category->slug, $topic->slug, $message->id)) }}">[Modifier]</a>&nbsp;-&nbsp;
+                    @endif
+                    <a href="#message{{ $message->id }}">Posté le {{ date('d/m/Y - H:i:s', strtotime($message->created_at)) }}</a>
+                </em></small>
+            </div>
 
         	<div class="span3">
         		<div class="pull-left">

@@ -741,11 +741,16 @@ class SBBCodeParser_Document extends SBBCodeParser_ContainerNode
 				foreach($node->children() as $child)
 					$content .= $child->get_html(false);
 
-				return "<pre>{$content}</pre>";
+				return "<pre class=\"prettyprint\">{$content}</pre>";
 			}, SBBCodeParser_BBCode::BLOCK_TAG),
-		    	new SBBCodeParser_BBCode('code', '<code>%content%</code>',
-				SBBCodeParser_BBCode::BLOCK_TAG, false, array(), array('text_node'), SBBCodeParser_BBCode::AUTO_DETECT_EXCLUDE_EMOTICON),
-		    	new SBBCodeParser_BBCode('php', function($content, $attribs, $node)
+		    	new SBBCodeParser_BBCode('code', function($content, $attribs, $node)
+			{
+				$content = '';
+				foreach($node->children() as $child)
+					$content .= $child->get_html(false);
+
+				return "<pre class=\"prettyprint\">{$content}</pre>";
+			}, SBBCodeParser_BBCode::BLOCK_TAG),		    	new SBBCodeParser_BBCode('php', function($content, $attribs, $node)
 			{
 				ob_start();
 				highlight_string($node->get_text());
@@ -1146,7 +1151,8 @@ class SBBCodeParser_Document extends SBBCodeParser_ContainerNode
 	 */
 	public function parse($str)
 	{
-		$str      = preg_replace('/[\r\n|\r]/', "\n", $str);
+		// Traitement du premier \r\n, ils ne seront pas convertis deux fois.
+		$str = str_replace(array("\r\n", "\r"), "\n", $str);
 		$len      = strlen($str);
 		$tag_open = false;
 		$tag_text = '';
