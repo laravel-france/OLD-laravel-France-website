@@ -31,31 +31,32 @@
                 @foreach($categories as $category)
                 <tr>
                     <td width="1" style="padding:0"><div style="min-height:78px"></div></td>
-                    <td width="37" class="ico-read">@if($category->isUnread())<i class="icon-circle"></i>@else<i class="icon-circle-blank"></i>@endif</td>
+                    <td width="37" class="ico-read">@if(Forumcategory::isUnread($category->id))<i class="icon-circle"></i>@else<i class="icon-circle-blank"></i>@endif</td>
                     <td>
                         <strong>
                             <a href="{{ URL::to_action('forums::category@index', array($category->slug)) }}">
                                 {{ $category->title }}
                             </a>
                         </strong>
-                        @if($category->desc)
-                        <br />{{ $category->desc }}
+                        @if($category->description)
+                        <br />{{ $category->description }}
                         @endif
                     </td>
                     <td class="text-center" width="127">{{ $category->nb_topics }}</td>
                     <td class="text-center" width="127">{{ $category->nb_posts }}</td>
                     <td width="350">
-                        @if($lm = $category->last_message)
-                            <a href="{{ URL::to_action('forums::topic@index', array($category->slug, $lm[0]->topic->slug)) }}#message{{ $lm[0]->id }}">
-                                {{ $lm[0]->topic->title }}<br />
-                                {{ date('d/m/Y H:i:s',strtotime($lm[0]->created_at)) }}
+                        @if(isset($category->last_message_date))
+                            <a href="{{ URL::to_action('forums::topic@index', array($category->slug, $category->last_message_topic_slug)) }}#message{{ $category->last_message_id }}">
+                                {{ $category->last_message_topic_slug }}<br />
+                                {{ date('d/m/Y H:i:s',strtotime($category->last_message_date)) }}
                             </a><br />
-                            <small>Par {{ $lm[0]->user->username }}</small>
+                            <small>Par {{ $category->last_message_username }}</small>
                         @else
                             Aucun message dans cette catégorie
                         @endif
                     </td>
                 </tr>
+
                 @endforeach
             </tbody>
         </table>
