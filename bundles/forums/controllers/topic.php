@@ -3,14 +3,13 @@
 class Forums_Topic_Controller extends Base_Controller
 {
 
-    public function action_index($catslug, $topic_slug)
+    public function action_index($topic_slug, $topic_id)
     {
 
-        $category = Forumcategory::findBySlug($catslug);
-        if (is_null($category)) return Event::first('404');
-
-        $topic = Forumtopic::findBySlug($topic_slug);
+        $topic = Forumtopic::find($topic_id);
         if (is_null($topic)) return Event::first('404');
+
+        $category = $topic->category;
 
         $topic->view();
 
@@ -26,13 +25,12 @@ class Forums_Topic_Controller extends Base_Controller
         );
     }
 
-    public function action_reply($catslug, $topic_slug)
+    public function action_reply($topic_slug, $topic_id)
     {
-        $category = Forumcategory::findBySlug($catslug);
-        if (is_null($category)) return Event::first('404');
-
-        $topic = Forumtopic::findBySlug($topic_slug);
+        $topic = Forumtopic::find($topic_id);
         if (is_null($topic)) return Event::first('404');
+
+        $category = $topic->category;
 
         $messages = $topic->messages()->order_by('created_at', 'DESC')->take(5)->get();
 
@@ -46,13 +44,12 @@ class Forums_Topic_Controller extends Base_Controller
         );
     }
 
-    public function action_postreply($catslug, $topic_slug)
+    public function action_postreply($topic_slug, $topic_id)
     {
-        $category = Forumcategory::findBySlug($catslug);
-        if (is_null($category)) return Event::first('404');
-
-        $topic = Forumtopic::findBySlug($topic_slug);
+        $topic = Forumtopic::find($topic_id);
         if (is_null($topic)) return Event::first('404');
+
+        $category = $topic->category;
 
         $rules = array(
             'content' => 'required|min:2'
@@ -75,15 +72,14 @@ class Forums_Topic_Controller extends Base_Controller
 
         $message->save();
 
-        $url = URL::to_action('forums::topic@index', compact('catslug', 'topic_slug')).'#message'.$message->id;        
+        $url = URL::to_action('forums::topic@index', compact('topic_slug', 'topic_id')).'#message'.$message->id;        
         return Redirect::to($url);
     }
 
-    public function action_create($catslug)
+    public function action_create($catslug, $catid)
     {
-        $category = Forumcategory::findBySlug($catslug);
+        $category = Forumcategory::find($catid);
         if (is_null($category)) return Event::first('404');
-
 
         return View::make(
             'forums::topic.create',
@@ -93,9 +89,9 @@ class Forums_Topic_Controller extends Base_Controller
         );
     }
 
-    public function action_postcreate($catslug)
+    public function action_postcreate($catslug, $catid)
     {
-        $category = Forumcategory::findBySlug($catslug);
+        $category = Forumcategory::find($catid);
         if (is_null($category)) return Event::first('404');
 
         $rules = array(
@@ -126,13 +122,13 @@ class Forums_Topic_Controller extends Base_Controller
         $topic_id = $topic->id;
         $topic_slug = $topic->slug;
 
-        $url = URL::to_action('forums::topic@index', compact('catslug', 'topic_slug')).'#message'.$message->id;        
+        $url = URL::to_action('forums::topic@index', compact('topic_slug', 'topic_id')).'#message'.$message->id;        
         return Redirect::to($url);
     }
 
-    public function action_toggle_sticky($catslug, $topic_slug)
+    public function action_toggle_sticky($topic_slug, $topic_id)
     {
-        $topic = Forumtopic::findBySlug($topic_slug);
+        $topic = Forumtopic::find($topic_id);
         if (is_null($topic)) return Event::first('404');
 
         $topic->toggleSticky();
@@ -140,13 +136,12 @@ class Forums_Topic_Controller extends Base_Controller
         return Redirect::back();
     }
 
-    public function action_edit($catslug, $topic_slug, $message_id)
+    public function action_edit($topic_slug, $topic_id, $message_id)
     {
-        $category = Forumcategory::findBySlug($catslug);
-        if (is_null($category)) return Event::first('404');
-
-        $topic = Forumtopic::findBySlug($topic_slug);
+        $topic = Forumtopic::find($topic_id);
         if (is_null($topic)) return Event::first('404');
+
+        $category = $topic->category;
 
         $message = Forummessage::find($message_id);
         if (is_null($message)) return Event::first('404');
@@ -164,13 +159,12 @@ class Forums_Topic_Controller extends Base_Controller
         );
     }
 
-    public function action_postedit($catslug, $topic_slug, $message_id)
+    public function action_postedit($topic_slug, $topic_id, $message_id)
     {
-        $category = Forumcategory::findBySlug($catslug);
-        if (is_null($category)) return Event::first('404');
-
-        $topic = Forumtopic::findBySlug($topic_slug);
+        $topic = Forumtopic::find($topic_id);
         if (is_null($topic)) return Event::first('404');
+
+        $category = $topic->category;
 
         $message = Forummessage::find($message_id);
         if (is_null($message)) return Event::first('404');
@@ -228,7 +222,7 @@ class Forums_Topic_Controller extends Base_Controller
         $topic_id = $topic->id;
         $topic_slug = $topic->slug;
 
-        $url = URL::to_action('forums::topic@index', compact('catslug', 'topic_slug')).'#message'.$message->id;        
+        $url = URL::to_action('forums::topic@index', compact('topic_slug', 'topic_id')).'#message'.$message->id;        
         return Redirect::to($url);
     }
 }

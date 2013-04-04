@@ -45,7 +45,7 @@
                     <td width="37" class="ico-read">@if($topic->isUnread())<i class="icon-circle"></i>@else<i class="icon-circle-blank"></i>@endif</td>
                     <td>
                         <strong>
-                            <a href="{{ URL::to_action('forums::topic@index', array($category->slug, $topic->slug)) }}">
+                            <a href="{{ URL::to_action('forums::topic@index', array($topic->slug, $topic->id)) }}">
                                 @if($topic->sticky)<i class="icon-flag"></i> @endif{{ $topic->title }}
                             </a>
                         </strong><br />
@@ -55,7 +55,7 @@
                     <td class="text-center" width="127">{{ $topic->nb_views }}</td>
                     <td width="350">
                         <?php $lm = $topic->last_message; ?>
-                        <a href="{{ URL::to_action('forums::topic@index', array($category->slug, $topic->slug)) }}#message{{ $lm[0]->id }}">
+                        <a href="{{ URL::to_action('forums::topic@index', array($topic->slug, $topic->id)) }}#message{{ $lm[0]->id }}">
                             {{ date('d/m/Y H:i:s',strtotime($lm[0]->created_at)) }}
                         </a><br />
                         <small>Par {{ $lm[0]->user->username }}</small>

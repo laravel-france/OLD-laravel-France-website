@@ -18,8 +18,8 @@
         <ul class="breadcrumb">
         <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
         <li><a href="{{ URL::to_action('forums::home@index') }}">Forums</a> <span class="divider">/</span></li>
-        <li><a href="{{ URL::to_action('forums::category@index', array($category->slug)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
-        <li><a href="{{ URL::to_action('forums::topic@index', array($category->slug, $topic->slug)) }}">{{ $topic->title }}</a> <span class="divider">/</span></li>
+        <li><a href="{{ URL::to_action('forums::category@index', array($category->slug, $category->id)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
+        <li><a href="{{ URL::to_action('forums::topic@index', array($topic->slug, $topic->id)) }}">{{ $topic->title }}</a> <span class="divider">/</span></li>
         <li>Modifier une réponse</li>
         </ul>
     </div>
@@ -27,7 +27,7 @@
 
 
 
-	{{ Form::open(URL::to_action('forums::topic@edit', array($category->slug, $topic->slug, $message->id)), null, array('id'=>'edit_form', 'class'=>'form')) }}
+	{{ Form::open(URL::to_action('forums::topic@edit', array($topic->slug, $topic->id, $message->id)), null, array('id'=>'edit_form', 'class'=>'form')) }}
     {{ Form::token() }}
 
     @if($topic->messages[0]->id == $message->id)

@@ -3,9 +3,9 @@
 class Forums_Category_Controller extends Base_Controller
 {
 
-    public function action_index($slug)
+    public function action_index($slug, $id)
     {
-    	$category = Forumcategory::findBySlug($slug)->with('ordered_topics');
+    	$category = Forumcategory::find($id)->with('ordered_topics');
     	if (!$category) Event::fire('404');
 
     	return View::make(

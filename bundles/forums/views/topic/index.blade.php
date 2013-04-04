@@ -16,7 +16,7 @@
         <ul class="breadcrumb">
         <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
         <li><a href="{{ URL::to_action('forums::home@index') }}">Forums</a> <span class="divider">/</span></li>
-        <li><a href="{{ URL::to_action('forums::category@index', array($category->slug)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
+        <li><a href="{{ URL::to_action('forums::category@index', array($category->slug, $category->id)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
         <li>
         @if($topic->sticky)<i class="icon-flag"></i> @endif<strong>{{ $topic->title }}</strong></li>
         <li class="pull-right">Page 1</li>
@@ -45,7 +45,7 @@
             <div class="info_posted">
                 <small><em>
                     @if(!Auth::guest() && (Auth::user()->id == $message->user->id || Auth::user()->is('Forumer')))
-                        <a href="{{ URL::to_action('forums::topic@edit', array($category->slug, $topic->slug, $message->id)) }}">[Modifier]</a>&nbsp;-&nbsp;
+                        <a href="{{ URL::to_action('forums::topic@edit', array($topic->slug, $topic->id, $message->id)) }}">[Modifier]</a>&nbsp;-&nbsp;
                     @endif
                     <a href="#message{{ $message->id }}">Posté le {{ date('d/m/Y - H:i:s', strtotime($message->created_at)) }}</a>
                 </em></small>
