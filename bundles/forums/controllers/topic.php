@@ -130,6 +130,16 @@ class Forums_Topic_Controller extends Base_Controller
         return Redirect::to($url);
     }
 
+    public function action_toggle_sticky($catslug, $topic_slug)
+    {
+        $topic = Forumtopic::findBySlug($topic_slug);
+        if (is_null($topic)) return Event::first('404');
+
+        $topic->toggleSticky();
+
+        return Redirect::back();
+    }
+
     public function action_edit($catslug, $topic_slug, $message_id)
     {
         $category = Forumcategory::findBySlug($catslug);

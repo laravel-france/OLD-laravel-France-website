@@ -12,6 +12,12 @@ class Forumcategory extends Eloquent {
         return $this->has_many('Forumtopic')->order_by('updated_at', 'desc');
     }
 
+    public function ordered_topics()
+    {
+        return $this->has_many('Forumtopic')->order_by('sticky', 'desc')->order_by('updated_at', 'desc');
+    }
+    
+
     public function messages()
     {
     	return $this->has_many('Forummessage');

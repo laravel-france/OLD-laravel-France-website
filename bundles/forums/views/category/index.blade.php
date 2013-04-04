@@ -39,14 +39,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($category->topics as $topic)
+                @foreach($category->ordered_topics as $topic)
                 <tr>
                     <td width="1" style="padding:0"><div style="min-height:61px"></div></td>
                     <td width="37" class="ico-read">@if($topic->isUnread())<i class="icon-circle"></i>@else<i class="icon-circle-blank"></i>@endif</td>
                     <td>
                         <strong>
                             <a href="{{ URL::to_action('forums::topic@index', array($category->slug, $topic->slug)) }}">
-                                {{ $topic->title }}
+                                @if($topic->sticky)<i class="icon-flag"></i> @endif{{ $topic->title }}
                             </a>
                         </strong><br />
                         <small>Par {{ $topic->user->username }} le {{ date('\l\e d/m/Y à H:i:s', strtotime($topic->created_at)) }}</small>

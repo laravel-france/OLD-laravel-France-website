@@ -60,6 +60,7 @@ class Forumtopic extends Eloquent {
         $incSlug = 0;
         $originalSlug = $this->slug;
 
+        $this->sticky = false;
         do {
 
             try {
@@ -101,6 +102,13 @@ class Forumtopic extends Eloquent {
 
         if(array_search($this->id, IoC::resolve('topicsview')) !== false) return false;
         return true;
+    }
+
+
+    public function toggleSticky()
+    {
+        $this->sticky = !((bool)$this->sticky);
+        $this->save();
     }
 
 }

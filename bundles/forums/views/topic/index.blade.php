@@ -17,7 +17,8 @@
         <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
         <li><a href="{{ URL::to_action('forums::home@index') }}">Forums</a> <span class="divider">/</span></li>
         <li><a href="{{ URL::to_action('forums::category@index', array($category->slug)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
-        <li><strong>{{ $topic->title }}</strong></li>
+        <li>
+        @if($topic->sticky)<i class="icon-flag"></i> @endif<strong>{{ $topic->title }}</strong></li>
         <li class="pull-right">Page 1</li>
         </ul>
     </div>
@@ -43,7 +44,7 @@
         <div class="forum-message span12 @if(!($k%2))bg1@elsebg2@endif"> 
             <div class="info_posted">
                 <small><em>
-                    @if(Auth::user()->id == $message->user->id || Auth::user()->is('Forumer'))
+                    @if(!Auth::guest() && (Auth::user()->id == $message->user->id || Auth::user()->is('Forumer')))
                         <a href="{{ URL::to_action('forums::topic@edit', array($category->slug, $topic->slug, $message->id)) }}">[Modifier]</a>&nbsp;-&nbsp;
                     @endif
                     <a href="#message{{ $message->id }}">Posté le {{ date('d/m/Y - H:i:s', strtotime($message->created_at)) }}</a>
@@ -89,4 +90,18 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+
+@section('javascript')
+    @if(!Auth::guest() && Auth::user()->is('Forumer'))
+    <script>
+        $('.postit').click(function(event){
+            if(!confirm('Mettre/enlever ce sujet du mode post it ?')) {
+                event.preventDefault();
+            }
+        });
+    </script>
+    @endif
 @endsection

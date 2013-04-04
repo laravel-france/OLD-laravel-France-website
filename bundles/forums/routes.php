@@ -1,6 +1,6 @@
 <?php
 
-Route::filter('pattern: forums/admin*', 'forummer');
+Route::filter('pattern: forums/admin*', 'forumer');
 Route::controller('forums::admin.category');
 Route::controller('forums::admin');
 
@@ -64,6 +64,15 @@ Route::get(
 	)
 );
 
+// Stick a message
+Route::get(
+	'(:bundle)/(:any)/(:any)/toggleStick', 
+	array(
+		'uses' => 'forums::topic@toggle_sticky',
+		'before' => 'auth',
+	)
+);
+
 Route::post(
 	'(:bundle)/(:any)/(:any)/edit/(:num)', 
 	array(
@@ -81,7 +90,7 @@ Route::get(
 );
 
 
-Route::filter('forummer', function()
+Route::filter('forumer', function()
 {
 	if (\Auth::guest() || !\Auth::user()->is('Forumer')) {
 		return \Response::error('404');
