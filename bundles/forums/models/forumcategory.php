@@ -16,6 +16,7 @@ class Forumcategory extends Eloquent {
             fm.updated_at as last_message_date,
             forumtopics.id as last_message_topic_id,
             forumtopics.slug as last_message_topic_slug,
+            forumtopics.title as last_message_topic_title,
             users.username as last_message_username
         FROM forumcategories
         JOIN (SELECT forummessages.id, forummessages.user_id, forummessages.forumtopic_id, forummessages.forumcategory_id, forummessages.updated_at FROM forummessages ORDER BY forummessages.updated_at DESC) as fm

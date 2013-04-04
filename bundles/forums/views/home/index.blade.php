@@ -47,7 +47,7 @@
                     <td width="350">
                         @if(isset($category->last_message_date))
                             <a href="{{ URL::to_action('forums::topic@index', array($category->last_message_topic_slug, $category->last_message_topic_id)) }}#message{{ $category->last_message_id }}">
-                                {{ $category->last_message_topic_slug }}<br />
+                                {{ $category->last_message_topic_title }}<br />
                                 {{ date('d/m/Y H:i:s',strtotime($category->last_message_date)) }}
                             </a><br />
                             <small>Par {{ $category->last_message_username }}</small>
