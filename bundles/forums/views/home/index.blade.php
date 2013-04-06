@@ -11,10 +11,11 @@
 
 @section('content')
 
-    <ul class="breadcrumb">
-        <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
-        <li>Forums - Accueil</li>
-    </ul>
+<ul class="breadcrumb">
+    <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
+    <li>Forums - Accueil</li>
+    @include('forums::partials.login_breadcrumb')
+</ul>
 
 <div class="row">
     <div class="span12">
