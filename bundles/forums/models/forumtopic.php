@@ -2,7 +2,65 @@
 
 class Forumtopic extends Eloquent {
 
-	public $includes = array('user');
+	//public $includes = array('user');
+
+    public static function getHomePageList($category_id)
+    {
+
+        $total = static::where('forumtopics.forumcategory_id', '=', $category_id)->count();
+        $per_page = Config::get('forums::forums.topics_per_page');
+        $page = Paginator::page($total, $per_page);
+
+
+        $topics = DB::query('SELECT 
+            forumtopics.id as id,
+            forumtopics.title as title,
+            forumtopics.slug as slug,
+            forumtopics.nb_messages as nb_messages,
+            forumtopics.nb_views as nb_views,
+            forumtopics.sticky as sticky,
+            forumtopics.created_at as created_at,
+            topicusers.username as topic_username,
+            fm.id as last_message_id,
+            fm.created_at as last_message_date,
+            users.username as last_message_username
+        FROM forumtopics
+        JOIN (SELECT forummessages.id, forummessages.user_id, forummessages.forumtopic_id, forummessages.created_at FROM forummessages ORDER BY forummessages.updated_at DESC) as fm
+        ON fm.forumtopic_id = forumtopics.id
+        JOIN users ON fm.user_id = users.id
+        JOIN users as topicusers ON forumtopics.user_id = topicusers.id
+        WHERE forumtopics.forumcategory_id = ? 
+        GROUP BY fm.forumtopic_id
+        ORDER BY forumtopics.sticky DESC, fm.created_at DESC
+        LIMIT '.(($page-1)*$per_page).', '.$per_page, array($category_id));
+
+        return Paginator::make($topics, $total, $per_page);
+    }
+
+    public static function findBySlug($slug)
+    {
+        return static::where('slug', '=', $slug)->first();
+    }
+
+    public function view($andMarkAsRead = false)
+    {
+        $this->nb_views++;
+        static::where('id', '=', $this->id)->update(array('nb_views' => ($this->nb_views)));
+
+        if(Auth::guest()) return;
+
+        if($andMarkAsRead) {
+            $fv = Forumview::where('topic_id', '=', $this->id)->where('user_id', '=', Auth::user()->id)->first();
+            if (!is_null($fv)) {
+                $fv->touch();
+            } else {
+                Forumview::create(array(
+                    'topic_id' => $this->id,
+                    'user_id' => Auth::user()->id
+                ));
+            }
+        }
+    }
 
 	public function user()
 	{
@@ -36,6 +94,7 @@ class Forumtopic extends Eloquent {
         $incSlug = 0;
         $originalSlug = $this->slug;
 
+        $this->sticky = false;
         do {
 
             try {
@@ -45,9 +104,10 @@ class Forumtopic extends Eloquent {
                 if ($e->getCode() == 23000) {
                     $incSlug++;
                 }
+                $this->slug = $originalSlug.'-'.$incSlug;
             }
 
-        $this->slug = $originalSlug.'-'.$incSlug;
+        
 
         } while($incSlug != 0);
 
@@ -60,4 +120,35 @@ class Forumtopic extends Eloquent {
 
         return $this;
     }
+
+    public static function isUnread($id)
+    {
+        $obj = static::where_id($id)->first('id');
+        return $obj->_isUnread();
+    }
+
+    public function _isUnread()
+    {
+        if(Auth::guest()) return false;
+        $pastFromTenDays = time() - ( 10*24*60*60 );
+
+        if (!IoC::registered('topicsview'))
+        {
+            IoC::singleton('topicsview', function() use ($pastFromTenDays)
+            {
+                return Forumview::where('updated_at', '>=', date('Y-m-d H:i:s', $pastFromTenDays))->where('user_id', '=', Auth::user()->id)->lists('topic_id');
+            });
+        }
+
+        if(array_search($this->id, IoC::resolve('topicsview')) !== false) return false;
+        return true;
+    }
+
+
+    public function toggleSticky()
+    {
+        $this->sticky = !((bool)$this->sticky);
+        $this->save();
+    }
+
 }

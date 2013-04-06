@@ -52,4 +52,5 @@ return array(
 	        ),
 	    ),
 	),
+	'oneauth' => array('auto' => true),
 );

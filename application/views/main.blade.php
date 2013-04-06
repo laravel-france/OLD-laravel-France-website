@@ -11,7 +11,7 @@
     {{ HTML::style('css/bootstrap-responsive.min.css') }}
     {{ HTML::style('css/vendors/prettify.css') }}
     {{ HTML::style('css/main.css') }}
-    {{ HTML::style('http://fonts.googleapis.com/css?family=Ubuntu') }}
+    {{ HTML::style('css/font-awesome.min.css') }}
     @yield_section
 
     <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="{{ URL::to_action('blog::home@rss') }}" />
@@ -38,22 +38,44 @@
             </h1>
               <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
-                  <li class="{{ URI::is('/') ? 'active' : '' }}">{{ HTML::link(URL::home(), 'Accueil'); }}</li>
-                  <li class="{{ URI::is( '^docs*') ? 'active' : '' }}">{{ HTML::link(URL::to('docs'), 'Documentation'); }}</li>
-                  <li class="dropdown {{ URI::is( '^(blog|AUTRE)*') ? 'active' : '' }}">
+                  <li class="{{ URI::is('/') ? 'active' : '' }}"><a href="{{ URL::home() }}"><i class="icon-home"></i> Accueil</a></li>
+                  <li class="{{ URI::is( '^docs*') ? 'active' : '' }}"><a href="{{ URL::to('docs') }}"><i class="icon-book"></i> Documentation</a></li>
+                  <li class="dropdown {{ URI::is( '^/(blog|forums)/*') ? 'active' : '' }}">
                     <a class="dropdown-toggle"
                        data-toggle="dropdown"
                        href="#">
-                        Communauté
+                        <i class="icon-group"></i> Communauté
                         <b class="caret"></b>
                       </a>
                     <ul class="dropdown-menu">
-                      <li class="{{ URI::is( '^blog*') ? 'active' : '' }}">{{ HTML::link(URL::to('blog'), 'Blog'); }}</li>
+                      <li class="{{ URI::is( '^/blog/*') ? 'active' : '' }}">{{ HTML::link(URL::to('blog'), 'Blog'); }}</li>
+                      <li class="{{ URI::is( '^/forums/*') ? 'active' : '' }}">{{ HTML::link(URL::to('forums'), 'Forums'); }}</li>
                     </ul>
                   </li>
+                  <li class="{{ URI::is( '^contact*') ? 'active' : '' }}"><a href="{{ URL::to_action('contact') }}"><i class="icon-envelope"></i> Contact</a></li>
 
+                  <li class="dropdown {{ URI::is( '^(panel*|*/admin/*)') ? 'active' : '' }}">
+                    @if(Auth::guest())
+                      <a href="{{ URL::to('login') }}"><i class="icon-user"></i> Se connecter</a>
+                    @else
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('panel') }}"><i class="icon-user"></i> {{ Auth::user()->username }}<b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li class="{{ URI::is( '^panel*') ? 'active' : '' }}">{{ HTML::link(URL::to('panel'), 'Panel'); }}</li>
+                        @if(Auth::user()->is('Blogger'))
+                        <li class="{{ URI::is( '^blog/admin*') ? 'active' : '' }}">{{ HTML::link(URL::to('blog/admin/post/list'), 'Blog'); }}</li>
+                        @endif
+                        @if(Auth::user()->is('Forumer'))
+                        <li class="{{ URI::is( '^forums/admin*') ? 'active' : '' }}">{{ HTML::link(URL::to('forums/admin/category/list'), 'Forums'); }}</li>
+                        @endif
+                        <li class="divider"></li>
+                        <li>{{ HTML::link(URL::to('logout'), 'Déconnexion'); }}</li>
+                      </ul>
 
-                  <li class="{{ URI::is( '^contact*') ? 'active' : '' }}">{{ HTML::link(URL::to_action('contact'), 'Contact'); }}</li>
+                    @endif
+                  </a>
+                </li>
+
+                  <li class="divider-vertical"></li>
                   <li><a href="{{URL::to('telecharger')}}" class='downloadlink btn btn-large'><i class="icon-download-alt icon-white"></i> Télécharger</a></li>
                 </ul>
               </div><!--/.nav-collapse -->

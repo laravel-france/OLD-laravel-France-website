@@ -21,8 +21,13 @@ class Blog_Home_Controller extends Base_Controller
     {
         if ($posts = Post::with(array('author'))->order_by('created_at','desc')->take(10)->get()) {
             
-            return View::make('blog::blog.list_rss')
+            $view = View::make('blog::blog.list_rss')
                 ->with('posts',$posts);
+
+            return Response::make($view, 200, array(
+                'content-type' => 'application/rss+xml'
+            ));
+
         } else {
             return Event::first('404');
         }

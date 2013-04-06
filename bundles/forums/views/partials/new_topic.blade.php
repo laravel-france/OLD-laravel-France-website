@@ -1,1 +1,1 @@
-<a class="btn btn-primary" href="{{ URL::to_action('forums::topic@create', array($category->id, $category->slug)) }}"><i class="icon-plus icon-white"></i> Nouveau sujet</a>
+<a class="btn btn-primary" href="{{ URL::to_action('forums::topic@create', array($category->slug, $category->id)) }}"><i class="icon-plus icon-white"></i> Nouveau sujet</a>

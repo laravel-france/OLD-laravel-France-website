@@ -21,7 +21,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th colspan="2"><strong>Forums</strong></th>
+                    <th colspan="3"><strong>Forums</strong></th>
                     <th class="text-center">Sujets</th>
                     <th class="text-center">Messages</th>
                     <th>Dernier message</th>
@@ -30,34 +30,44 @@
             <tbody>
                 @foreach($categories as $category)
                 <tr>
-                    <td width="37"></td>
+                    <td width="1" style="padding:0"><div style="min-height:78px"></div></td>
+                    <td width="37" class="ico-read">@if(Forumcategory::isUnread($category->id))<i class="icon-circle"></i>@else<i class="icon-circle-blank"></i>@endif</td>
                     <td>
                         <strong>
-                            <a href="{{ URL::to_action('forums::category@index', array($category->id, $category->slug)) }}">
+                            <a href="{{ URL::to_action('forums::category@index', array($category->slug, $category->id)) }}">
                                 {{ $category->title }}
                             </a>
                         </strong>
-                        @if($category->desc)
-                        <br />{{ $category->desc }}
+                        @if($category->description)
+                        <br />{{ $category->description }}
                         @endif
                     </td>
                     <td class="text-center" width="127">{{ $category->nb_topics }}</td>
                     <td class="text-center" width="127">{{ $category->nb_posts }}</td>
                     <td width="350">
-                        @if($lm = $category->last_message)
-                            <a href="{{ URL::to_action('forums::topic@index', array($category->id, $category->slug, $lm[0]->topic->id, $lm[0]->topic->slug)) }}">
-                                {{ $lm[0]->topic->title }}<br />
-                                {{ date('d/m/Y H:i:s',strtotime($lm[0]->created_at)) }}
+                        @if(isset($category->last_message_date))
+                            <a href="{{ URL::to_action('forums::topic@index', array($category->last_message_topic_slug, $category->last_message_topic_id)) }}?page=last#message{{ $category->last_message_id }}">
+                                {{ $category->last_message_topic_title }}<br />
+                                {{ date('d/m/Y H:i:s',strtotime($category->last_message_date)) }}
                             </a><br />
-                            <small>Par {{ $lm[0]->user->username }}</small>
+                            <small>Par {{ $category->last_message_username }}</small>
                         @else
                             Aucun message dans cette catégorie
                         @endif
                     </td>
                 </tr>
+
                 @endforeach
             </tbody>
         </table>
+
+        <div>
+            <strong>Légende :</strong>
+            <p class="ico-read">
+                <i class="icon-circle"></i> : Messages non lus<br />
+                <i class="icon-circle-blank"></i> : Messages lus
+            </p>
+        </div>
     </div>
 </div>
 @endsection

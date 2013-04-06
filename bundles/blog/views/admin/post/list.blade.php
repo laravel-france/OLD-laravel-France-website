@@ -34,11 +34,21 @@
                 <td>{{ HTML::link_to_action('blog::admin.post@edit', $post->title, array('id'=> $post->id)) }}</td>
                 <td>{{ $post->publicated_at->format('d-m-Y H:i:s') }}</td>
                 <td>{{ $post->updated_at->format('d-m-Y H:i:s') }}</td>
-                <td>{{ HTML::link_to_action('blog::admin.post@remove', 'Supprimer', array('id' => $post->id), array('class'=>'btn btn-danger')) }}</td>
+                <td>{{ HTML::link_to_action('blog::admin.post@remove', 'Supprimer', array('id' => $post->id), array('class'=>'btn btn-danger confirm')) }}</td>
             </tr>
         @endforeach
         </tbody>
     </table>
     @endif
 
+@endsection
+
+@section('javascript')
+<script>
+    $('a.confirm').click(function(e){
+        if (!confirm('Êtes vous sûr de vouloir supprimer ce billet ?')) {
+            e.preventDefault();
+        }
+    });
+</script>
 @endsection

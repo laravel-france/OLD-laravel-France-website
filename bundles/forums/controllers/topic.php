@@ -3,36 +3,45 @@
 class Forums_Topic_Controller extends Base_Controller
 {
 
-    public function action_index($category_id, $catslug, $topic_id, $topic_slug)
+    public function action_index($topic_slug, $topic_id)
     {
 
-        $category = Forumcategory::find($category_id);
-        if (!$category) Event::fire('404');
+        $messages = Forummessage::with(array('category','topic', 'user'))->where_forumtopic_id($topic_id)->paginate(Config::get('forums::forums.messages_per_page'));
 
-        $topic = Forumtopic::find($topic_id);
-        if (!$topic) Event::fire('404');
+        $andMarkAsRead = false;
+        if ($messages->page == $messages->last) {
+            $andMarkAsRead = true;
+        }
 
-        $messages = $topic->ordered_messages;
+        $pagination = $messages->links();
+        $messages = $messages->results;
+
+        $messages[0]->topic->view($andMarkAsRead);
 
         return View::make(
             'forums::topic.index',
             array(
-                'category' => $category,
-                'topic' => $topic,
+                'category' => $messages[0]->category,
+                'topic' => $messages[0]->topic,
                 'messages' => $messages,
+                'pagination' => $pagination
             )
         );
     }
 
-    public function action_reply($category_id, $catslug, $topic_id, $topic_slug)
+    public function action_reply($topic_slug, $topic_id)
     {
-        $category = Forumcategory::find($category_id);
-        if (!$category) Event::fire('404');
-
         $topic = Forumtopic::find($topic_id);
-        if (!$topic) Event::fire('404');
+        if (is_null($topic)) return Event::first('404');
+
+        $category = $topic->category;
 
         $messages = $topic->messages()->order_by('created_at', 'DESC')->take(5)->get();
+
+        $originalMess = Forummessage::with('user')->where_id(Input::get('o'))->first(array('user_id', 'content_bbcode'));
+
+        $bbcodeCite = null;
+        if($originalMess) $bbcodeCite = "[quote=".$originalMess->user->username."]".$originalMess->content_bbcode."[/quote]";
 
         return View::make(
             'forums::topic.reply',
@@ -40,17 +49,17 @@ class Forums_Topic_Controller extends Base_Controller
                 'category' => $category,
                 'topic' => $topic,
                 'messages' => $messages,
+                'cite' => $bbcodeCite,
             )
         );
     }
 
-    public function action_postreply($category_id, $catslug, $topic_id, $topic_slug)
+    public function action_postreply($topic_slug, $topic_id)
     {
-        $category = Forumcategory::find($category_id);
-        if (!$category) Event::fire('404');
-
         $topic = Forumtopic::find($topic_id);
-        if (!$topic) Event::fire('404');
+        if (is_null($topic)) return Event::first('404');
+
+        $category = $topic->category;
 
         $rules = array(
             'content' => 'required|min:2'
@@ -68,20 +77,19 @@ class Forums_Topic_Controller extends Base_Controller
 
         $message->content = BBCodeParser::parse($content);
         $message->content_bbcode = $content;
-        $message->forumtopic_id = $topic_id;
-        $message->forumcategory_id = $category_id;
+        $message->forumtopic_id = $topic->id;
+        $message->forumcategory_id = $category->id;
 
         $message->save();
 
-
-        return Redirect::to_action('forums::topic@index', compact('category_id', 'catslug', 'topic_id', 'topic_slug'));
+        $url = URL::to_action('forums::topic@index', compact('topic_slug', 'topic_id')).'?page=last#message'.$message->id;        
+        return Redirect::to($url);
     }
 
-    public function action_create($category_id, $catslug)
+    public function action_create($catslug, $catid)
     {
-        $category = Forumcategory::find($category_id);
-        if (!$category) Event::fire('404');
-
+        $category = Forumcategory::find($catid);
+        if (is_null($category)) return Event::first('404');
 
         return View::make(
             'forums::topic.create',
@@ -91,10 +99,10 @@ class Forums_Topic_Controller extends Base_Controller
         );
     }
 
-    public function action_postcreate($category_id, $catslug)
+    public function action_postcreate($catslug, $catid)
     {
-        $category = Forumcategory::find($category_id);
-        if (!$category) Event::fire('404');
+        $category = Forumcategory::find($catid);
+        if (is_null($category)) return Event::first('404');
 
         $rules = array(
             'title' => 'required|min:2',
@@ -112,7 +120,7 @@ class Forums_Topic_Controller extends Base_Controller
         $topic = new Forumtopic();
         $topic->title = $title;
         $topic->slug = Str::slug($title);
-        $topic->forumcategory_id = $category_id;
+        $topic->forumcategory_id = $category->id;
 
         $message = new Forummessage();
         $message->content = BBCodeParser::parse($content);
@@ -122,10 +130,109 @@ class Forums_Topic_Controller extends Base_Controller
 
 
         $topic_id = $topic->id;
-        $topic_idslug = $topic->slug;
+        $topic_slug = $topic->slug;
 
-        return Redirect::to_action('forums::topic@index', compact('category_id', 'catslug', 'topic_id', 'topic_slug'));
+        $url = URL::to_action('forums::topic@index', compact('topic_slug', 'topic_id')).'#message'.$message->id;        
+        return Redirect::to($url);
     }
 
+    public function action_toggle_sticky($topic_slug, $topic_id)
+    {
+        $topic = Forumtopic::find($topic_id);
+        if (is_null($topic)) return Event::first('404');
 
+        $topic->toggleSticky();
+
+        return Redirect::back();
+    }
+
+    public function action_edit($topic_slug, $topic_id, $message_id)
+    {
+        $topic = Forumtopic::find($topic_id);
+        if (is_null($topic)) return Event::first('404');
+
+        $category = $topic->category;
+
+        $message = Forummessage::find($message_id);
+        if (is_null($message)) return Event::first('404');
+
+        if ($message->user->id != Auth::user()->id && !Auth::user()->is('Forumer'))
+            return Event::first('404');
+
+        return View::make(
+            'forums::topic.edit',
+            array(
+                'category' => $category,
+                'topic' => $topic,
+                'message' => $message,
+            )
+        );
+    }
+
+    public function action_postedit($topic_slug, $topic_id, $message_id)
+    {
+        $topic = Forumtopic::find($topic_id);
+        if (is_null($topic)) return Event::first('404');
+
+        $category = $topic->category;
+
+        $message = Forummessage::find($message_id);
+        if (is_null($message)) return Event::first('404');
+
+        if ($message->user->id != Auth::user()->id && !Auth::user()->is('Forumer'))
+            return Event::first('404');
+
+        $rules = array(
+            'content' => 'required|min:30'
+        );
+        $content = trim(Input::get('content'));
+        $toValidate = compact('content');
+
+
+        $editTitle = false;
+        if ($topic->messages[0]->id == $message->id && trim(Input::get('title')) != $topic->title) {
+            $editTitle = true;
+            $rules['title'] = 'required|min:2';
+            $title = trim(Input::get('title'));
+            $toValidate['title'] = $title;
+        }
+
+
+
+        $validator = Validator::make($toValidate, $rules);
+        if ($validator->fails()) {
+            return Redirect::back()->with_errors($validator)->with_input();
+        }
+
+        if ($editTitle) {
+            $topic->title = $toValidate['title'];
+            $topic->slug = Str::slug($toValidate['title']);
+            $originalSlug = $topic->slug;
+            $incSlug = 0;
+            
+            do {
+                try {
+                    $topic->save();
+                    $incSlug = 0;
+                } catch(Exception $e) {
+                    if ($e->getCode() == 23000) {
+                        $incSlug++;
+                    }
+                    $topic->slug = $originalSlug.'-'.$incSlug;
+                }
+            } while($incSlug != 0);
+        }
+       
+        $message->content = BBCodeParser::parse($content);
+        $message->content_bbcode = $content;
+
+        $message->save();
+        $topic->touch();
+
+        $topic_id = $topic->id;
+        $topic_slug = $topic->slug;
+
+        $url = URL::to_action('forums::topic@index', compact('topic_slug', 'topic_id')).'?page=last#message'.$message->id;        
+        return Redirect::to($url);
+    }
 }

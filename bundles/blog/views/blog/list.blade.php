@@ -14,6 +14,11 @@
 <ul class="breadcrumb">
     <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
     <li>Blog</li>
+    <li class="pull-right">
+        <a target="_blank" href="{{ URL::to_action('blog::home@rss') }}">
+            <i class="icon-rss"></i> S'abonner au flux RSS
+        </a>
+    </li>
 </ul>
 
 

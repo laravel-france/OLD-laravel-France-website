@@ -18,8 +18,8 @@
         <ul class="breadcrumb">
         <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
         <li><a href="{{ URL::to_action('forums::home@index') }}">Forums</a> <span class="divider">/</span></li>
-        <li><a href="{{ URL::to_action('forums::category@index', array($category->id, $category->slug)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
-        <li><a href="{{ URL::to_action('forums::topic@index', array($category->id, $category->slug, $topic->id, $topic->slug)) }}">{{ $topic->title }}</a> <span class="divider">/</span></li>
+        <li><a href="{{ URL::to_action('forums::category@index', array($category->slug, $category->id)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
+        <li><a href="{{ URL::to_action('forums::topic@index', array($topic->slug, $topic->id)) }}">{{ $topic->title }}</a> <span class="divider">/</span></li>
         <li>Écrire une réponse</li>
         </ul>
     </div>
@@ -27,12 +27,13 @@
 
 
 
-	{{ Form::open(URL::to_action('forums::topic@reply', array($category->id, $category->slug, $topic->id, $topic->slug)), null, array('id'=>'new_reply_form', 'class'=>'form')) }}
+	{{ Form::open(URL::to_action('forums::topic@reply', array($topic->slug, $topic->id)), null, array('id'=>'new_reply_form', 'class'=>'form')) }}
     {{ Form::token() }}
 
 	<div class="control-group @if($errors->has('content'))error@endif">
         <div class="controls">
-        {{ Form::textarea('content', Input::old('content', null), array('class'=>'span12')) }}
+        {{ $cite }}
+        {{ Form::textarea('content', Input::old('content', $cite), array('class'=>'span12')) }}
         {{ $errors->first('content', '<span class="help-inline">Veuillez insérer un message</span>') }}
         </div>
 	</div>

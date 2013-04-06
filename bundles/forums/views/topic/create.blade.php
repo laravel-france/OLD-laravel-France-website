@@ -18,7 +18,7 @@
         <ul class="breadcrumb">
         <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
         <li><a href="{{ URL::to_action('forums::home@index') }}">Forums</a> <span class="divider">/</span></li>
-        <li><a href="{{ URL::to_action('forums::category@index', array($category->id, $category->slug)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
+        <li><a href="{{ URL::to_action('forums::category@index', array($category->slug, $category->id)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
         <li>Créer un sujet</li>
         </ul>
     </div>
@@ -26,7 +26,7 @@
 
 
 
-	{{ Form::open(URL::to_action('forums::topic@create', array($category->id, $category->slug)), null, array('id'=>'new_reply_form', 'class'=>'form')) }}
+	{{ Form::open(URL::to_action('forums::topic@create', array($category->slug, $category->id)), null, array('id'=>'new_reply_form', 'class'=>'form')) }}
     {{ Form::token() }}
 
     <div class="control-group @if($errors->has('title'))error@endif">

@@ -2,7 +2,7 @@
 
 class Forummessage extends Eloquent {
 
-	public $includes = array('user');
+//	public $includes = array('user');
 
 	public function topic()
 	{
@@ -39,6 +39,8 @@ class Forummessage extends Eloquent {
 
 		$this->topic->updated_at = $this->updated_at;
 		$this->topic->save();
+
+		Forumview::where('topic_id', '=', $this->forumtopic_id)->delete();
 
 		return $this;
 	}
