@@ -17,8 +17,10 @@ Route::group(array('before' => 'isGuest'), function() {
 		    Auth::attempt(
 		    	array(
 		    		'username' => Input::get('username'),
-		    		'password' => Input::get('password')
-		    	)
+		    		'password' => Input::get('password'),
+		    		'remember' => true,
+		    	),
+		    	true
 		    );
 
 		    Session::forget('from_url');

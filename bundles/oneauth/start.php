@@ -56,7 +56,7 @@ Event::listen('oneauth.logged', function ($client, $user_data)
 		$client->save();
 
 
-		Auth::login($user->id);
+		Auth::login($user->id, true);
 	}
 });
 
@@ -112,6 +112,6 @@ if ( ! IoC::registered('oneauth.driver: auth.login'))
 	// Login the user by users.id
 	IoC::register('oneauth.driver: auth.login', function ($user_id)
 	{
-		return Auth::login($user_id);
+		return Auth::login($user_id, true);
 	});
 }
