@@ -19,7 +19,6 @@
         <li><a href="{{ URL::to_action('forums::category@index', array($category->slug, $category->id)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
         <li>
         @if($topic->sticky)<i class="icon-flag"></i> @endif<strong>{{ $topic->title }}</strong></li>
-        <li class="pull-right">Page 1</li>
         </ul>
     </div>
 </div>
