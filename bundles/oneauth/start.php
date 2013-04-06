@@ -41,7 +41,7 @@ Event::listen('oneauth.logged', function ($client, $user_data)
 	{
 
 		if ($user_data["provider"] == "twitter") {
-			$user_data["info"]["email"] = $user_data["info"]["nickname"]."@twitterauth.laravel";
+			$user_data["info"]["email"] = $user_data["info"]["nickname"]."@fillme.twitter";
 		}
 
 		$user = new User;

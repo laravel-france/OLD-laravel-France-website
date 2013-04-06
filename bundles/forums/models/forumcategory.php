@@ -19,10 +19,10 @@ class Forumcategory extends Eloquent {
             forumtopics.title as last_message_topic_title,
             users.username as last_message_username
         FROM forumcategories
-        JOIN (SELECT forummessages.id, forummessages.user_id, forummessages.forumtopic_id, forummessages.forumcategory_id, forummessages.created_at FROM forummessages ORDER BY forummessages.created_at DESC) as fm
+        LEFT OUTER JOIN (SELECT forummessages.id, forummessages.user_id, forummessages.forumtopic_id, forummessages.forumcategory_id, forummessages.created_at FROM forummessages ORDER BY forummessages.created_at DESC) as fm
         ON fm.forumcategory_id = forumcategories.id
-        JOIN forumtopics ON fm.forumtopic_id = forumtopics.id
-        JOIN users ON fm.user_id = users.id
+        LEFT OUTER JOIN forumtopics ON fm.forumtopic_id = forumtopics.id
+        LEFT OUTER JOIN users ON fm.user_id = users.id
         GROUP BY fm.forumcategory_id
         ORDER BY
             forumcategories.order ASC');

@@ -57,7 +57,13 @@
 
         	<div class="span3">
         		<div class="pull-left">
+                    @if(!Auth::guest() && Auth::user()->id == $message->user->id)
+                    <a href="{{ URL::to_action('panel::avatar@show') }}">
+                    @endif
         			<img src="{{ $message->user->gravatar }}" class="img-polaroid" />
+                    @if(!Auth::guest() && Auth::user()->id == $message->user->id)
+                    </a>
+                    @endif
         		</div>
 
         		<div class="userPres">

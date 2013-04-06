@@ -40,17 +40,13 @@ Route::group(array('before' => 'auth'), function() {
 	});
 
 	Route::get('panel', function(){
-
 		return View::make('panel::panel.index');
 	});
 
-
-
-
-	Route::get('panel/password', 'panel::password@show');
-	Route::post('panel/password', 'panel::password@submit');
-
 	Route::get('panel/application', 'panel::applications@show');
+
+	Route::get('panel/avatar', 'panel::avatar@show');
+	Route::post('panel/avatar', 'panel::avatar@submit');
 });
 
 
@@ -59,6 +55,7 @@ Route::group(array('before' => 'superadmin'), function() {
 	Route::get('panel/site/users/(:num)/remove', 'panel::site@removeuser');
 	Route::get('panel/site/users/(:num)/edit', 'panel::site@editusers');
 	Route::put('panel/site/users/(:num)', 'panel::site@updateusers');
+	Route::put('panel/site/users/(:num)/password', 'panel::site@updateuserpassword');
 	Route::put('panel/site/users/(:num)/roles', 'panel::site@updateuserroles');
 
 	Route::get('panel/site/roles', 'panel::site@listroles');

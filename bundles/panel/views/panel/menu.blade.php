@@ -4,7 +4,7 @@
 <nav class="well">
     <h3>Mon compte</h3>
 	<ul>
-<?php /*<li><a href="{{ URL::to_action('panel::password@show') }}">Modifier mon mot de passe</a></li>*/ ?>
+    <li><a href="{{ URL::to_action('panel::avatar@show') }}">Modifier mon avatar</a></li>
         <li><a href="{{ URL::to_action('panel::applications@show') }}">Applications</a></li>
 		<li><a href="{{ URL::to('logout') }}">Déconnexion</a></li>
 	</ul>

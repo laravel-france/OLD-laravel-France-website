@@ -6,6 +6,7 @@
     <ul class="nav nav-tabs" id="myTab">
       <li class="active"><a href="#profile" data-toggle="tab">Profil</a></li>
       <li><a href="#roles" data-toggle="tab">Rôles</a></li>
+      <li><a href="#password" data-toggle="password">Mot de passe</a></li>
     </ul>
 
 
@@ -84,6 +85,46 @@
             {{ Form::close() }}
 
         </div>
+
+
+        <div class="tab-pane fade" id="password">
+
+            @if(Session::get('passwd_error'))
+                <div class="alert alert-error">
+                    @if(Session::get('passwd_error') == 1)
+                        Votre mot de passe actuel n'est pas valide
+                    @elseif(Session::get('passwd_error') == 2)
+                        Un mot de passe vide n'est pas valide
+                    @else
+                        Les deux mot de passes n'étaient pas identiques.
+                    @endif
+                </div>
+            @endif
+
+            @if(Session::get('passwd_success'))
+                <div class="alert alert-success">
+                    Le mot de passe a été changé.
+                </div>
+            @endif
+
+            {{ Form::open(URL::to_action('panel::site@updateuserpassword', array($cUser->id)), 'put') }}
+
+                <!-- new_password field -->
+                <p>{{ Form::label('new_password', 'Nouveau mot de passe') }}</p>
+                <p>{{ Form::password('new_password') }}</p>
+
+                <!-- confirm_new_password field -->
+                <p>{{ Form::label('confirm_new_password', 'Confirmez le mot de passe') }}</p>
+                <p>{{ Form::password('confirm_new_password') }}</p>
+
+                <!-- submit button -->
+                <p>{{ Form::submit('Modifier') }}</p>
+            {{ Form::close() }}
+
+        </div>
+
+
+
     </div>
 @endsection
 

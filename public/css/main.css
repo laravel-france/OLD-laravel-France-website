@@ -253,3 +253,7 @@ background-color: rgb(201, 201, 201);
 .pagination {
     margin: 0;
 }
+
+.navbar .divider-vertical {
+    border: none;
+}
