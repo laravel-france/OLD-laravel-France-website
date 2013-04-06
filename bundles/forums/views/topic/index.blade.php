@@ -58,7 +58,7 @@
         	<div class="span3">
         		<div class="pull-left">
                     @if(!Auth::guest() && Auth::user()->id == $message->user->id)
-                    <a href="{{ URL::to_action('panel::avatar@show') }}">
+                    <a href="{{ URL::to_action('panel::avatar@show') }}" data-toggle="tooltip" data-placement="left" title="Changer mon avatar" style="display:block">
                     @endif
         			<img src="{{ $message->user->gravatar }}" class="img-polaroid" />
                     @if(!Auth::guest() && Auth::user()->id == $message->user->id)
@@ -126,6 +126,11 @@
                 event.preventDefault();
             }
         });
+
+    $(function () {
+        $("[data-toggle='tooltip']").tooltip();
+    });
+
     </script>
     @endif
 @endsection
