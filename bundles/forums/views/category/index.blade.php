@@ -22,12 +22,20 @@
     </div>
 </div>
 <div class="row">
-    <div class="span12">
-
+    <div class="span6">
+        <div class="pull-left">
+            {{ $pagination }}
+        </div>
+    </div>
+    <div class="span6">
         <div class="pull-right">
             @include('forums::partials.new_topic')
         </div>
+    </div>
+</div>
 
+<div class="row">
+    <div class="span12">
     	@if($topics)
         <table class="table table-striped">
             <thead>

@@ -6,7 +6,13 @@ class Forumtopic extends Eloquent {
 
     public static function getHomePageList($category_id)
     {
-        return DB::query('SELECT 
+
+        $total = static::where('forumtopics.forumcategory_id', '=', $category_id)->count();
+        $per_page = Config::get('forums::forums.topics_per_page');
+        $page = Paginator::page($total, $per_page);
+
+
+        $topics = DB::query('SELECT 
             forumtopics.id as id,
             forumtopics.title as title,
             forumtopics.slug as slug,
@@ -25,9 +31,10 @@ class Forumtopic extends Eloquent {
         JOIN users as topicusers ON forumtopics.user_id = topicusers.id
         WHERE forumtopics.forumcategory_id = ? 
         GROUP BY fm.forumtopic_id
-        ORDER BY
-            forumtopics.sticky DESC, fm.created_at DESC', array($category_id));
+        ORDER BY forumtopics.sticky DESC, fm.created_at DESC
+        LIMIT '.(($page-1)*$per_page).', '.$per_page, array($category_id));
 
+        return Paginator::make($topics, $total, $per_page);
     }
 
     public static function findBySlug($slug)
