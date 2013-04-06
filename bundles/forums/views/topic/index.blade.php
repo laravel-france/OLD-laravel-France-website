@@ -49,7 +49,7 @@
             <div class="info_posted">
                 <small><em>
                     @if(!Auth::guest() && (Auth::user()->id == $message->user->id || Auth::user()->is('Forumer')))
-                        <a href="{{ URL::to_action('forums::topic@edit', array($topic->slug, $topic->id, $message->id)) }}">[Modifier]</a>&nbsp;-&nbsp;
+                        <a href="{{ URL::to_action('forums::topic@edit', array($topic->slug, $topic->id, $message->id)) }}"><i class="icon-pencil"></i> Modifier</a>&nbsp;-&nbsp;
                     @endif
                     <a href="#message{{ $message->id }}">Posté le {{ date('d/m/Y - H:i:s', strtotime($message->created_at)) }}</a>
                 </em></small>
@@ -60,7 +60,7 @@
         			<img src="{{ $message->user->gravatar }}" class="img-polaroid" />
         		</div>
 
-        		<div style="padding:10px; margin-left: 90px;">
+        		<div class="userPres">
                     <strong>{{ $message->user->username }}</strong><br />
                     Inscrit le {{ date('d/m/Y', strtotime($message->user->created_at)) }}<br />
                     Messages : {{ $message->user->nb_messages }}
@@ -68,10 +68,19 @@
         	</div>
 
         	<div class="span9">
-        		<div class="forum-message-content" style="padding:10px;">
+        		<div class="forum-message-content">
         			{{ $message->content }}
         		</div>
         	</div>
+            <div class="replyZone">
+                <div class="pull-right">
+                    <small><em>
+                    @if(!Auth::guest())
+                        <a class="btn btn-small btn-success" href="{{ URL::to_action('forums::topic@reply', array($topic->slug, $topic->id)) }}?o={{ $message->id }}"><i class="icon-share-alt icon-white"></i> Citer</a>
+                    @endif
+                    </em></small>
+                </div>
+            </div>
         </div>
     </div>
 

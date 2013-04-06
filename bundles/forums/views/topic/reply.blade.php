@@ -32,7 +32,8 @@
 
 	<div class="control-group @if($errors->has('content'))error@endif">
         <div class="controls">
-        {{ Form::textarea('content', Input::old('content', null), array('class'=>'span12')) }}
+        {{ $cite }}
+        {{ Form::textarea('content', Input::old('content', $cite), array('class'=>'span12')) }}
         {{ $errors->first('content', '<span class="help-inline">Veuillez insérer un message</span>') }}
         </div>
 	</div>

@@ -38,12 +38,18 @@ class Forums_Topic_Controller extends Base_Controller
 
         $messages = $topic->messages()->order_by('created_at', 'DESC')->take(5)->get();
 
+        $originalMess = Forummessage::with('user')->where_id(Input::get('o'))->first(array('user_id', 'content_bbcode'));
+
+        $bbcodeCite = null;
+        if($originalMess) $bbcodeCite = "[quote=".$originalMess->user->username."]".$originalMess->content_bbcode."[/quote]";
+
         return View::make(
             'forums::topic.reply',
             array(
                 'category' => $category,
                 'topic' => $topic,
                 'messages' => $messages,
+                'cite' => $bbcodeCite,
             )
         );
     }

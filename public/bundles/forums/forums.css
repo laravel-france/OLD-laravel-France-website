@@ -69,3 +69,18 @@ cite {
     font-weight: bold;
     font-style: italic;
 }
+
+.replyZone {
+    bottom: 5px;
+    right: 5px;
+    position: absolute;
+}
+
+.userPres {
+    padding:10px;
+    margin-left: 90px;
+}
+
+.forum-message-content {
+    padding: 15px 10px 20px 10px;
+}
