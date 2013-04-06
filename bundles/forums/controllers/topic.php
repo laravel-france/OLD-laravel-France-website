@@ -82,7 +82,7 @@ class Forums_Topic_Controller extends Base_Controller
 
         $message->save();
 
-        $url = URL::to_action('forums::topic@index', compact('topic_slug', 'topic_id')).'#message'.$message->id;        
+        $url = URL::to_action('forums::topic@index', compact('topic_slug', 'topic_id')).'?page=last#message'.$message->id;        
         return Redirect::to($url);
     }
 
@@ -232,7 +232,7 @@ class Forums_Topic_Controller extends Base_Controller
         $topic_id = $topic->id;
         $topic_slug = $topic->slug;
 
-        $url = URL::to_action('forums::topic@index', compact('topic_slug', 'topic_id')).'#message'.$message->id;        
+        $url = URL::to_action('forums::topic@index', compact('topic_slug', 'topic_id')).'?page=last#message'.$message->id;        
         return Redirect::to($url);
     }
 }
