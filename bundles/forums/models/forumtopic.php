@@ -4,27 +4,54 @@ class Forumtopic extends Eloquent {
 
 	//public $includes = array('user');
 
+    public static function getHomePageList($category_id)
+    {
+        return DB::query('SELECT 
+            forumtopics.id as id,
+            forumtopics.title as title,
+            forumtopics.slug as slug,
+            forumtopics.nb_messages as nb_messages,
+            forumtopics.nb_views as nb_views,
+            forumtopics.sticky as sticky,
+            forumtopics.created_at as created_at,
+            topicusers.username as topic_username,
+            fm.id as last_message_id,
+            fm.created_at as last_message_date,
+            users.username as last_message_username
+        FROM forumtopics
+        JOIN (SELECT forummessages.id, forummessages.user_id, forummessages.forumtopic_id, forummessages.created_at FROM forummessages ORDER BY forummessages.updated_at DESC) as fm
+        ON fm.forumtopic_id = forumtopics.id
+        JOIN users ON fm.user_id = users.id
+        JOIN users as topicusers ON forumtopics.user_id = topicusers.id
+        WHERE forumtopics.forumcategory_id = ? 
+        GROUP BY fm.forumtopic_id
+        ORDER BY
+            forumtopics.sticky DESC, fm.created_at DESC', array($category_id));
+
+    }
 
     public static function findBySlug($slug)
     {
         return static::where('slug', '=', $slug)->first();
     }
 
-    public function view()
+    public function view($andMarkAsRead = false)
     {
         $this->nb_views++;
         static::where('id', '=', $this->id)->update(array('nb_views' => ($this->nb_views)));
 
         if(Auth::guest()) return;
 
-        $fv = Forumview::where('topic_id', '=', $this->id)->where('user_id', '=', Auth::user()->id)->first();
-        if (!is_null($fv)) {
-            $fv->touch();
-        } else {
-            Forumview::create(array(
-                'topic_id' => $this->id,
-                'user_id' => Auth::user()->id
-            ));
+        if($andMarkAsRead) {
+            $fv = Forumview::where('topic_id', '=', $this->id)->where('user_id', '=', Auth::user()->id)->first();
+            if (!is_null($fv)) {
+                $fv->touch();
+            } else {
+                Forumview::create(array(
+                    'topic_id' => $this->id,
+                    'user_id' => Auth::user()->id
+                ));
+            }
         }
     }
 
@@ -87,7 +114,13 @@ class Forumtopic extends Eloquent {
         return $this;
     }
 
-    public function isUnread()
+    public static function isUnread($id)
+    {
+        $obj = static::where_id($id)->first('id');
+        return $obj->_isUnread();
+    }
+
+    public function _isUnread()
     {
         if(Auth::guest()) return false;
         $pastFromTenDays = time() - ( 10*24*60*60 );

@@ -13,13 +13,13 @@ class Forumcategory extends Eloquent {
             forumcategories.nb_topics as nb_topics,
             forumcategories.nb_posts as nb_posts,
             fm.id as last_message_id,
-            fm.updated_at as last_message_date,
+            fm.created_at as last_message_date,
             forumtopics.id as last_message_topic_id,
             forumtopics.slug as last_message_topic_slug,
             forumtopics.title as last_message_topic_title,
             users.username as last_message_username
         FROM forumcategories
-        JOIN (SELECT forummessages.id, forummessages.user_id, forummessages.forumtopic_id, forummessages.forumcategory_id, forummessages.updated_at FROM forummessages ORDER BY forummessages.updated_at DESC) as fm
+        JOIN (SELECT forummessages.id, forummessages.user_id, forummessages.forumtopic_id, forummessages.forumcategory_id, forummessages.created_at FROM forummessages ORDER BY forummessages.created_at DESC) as fm
         ON fm.forumcategory_id = forumcategories.id
         JOIN forumtopics ON fm.forumtopic_id = forumtopics.id
         JOIN users ON fm.user_id = users.id
@@ -57,7 +57,7 @@ class Forumcategory extends Eloquent {
 
     public static function isUnread($id)
     {
-        $cat = static::find($id);
+        $cat = static::where_id($id)->first('id');
         return $cat->_isUnread();
     }
 

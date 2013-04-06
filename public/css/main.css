@@ -249,3 +249,7 @@ background-color: rgb(201, 201, 201);
     color: black;
     font-size: 1.2em;
 }
+
+.pagination {
+    margin: 0;
+}

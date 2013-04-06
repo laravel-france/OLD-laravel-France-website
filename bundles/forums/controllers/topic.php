@@ -6,21 +6,25 @@ class Forums_Topic_Controller extends Base_Controller
     public function action_index($topic_slug, $topic_id)
     {
 
-        $topic = Forumtopic::find($topic_id);
-        if (is_null($topic)) return Event::first('404');
+        $messages = Forummessage::with(array('category','topic', 'user'))->where_forumtopic_id($topic_id)->paginate(Config::get('forums::forums.messages_per_page'));
 
-        $category = $topic->category;
+        $andMarkAsRead = false;
+        if ($messages->page == $messages->last) {
+            $andMarkAsRead = true;
+        }
 
-        $topic->view();
+        $pagination = $messages->links();
+        $messages = $messages->results;
 
-        $messages = $topic->ordered_messages;
+        $messages[0]->topic->view($andMarkAsRead);
 
         return View::make(
             'forums::topic.index',
             array(
-                'category' => $category,
-                'topic' => $topic,
+                'category' => $messages[0]->category,
+                'topic' => $messages[0]->topic,
                 'messages' => $messages,
+                'pagination' => $pagination
             )
         );
     }

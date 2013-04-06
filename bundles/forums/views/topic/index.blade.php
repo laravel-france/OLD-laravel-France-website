@@ -25,7 +25,12 @@
 </div>
 
 <div class="row">
-    <div class="span12">
+    <div class="span6">
+        <div class="pull-left">
+            {{ $pagination }}
+        </div>
+    </div>
+    <div class="span6">
         <div class="pull-right">
             @include('forums::partials.reply_topic')
         </div>
@@ -84,7 +89,12 @@
 
 
 <div class="row">
-    <div class="span12">
+    <div class="span6">
+        <div class="pull-left">
+            {{ $pagination }}
+        </div>
+    </div>
+    <div class="span6">
         <div class="pull-right">
             @include('forums::partials.reply_topic')
         </div>

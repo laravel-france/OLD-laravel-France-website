@@ -28,7 +28,7 @@
             @include('forums::partials.new_topic')
         </div>
 
-    	@if($category->topics)
+    	@if($topics)
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -39,26 +39,25 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($category->ordered_topics as $topic)
+                @foreach($topics as $topic)
                 <tr>
                     <td width="1" style="padding:0"><div style="min-height:61px"></div></td>
-                    <td width="37" class="ico-read">@if($topic->isUnread())<i class="icon-circle"></i>@else<i class="icon-circle-blank"></i>@endif</td>
+                    <td width="37" class="ico-read">@if(Forumtopic::isUnread($topic->id))<i class="icon-circle"></i>@else<i class="icon-circle-blank"></i>@endif</td>
                     <td>
                         <strong>
                             <a href="{{ URL::to_action('forums::topic@index', array($topic->slug, $topic->id)) }}">
                                 @if($topic->sticky)<i class="icon-flag"></i> @endif{{ $topic->title }}
                             </a>
                         </strong><br />
-                        <small>Par {{ $topic->user->username }} le {{ date('\l\e d/m/Y à H:i:s', strtotime($topic->created_at)) }}</small>
+                        <small>Par {{ $topic->topic_username }} le {{ date('\l\e d/m/Y à H:i:s', strtotime($topic->created_at)) }}</small>
                     </td>
                     <td class="text-center" width="127">{{ $topic->nb_messages }}</td>
                     <td class="text-center" width="127">{{ $topic->nb_views }}</td>
                     <td width="350">
-                        <?php $lm = $topic->last_message; ?>
-                        <a href="{{ URL::to_action('forums::topic@index', array($topic->slug, $topic->id)) }}#message{{ $lm[0]->id }}">
-                            {{ date('d/m/Y H:i:s',strtotime($lm[0]->created_at)) }}
+                        <a href="{{ URL::to_action('forums::topic@index', array($topic->slug, $topic->id)) }}?page=last#message{{ $topic->last_message_id }}">
+                            {{ date('d/m/Y H:i:s',strtotime($topic->last_message_date)) }}
                         </a><br />
-                        <small>Par {{ $lm[0]->user->username }}</small>
+                        <small>Par {{ $topic->last_message_username }}</small>
                     </td>
                 </tr>
                 @endforeach
