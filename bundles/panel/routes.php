@@ -11,7 +11,7 @@ Route::group(array('before' => 'isGuest'), function() {
 
 
 	Route::post('login', function() {
-		$from_url = Session::get('from_url', '/');
+		$from_url = Session::get('from_url', URL::to_action('forums::home@index'));
 		try
 		{
 		    Auth::attempt(
@@ -22,7 +22,7 @@ Route::group(array('before' => 'isGuest'), function() {
 		    );
 
 		    Session::forget('from_url');
-		    return Redirect::to($from_url ? $from_url : '/');
+		    return Redirect::to($from_url ? $from_url : URL::to_action('forums::home@index'));
 		}
 		catch (Exception $e)
 		{

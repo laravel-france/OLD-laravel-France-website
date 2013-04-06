@@ -17,6 +17,7 @@
             <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
             <li><a href="{{ URL::to_action('forums::home@index') }}">Forums</a> <span class="divider">/</span></li>
             <li>{{ $category->title }}</li>
+            @include('forums::partials.login_breadcrumb')
         </ul>
     </div>
 </div>
