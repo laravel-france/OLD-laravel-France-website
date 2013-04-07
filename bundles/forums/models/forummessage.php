@@ -23,9 +23,7 @@ class Forummessage extends Eloquent {
 	{
 		$isNew = !$this->exists;
 
-		$this->user_id = Auth::user()->id;
 
-		parent::save();
 
 		if ($isNew) {
 			$this->category->nb_posts++;
@@ -35,7 +33,11 @@ class Forummessage extends Eloquent {
 
 			Auth::user()->nb_messages++;
 			Auth::user()->save();
+
+			$this->user_id = Auth::user()->id;
 		}
+
+		parent::save();
 
 		$this->topic->updated_at = $this->updated_at;
 		$this->topic->save();
