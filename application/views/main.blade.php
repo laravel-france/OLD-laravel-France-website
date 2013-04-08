@@ -42,7 +42,7 @@
                 <ul class="nav pull-right">
                   <li class="{{ URI::is('/') ? 'active' : '' }}"><a href="{{ URL::home() }}"><i class="icon-home"></i> Accueil</a></li>
                   <li class="{{ URI::is( '^docs*') ? 'active' : '' }}"><a href="{{ URL::to('docs') }}"><i class="icon-book"></i> Documentation</a></li>
-                  <li class="dropdown {{ URI::is( '^/(blog|forums|irc)*') ? 'active' : '' }}">
+                  <li class="dropdown {{ URI::is( '^(blog|forums|irc)*') ? 'active' : '' }}">
                     <a class="dropdown-toggle"
                        data-toggle="dropdown"
                        href="#">
@@ -50,9 +50,9 @@
                         <b class="caret"></b>
                       </a>
                     <ul class="dropdown-menu">
-                      <li class="{{ URI::is( '^/blog/*') ? 'active' : '' }}">{{ HTML::link(URL::to('blog'), 'Blog'); }}</li>
-                      <li class="{{ URI::is( '^/forums/*') ? 'active' : '' }}">{{ HTML::link(URL::to('forums'), 'Forums'); }}</li>
-                      <li class="{{ URI::is( '^/irc/*') ? 'active' : '' }}">{{ HTML::link(URL::to('irc'), 'IRC'); }}</li>
+                      <li class="{{ URI::is( '^blog*') ? 'active' : '' }}">{{ HTML::link(URL::to('blog'), 'Blog'); }}</li>
+                      <li class="{{ URI::is( '^forums*') ? 'active' : '' }}">{{ HTML::link(URL::to('forums'), 'Forums'); }}</li>
+                      <li class="{{ URI::is( '^irc') ? 'active' : '' }}">{{ HTML::link(URL::to('irc'), 'IRC'); }}</li>
                     </ul>
                   </li>
                   <li class="{{ URI::is( '^contact*') ? 'active' : '' }}"><a href="{{ URL::to_action('contact') }}"><i class="icon-envelope"></i> Contact</a></li>
