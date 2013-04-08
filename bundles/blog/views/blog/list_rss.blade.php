@@ -4,7 +4,7 @@
         <title>Laravel.Fr</title>
         <description>Laravel France : le blog</description>
         <lastBuildDate>{{ date(DATE_RSS) }}</lastBuildDate>
-        <link>http://laravel.fr/</link>
+        <link>http://laravel.fr/blog</link>
         @foreach($posts as $post)
         <item>
             <title>{{ $post->title }}</title>

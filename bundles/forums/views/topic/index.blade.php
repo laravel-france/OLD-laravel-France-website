@@ -9,6 +9,11 @@
     {{ $topic->title }} - Forums de Laravel France
 @endsection
 
+@section('link_rss')
+<link rel="alternate" type="application/rss+xml" title="Forums - Catégorie '{{ $category->title }}' RSS" href="{{ URL::to_action('forums::category@rss', array($category->slug, $category->id)) }}" />
+<link rel="alternate" type="application/rss+xml" title="Forums - Topic '{{ $topic->title }}' RSS" href="{{ URL::to_action('forums::topic@rss', array($topic->slug, $topic->id)) }}" />
+@endsection
+
 @section('content')
 
 <div class="row">
