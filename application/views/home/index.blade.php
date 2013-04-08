@@ -98,7 +98,7 @@ $ php artistan bundle:install laravel-oauth2
             </li>
             @endforeach
         </ul>
-        <p style="text-align:right"><a href="{{ URL::to_action('blog::home@index') }}">Aller au blog &gt;&gt;&nbsp;</a></p>
+        <p style="text-align:right; margin-right:10px;"><a href="{{ URL::to_action('blog::home@index') }}" class="btn btn-small btn-orange">Aller au blog</a></p>
     </aside>
 @endif
 
