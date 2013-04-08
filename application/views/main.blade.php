@@ -15,6 +15,8 @@
     @yield_section
 
     <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="{{ URL::to_action('blog::home@rss') }}" />
+    <link rel="alternate" type="application/rss+xml" title="Forums RSS" href="{{ URL::to_action('forums::home@rss') }}" />
+    @yield('link_rss')
     <link rel="shortcut icon" href="{{ URL::to_asset('img/favicon.png') }}">
   </head>
   <body class="@yield('page_class')">
@@ -40,7 +42,7 @@
                 <ul class="nav pull-right">
                   <li class="{{ URI::is('/') ? 'active' : '' }}"><a href="{{ URL::home() }}"><i class="icon-home"></i> Accueil</a></li>
                   <li class="{{ URI::is( '^docs*') ? 'active' : '' }}"><a href="{{ URL::to('docs') }}"><i class="icon-book"></i> Documentation</a></li>
-                  <li class="dropdown {{ URI::is( '^/(blog|forums)/*') ? 'active' : '' }}">
+                  <li class="dropdown {{ URI::is( '^/(blog|forums|irc)*') ? 'active' : '' }}">
                     <a class="dropdown-toggle"
                        data-toggle="dropdown"
                        href="#">
@@ -50,6 +52,7 @@
                     <ul class="dropdown-menu">
                       <li class="{{ URI::is( '^/blog/*') ? 'active' : '' }}">{{ HTML::link(URL::to('blog'), 'Blog'); }}</li>
                       <li class="{{ URI::is( '^/forums/*') ? 'active' : '' }}">{{ HTML::link(URL::to('forums'), 'Forums'); }}</li>
+                      <li class="{{ URI::is( '^/irc/*') ? 'active' : '' }}">{{ HTML::link(URL::to('irc'), 'IRC'); }}</li>
                     </ul>
                   </li>
                   <li class="{{ URI::is( '^contact*') ? 'active' : '' }}"><a href="{{ URL::to_action('contact') }}"><i class="icon-envelope"></i> Contact</a></li>

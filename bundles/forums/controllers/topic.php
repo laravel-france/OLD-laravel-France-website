@@ -29,6 +29,19 @@ class Forums_Topic_Controller extends Base_Controller
         );
     }
 
+    public function action_rss($topic_slug, $topic_id)
+    {
+
+        $messages = Forummessage::with(array('topic'))->where_forumtopic_id($topic_id)->order_by('created_at', 'DESC')->take(20)->get();
+
+        return Response::make(
+            View::make('forums::topic.rss', array('topic' => $messages[0]->topic, 'messages' => $messages)),
+            200,
+            array('content-type' => 'application/rss+xml')
+        );
+    }
+
+
     public function action_reply($topic_slug, $topic_id)
     {
         $topic = Forumtopic::find($topic_id);

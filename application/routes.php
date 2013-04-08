@@ -15,6 +15,11 @@ Route::get('telecharger, download', array('as'=>'telecharger', function()
     return Redirect::to('http://laravel.com/download');
 }));
 
+Route::get('irc', array('as'=>'irc', function()
+{
+    return view::make('irc.index');
+}));
+
 
 
 Route::controller(array('contact'));

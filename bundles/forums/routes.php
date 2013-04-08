@@ -14,11 +14,26 @@ Route::get(
 	)
 );
 
+Route::get(
+	'(:bundle).rss', 
+	array(
+		'uses' => 'forums::home@rss',
+	)
+);
+
 // View topics in a cat
 Route::get(
 	'(:bundle)/(:any)-c(:num)', 
 	array(
 		'uses' => 'forums::category@index',
+	)
+);
+
+// View topics in a cat in rss
+Route::get(
+	'(:bundle)/(:any)-c(:num).rss', 
+	array(
+		'uses' => 'forums::category@rss',
 	)
 );
 
@@ -87,6 +102,14 @@ Route::get(
 	'(:bundle)/(:any)-t(:num)', 
 	array(
 		'uses' => 'forums::topic@index',
+	)
+);
+
+// View topic rss
+Route::get(
+	'(:bundle)/(:any)-t(:num).rss', 
+	array(
+		'uses' => 'forums::topic@rss',
 	)
 );
 
