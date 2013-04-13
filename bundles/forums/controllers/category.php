@@ -6,7 +6,7 @@ class Forums_Category_Controller extends Base_Controller
     public function action_index($slug, $id)
     {
         $topics = Forumtopic::getHomePageList($id);
-        if (!$topics) Event::fire('404');
+        if (!$topics) return Event::first('404');
 
         $pagination = $topics->links();
         $topics = $topics->results;

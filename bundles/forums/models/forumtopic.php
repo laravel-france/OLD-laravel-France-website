@@ -25,7 +25,7 @@ class Forumtopic extends Eloquent {
             fm.created_at as last_message_date,
             users.username as last_message_username
         FROM forumtopics
-        JOIN (SELECT forummessages.id, forummessages.user_id, forummessages.forumtopic_id, forummessages.created_at FROM forummessages ORDER BY forummessages.updated_at DESC) as fm
+        JOIN (SELECT forummessages.id, forummessages.user_id, forummessages.forumtopic_id, forummessages.created_at FROM forummessages ORDER BY forummessages.created_at DESC) as fm
         ON fm.forumtopic_id = forumtopics.id
         JOIN users ON fm.user_id = users.id
         JOIN users as topicusers ON forumtopics.user_id = topicusers.id
@@ -35,6 +35,31 @@ class Forumtopic extends Eloquent {
         LIMIT '.(($page-1)*$per_page).', '.$per_page, array($category_id));
 
         return Paginator::make($topics, $total, $per_page);
+    }
+
+    public static function getPosted()
+    {
+        return DB::query('SELECT
+            forumcategories.id as cat_id,
+            forumcategories.title as cat_title,
+            forumcategories.slug as cat_slug,
+            forumtopics.id as topic_id,
+            forumtopics.title as topic_title,
+            forumtopics.slug as topic_slug,
+            forumtopics.sticky as topic_sticky,
+            forumtopics.nb_messages as topic_nb_messages,
+            fm.id as last_message_id,
+            fm.created_at as last_message_date,
+            users.username as last_message_username
+        FROM forumtopics
+        JOIN (SELECT forummessages.id, forummessages.user_id, forummessages.forumtopic_id, forummessages.created_at FROM forummessages ORDER BY forummessages.created_at DESC) as fm
+            ON fm.forumtopic_id = forumtopics.id
+        JOIN forumcategories ON forumtopics.forumcategory_id = forumcategories.id
+        JOIN users ON fm.user_id = users.id
+        WHERE forumtopics.id IN (SELECT forumtopic_id FROM forummessages WHERE user_id = ? GROUP BY forumtopic_id ORDER BY created_at DESC)
+        GROUP BY fm.forumtopic_id
+        ORDER BY fm.created_at DESC
+        LIMIT 20', array(Auth::user()->id));
     }
 
     public static function findBySlug($slug)

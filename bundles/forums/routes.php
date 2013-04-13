@@ -113,6 +113,14 @@ Route::get(
 	)
 );
 
+// Index of the forums
+Route::get(
+	'(:bundle)/posted', 
+	array(
+		'uses' => 'forums::posted@index',
+	)
+);
+
 
 Route::filter('forumer', function()
 {

@@ -6,7 +6,7 @@ class Forums_Topic_Controller extends Base_Controller
     public function action_index($topic_slug, $topic_id)
     {
 
-        $messages = Forummessage::with(array('category','topic', 'user'))->where_forumtopic_id($topic_id)->paginate(Config::get('forums::forums.messages_per_page'));
+        $messages = Forummessage::with(array('category','topic', 'user'))->where_forumtopic_id($topic_id)->order_by('created_ad', 'ASC')->paginate(Config::get('forums::forums.messages_per_page'));
 
         $andMarkAsRead = false;
         if ($messages->page == $messages->last) {
