@@ -18,4 +18,8 @@
             <i class="icon-google-plus-sign"></i> Connexion via Google
         </a>
     </li>
+@else
+    <li class="pull-right">
+        <a href="{{ URL::to_action('forums::posted@index') }}">Posté</a>
+    </li>
 @endif
