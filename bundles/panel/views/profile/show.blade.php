@@ -45,40 +45,48 @@
 
 		<div class="offset1 span9">
 
-			<div id="profileforummessages">
-				<h3>Derniers messages sur les forums :</h3>
-				<table class="table table-condensed">
-				@forelse($user_messages as $message)
-					<tr style="background-color: #eee">
-						<td>
-							Dans <strong><a href="{{ URL::to_action('forums::topic@index', array($message->topic->slug, $message->topic->id)) }}">{{ $message->topic->title }}</a></strong>,
-							Le </strong>{{ date('d/m/Y à H:i:s', strtotime($message->created_at)) }}<br />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							{{ $message->content }}
-						</td>
-					</tr>
-				@empty
-					<tr>
-						<td>
-							Aucun message sur le forum
-						</td>
-					</tr>
-				@endforelse
-				</table>
-			</div>
+		    <ul class="nav nav-tabs" id="myTab">
+		      	<li class="active"><a href="#forums" data-toggle="tab">Forums</a></li>
+				@if($user->github_url)
+		      		<li><a href="#profilegithub" data-toggle="tab">Github</a></li>
+		      	@endif
+		    </ul>
 
-			@if($user->github_url)
-			<div id="profilegithub">
-				<h3>Activité sur Github :</h3>
-				<div id="githublist">
-					Chargement...
+    		<div id="myTabContent" class="tab-content">
+				<div class="tab-pane fade in active" id="forums">
+					<h3>Derniers messages sur les forums :</h3>
+					<table class="table table-condensed">
+					@forelse($user_messages as $message)
+						<tr style="background-color: #eee">
+							<td>
+								Dans <strong><a href="{{ URL::to_action('forums::topic@index', array($message->topic->slug, $message->topic->id)) }}">{{ $message->topic->title }}</a></strong>,
+								Le </strong>{{ date('d/m/Y à H:i:s', strtotime($message->created_at)) }}<br />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{{ $message->content }}
+							</td>
+						</tr>
+					@empty
+						<tr>
+							<td>
+								Aucun message sur le forum
+							</td>
+						</tr>
+					@endforelse
+					</table>
 				</div>
-			</div>
-			@endif
 
+				@if($user->github_url)
+				<div class="tab-pane fade" id="profilegithub">
+					<h3>Activité sur Github :</h3>
+					<div id="githublist">
+						Chargement...
+					</div>
+				</div>
+				@endif
+			</div>
 		</div>
 	</div>
 
