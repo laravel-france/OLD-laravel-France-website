@@ -27,7 +27,7 @@ class Panel_Profile_Controller extends Base_Controller
 		$news = null;
 		if (!is_null($user) && $user->github_url) {
 			$newReader = new Feedparser($user->github_url . '.atom');
-			$news = $newReader->parse(5);
+			$news = $newReader->parse(10);
 		}
 
 		return View::make(
