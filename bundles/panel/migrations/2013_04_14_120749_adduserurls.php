@@ -1,6 +1,6 @@
 <?php
 
-class Panel_User_Add_Nb_Messages {
+class Panel_Adduserurls {
 
 	/**
 	 * Make changes to the database.
@@ -11,8 +11,11 @@ class Panel_User_Add_Nb_Messages {
 	{
 		Schema::table('users', function($table)
 		{
-			$table->integer('nb_messages')->unsigned();
+			$table->string('twitter_url')->nullable();
+			$table->string('github_url')->nullable();
+			$table->string('googleplus_url')->nullable();
 		});
+
 	}
 
 	/**
@@ -24,7 +27,9 @@ class Panel_User_Add_Nb_Messages {
 	{
 		Schema::table('users', function($table)
 		{
-			$table->drop_column('nb_messages');
+			$table->drop_column('twitter_url');
+			$table->drop_column('github_url');
+			$table->drop_column('googleplus_url');
 		});
 	}
 

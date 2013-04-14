@@ -35,21 +35,41 @@ Event::listen('oneauth.logged', function ($client, $user_data)
 	// OneAuth should login the user if user exist and is not logged in
 	if (is_numeric($client->user_id) and $client->user_id > 0)
 	{
+		$user = User::find($client->user_id);
+
+		if ($user_data["provider"] == "twitter") {
+			$user->twitter_url = $user_data["info"]["urls"]["twitter"];
+		} elseif ($user_data["provider"] == "github") {
+			$user->github_url = $user_data["info"]["urls"]["github"];
+		} elseif ($user_data["google"]) {
+			$user->googleplus_url = $user_data["info"]["urls"]["googleplus"];
+		}
+
+		if ($user->dirty()) {
+			$user->save();
+		}
+
 		IoC::resolve('oneauth.driver: auth.login', array($client->user_id));
 	}
 	else // Or Create it
 	{
+		$userData = array(
+			"username" => $user_data["info"]["nickname"],
+			'verified' => 1,
+			"email" => (isset($user_data["info"]["email"]) ? $user_data["info"]["email"] : null),
+		);
 
 		if ($user_data["provider"] == "twitter") {
-			$user_data["info"]["email"] = $user_data["info"]["nickname"]."@fillme.twitter";
+			$userData["email"] = $user_data["info"]["nickname"]."@fillme.twitter";
+			$userData["twitter_url"] = $user_data["info"]["urls"]["twitter"];
+		} elseif ($user_data["provider"] == "github") {
+			$userData["github_url"] = $user_data["info"]["urls"]["github"];
+		} elseif ($user_data["google"]) {
+			$userData["googleplus_url"] = $user_data["info"]["urls"]["googleplus"];
 		}
 
 		$user = new User;
-		$user->fill(array(
-			"username" => $user_data["info"]["nickname"],
-			"email" => $user_data["info"]["email"],
-			'verified' => 1,
-		), true);
+		$user->fill($userData, true);
 		$user->save();
 
 		$client->user_id = $user->id;
