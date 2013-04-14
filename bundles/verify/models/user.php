@@ -207,8 +207,8 @@ class User extends EloquentVerifyBase
 	}
 
 
-	public function get_gravatar()
+	public function get_gravatar($size = null)
 	{
-		return 'http://www.gravatar.com/avatar/'.md5(strtolower($this->get_attribute('email')));
+		return 'http://www.gravatar.com/avatar/'.md5(strtolower($this->get_attribute('email'))) . (is_null($size)?: '?s='.$size);
 	}
 }

@@ -73,7 +73,7 @@
         		</div>
 
         		<div class="userPres">
-                    <strong>{{ $message->user->username }}</strong><br />
+                    <strong>{{ HTML::link_to_action('panel::profile', $message->user->username, array($message->user->username)) }}</strong><br />
                     Inscrit le {{ date('d/m/Y', strtotime($message->user->created_at)) }}<br />
                     Messages : {{ $message->user->nb_messages }}
         		</div>

@@ -1,5 +1,8 @@
 <?php
 
+Route::get('profile/(:any)', 'panel::profile@index');
+Route::get('profile/(:any)/github', 'panel::profile@github');
+
 Route::group(array('before' => 'isGuest'), function() {
 	Route::get('login', function() {
 	    return View::make('panel::login.login');
