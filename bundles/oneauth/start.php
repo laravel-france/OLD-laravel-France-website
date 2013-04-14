@@ -41,7 +41,7 @@ Event::listen('oneauth.logged', function ($client, $user_data)
 			$user->twitter_url = $user_data["info"]["urls"]["twitter"];
 		} elseif ($user_data["provider"] == "github") {
 			$user->github_url = $user_data["info"]["urls"]["github"];
-		} elseif ($user_data["google"]) {
+		} elseif ($user_data["provider"] == "google") {
 			$user->googleplus_url = $user_data["info"]["urls"]["googleplus"];
 		}
 
