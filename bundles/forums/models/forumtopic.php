@@ -155,7 +155,10 @@ class Forumtopic extends Eloquent {
     public function _isUnread()
     {
         if(Auth::guest()) return false;
-        $pastFromTenDays = time() - ( 10*24*60*60 );
+        $pastFromTenDays = value(Config::get('forums::forums.mark_as_read_after'));
+
+        // is the topic > delay, then return false;
+        if(strtotime($this->updated_at) < $pastFromTenDays) return false;
 
         if (!IoC::registered('topicsview'))
         {

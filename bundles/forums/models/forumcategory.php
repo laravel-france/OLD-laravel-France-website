@@ -64,7 +64,7 @@ class Forumcategory extends Eloquent {
     private function _isUnread()
     {
         if(Auth::guest()) return false;
-        $pastFromTenDays = time() - ( 10*24*60*60 );
+        $pastFromTenDays = value(Config::get('forums::forums.mark_as_read_after'));
 
         if (!IoC::registered('topicsview'))
         {
