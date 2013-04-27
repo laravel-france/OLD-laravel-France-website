@@ -17,7 +17,7 @@ class Forums_Home_Controller extends Base_Controller
 
     public function action_rss()
     {
-        $topics = Forumtopic::order_by('updated_at')->take(20)->get();
+        $topics = Forumtopic::order_by('updated_at', 'DESC')->take(20)->get();
 
         return Response::make(
             View::make('forums::home.rss', array('topics' => $topics)),
