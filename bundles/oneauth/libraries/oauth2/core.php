@@ -27,11 +27,6 @@ class Core extends OAuth_Core
 		// The transfer must always be returned
 		$options[CURLOPT_RETURNTRANSFER] = TRUE;
 
-		// The transfer must always be returned
-		$options[CURLOPT_HTTPHEADER] = array(
-		    'User-Agent: laravel/france'
-		);
-
 		// Open a new remote connection
 		$remote = curl_init($url);
 
