@@ -38,6 +38,7 @@ return array(
 		'github' => array(
 			'id'     => '7c85c12a871d84800769',
 			'secret' => '52a6bd5fd562ef1090d7c5a63ff340657ffd1613',
+            'scope'  => 'user:email'
 		),
 
 		'google' => array(

@@ -21,6 +21,8 @@ class Github extends OAuth2_Provider
 	 */
 	public $name = 'github';
 
+    public $scope = array('user', 'user:email');
+
 	public function url_authorize()
 	{
 		return 'https://github.com/login/oauth/authorize';
