@@ -1,3 +1,6 @@
 [submodule "bundles/docs"]
 	path = bundles/docs
 	url = git://github.com/laravel-france/laravel-france-doc.git
+[submodule "vagrant-chef"]
+	path = vagrant-chef
+	url = git@github.com:AoSiX/vagrant-chef.git
