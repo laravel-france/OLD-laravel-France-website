@@ -64,20 +64,20 @@ class Forumcategory extends Eloquent {
     private function _isUnread()
     {
         if(Auth::guest()) return false;
-        $pastFromTenDays = value(Config::get('forums::forums.mark_as_read_after'));
+        $markAsReadAfter = value(Config::get('forums::forums.mark_as_read_after'));
 
         if (!IoC::registered('topicsview'))
         {
-            IoC::singleton('topicsview', function() use ($pastFromTenDays)
+            IoC::singleton('topicsview', function() use ($markAsReadAfter)
             {
-                return Forumview::where('updated_at', '>=', date('Y-m-d H:i:s', $pastFromTenDays))->where('user_id', '=', Auth::user()->id)->lists('topic_id');
+                return Forumview::where('updated_at', '>=', date('Y-m-d H:i:s', $markAsReadAfter))->where('user_id', '=', Auth::user()->id)->lists('topic_id');
             });
         }
 
         $tv = IoC::resolve('topicsview');
         $nb = count($tv);
 
-        $view = Forumtopic::where('forumcategory_id', '=', $this->id)->where('updated_at', '>=', date('Y-m-d H:i:s', $pastFromTenDays));
+        $view = Forumtopic::where('forumcategory_id', '=', $this->id)->where('updated_at', '>=', date('Y-m-d H:i:s', $markAsReadAfter));
 
         if($nb > 0)
             $view = $view->where_not_in('id', $tv);

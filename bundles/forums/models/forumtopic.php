@@ -148,23 +148,23 @@ class Forumtopic extends Eloquent {
 
     public static function isUnread($id)
     {
-        $obj = static::where_id($id)->first('id');
+        $obj = static::where_id($id)->first(array('id', 'updated_at'));
         return $obj->_isUnread();
     }
 
     public function _isUnread()
     {
         if(Auth::guest()) return false;
-        $pastFromTenDays = value(Config::get('forums::forums.mark_as_read_after'));
+        $markAsReadAfter = value(Config::get('forums::forums.mark_as_read_after'));
 
         // is the topic > delay, then return false;
-        if(strtotime($this->updated_at) < $pastFromTenDays) return false;
+        if(strtotime($this->updated_at) < $markAsReadAfter) return false;
 
         if (!IoC::registered('topicsview'))
         {
-            IoC::singleton('topicsview', function() use ($pastFromTenDays)
+            IoC::singleton('topicsview', function() use ($markAsReadAfter)
             {
-                return Forumview::where('updated_at', '>=', date('Y-m-d H:i:s', $pastFromTenDays))->where('user_id', '=', Auth::user()->id)->lists('topic_id');
+                return Forumview::where('updated_at', '>=', date('Y-m-d H:i:s', $markAsReadAfter))->where('user_id', '=', Auth::user()->id)->lists('topic_id');
             });
         }
 
