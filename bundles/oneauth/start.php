@@ -5,7 +5,7 @@
 | OneAuth Library
 |--------------------------------------------------------------------------
 |
-| Map OneAuth Library using PSR-0 standard namespace. 
+| Map OneAuth Library using PSR-0 standard namespace.
 |
 */
 
@@ -20,8 +20,8 @@ Autoloader::namespaces(array(
 | OneAuth Events Listener
 |--------------------------------------------------------------------------
 |
-| Lets listen to when OneAuth logged a user using any of the supported 
-| providers. 
+| Lets listen to when OneAuth logged a user using any of the supported
+| providers.
 |
 | OneAuth also listen to when user actually logged in to Laravel.
 |
@@ -68,6 +68,12 @@ Event::listen('oneauth.logged', function ($client, $user_data)
 			$userData["googleplus_url"] = $user_data["info"]["urls"]["googleplus"];
 		}
 
+        $originalUname = $userData['username'];
+        for ($i = 1; User::where_username($userData['username'])->count() > 0; $i++)
+        {
+            $userData['username'] = $originalUname . '-' . $i++;
+        }
+
 		$user = new User;
 		$user->fill($userData, true);
 		$user->save();
@@ -75,8 +81,7 @@ Event::listen('oneauth.logged', function ($client, $user_data)
 		$client->user_id = $user->id;
 		$client->save();
 
-
-		Auth::login($user->id, true);
+        Auth::login($user->id, true);
 	}
 });
 

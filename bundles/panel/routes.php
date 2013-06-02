@@ -4,6 +4,7 @@ Route::get('profile/(:any)', 'panel::profile@index');
 Route::get('profile/(:any)/github', 'panel::profile@github');
 
 Route::group(array('before' => 'isGuest'), function() {
+
 	Route::get('login', function() {
 	    return View::make('panel::login.login');
 	});
@@ -11,7 +12,6 @@ Route::group(array('before' => 'isGuest'), function() {
 	Route::get('login/special', function() {
 	    return View::make('panel::login.login_special');
 	});
-
 
 	Route::post('login', function() {
 		$from_url = Session::get('from_url', URL::to_action('forums::home@index'));
@@ -34,7 +34,6 @@ Route::group(array('before' => 'isGuest'), function() {
 	        return Redirect::to('login')
 	            ->with('login_errors', true);
 		}
-
 	});
 });
 
