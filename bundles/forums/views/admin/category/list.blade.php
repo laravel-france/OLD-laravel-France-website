@@ -89,7 +89,7 @@
 
 
 @section('javascript')
-    <script src="https://raw.github.com/isocra/TableDnD/master/stable/jquery.tablednd.js"></script>
+    <script src="/js/jquery.tablednd.js"></script>
 
     <script>
     $("#sortable").tableDnD({
@@ -114,7 +114,7 @@
             data: {title: title, desc: desc},
             async: false,
             success: function() {
-                document.location.reload(true);        
+                document.location.reload(true);
             },
             error: function() {
                 alert('Erreur dans vos champs...');
@@ -133,7 +133,7 @@
             data: {id: id, title: title, desc: desc},
             async: false,
             success: function() {
-                document.location.reload(true);        
+                document.location.reload(true);
             },
             error: function() {
                 alert('Erreur dans vos champs...');
@@ -150,7 +150,7 @@
 
         $("#myModalEdit").modal('show')
 
-        
+
     });
 
     $('a.confirm').click(function(e){
