@@ -3,11 +3,12 @@
 
 <nav class="well">
     <h3>Mon compte</h3>
-	<ul>
-    <li><a href="{{ URL::to_action('panel::avatar@show') }}">Modifier mon avatar</a></li>
+    <ul>
+        <li><a href="{{ URL::to_action('panel::pseudo@show') }}">Modifier mon pseudo</a></li>
+        <li><a href="{{ URL::to_action('panel::avatar@show') }}">Modifier mon avatar</a></li>
         <li><a href="{{ URL::to_action('panel::applications@show') }}">Applications</a></li>
-		<li><a href="{{ URL::to('logout') }}">Déconnexion</a></li>
-	</ul>
+        <li><a href="{{ URL::to('logout') }}">Déconnexion</a></li>
+    </ul>
 </nav>
 
 @if($user->is('Blogger'))
