@@ -51,7 +51,7 @@
     <?php $i++; ?>
     <a name="message{{ $message->id }}"></a>
     <div class="row">
-        <div class="forum-message span12 @if(!($k%2))bg1@elsebg2@endif"> 
+        <div class="forum-message span12 @if(!($k%2))bg1@elsebg2@endif">
             <div class="info_posted">
                 <small><em>
                     @if(!Auth::guest() && (Auth::user()->id == $message->user->id || Auth::user()->is('Forumer')))
@@ -98,7 +98,7 @@
 
     @if($i != $total)
     <div class="row">
-        <div class="span12"> 
+        <div class="span12">
             <div class="forum-message-sep"></div>
         </div>
     </div>
@@ -118,6 +118,19 @@
         <div class="pull-right">
             @include('forums::partials.reply_topic')
         </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <ul class="breadcrumb">
+        <li><a title="Retour à la page d'accueil" href="{{ URL::home() }}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
+        <li><a href="{{ URL::to_action('forums::home@index') }}">Forums</a> <span class="divider">/</span></li>
+        <li><a href="{{ URL::to_action('forums::category@index', array($category->slug, $category->id)) }}">{{ $category->title }}</a> <span class="divider">/</span></li>
+        <li>
+        @if($topic->sticky)<i class="icon-flag"></i> @endif<strong>{{ $topic->title }}</strong></li>
+        @include('forums::partials.login_breadcrumb')
+        </ul>
     </div>
 </div>
 @endsection
