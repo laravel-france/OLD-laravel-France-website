@@ -89,7 +89,7 @@
 
 
 @section('javascript')
-    <script src="/js/jquery.tablednd.js"></script>
+    <script src="/js/vendors/jquery.tablednd.js"></script>
 
     <script>
     $("#sortable").tableDnD({
