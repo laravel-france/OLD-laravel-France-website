@@ -25,7 +25,7 @@
     </div>
 </div>
 
-
+    <p>Besoin d'insérer un grand bloc de code ? Utilisez notre paste pucket ! <a href="http://paste.laravel.fr" target="_blank">Accès au Paste Bucket Laravel France</a></p>
 
 	{{ Form::open(URL::to_action('forums::topic@edit', array($topic->slug, $topic->id, $message->id)), null, array('id'=>'edit_form', 'class'=>'form')) }}
     {{ Form::token() }}
@@ -73,6 +73,7 @@ $(function() {
 		style: "{{ URL::to_asset('bundles/forums/jquery.sceditor.default.min.css') }}",
 		emoticonsRoot: "{{ URL::to_asset('bundles/forums/') }}"
     });
+    $("textarea").sceditor('instance').sourceMode(true);
 });
 </script>
 

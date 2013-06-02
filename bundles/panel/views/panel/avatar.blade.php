@@ -14,7 +14,7 @@
 		Pour obtenir l'avatar de votre choix, vous devez remplir une adresse email valide enregistrée sur le site de <a target="_blank" href="http://fr.gravatar.com/">Gravatar</a>,
 		et ensuite renseignez ci dessous votre adresse email :
 	</p>
-			
+
 
 	<table>
 		<tr>
@@ -56,10 +56,10 @@ jQuery(document).ready(function(){
 			$('#errorZone').hide();
 			$('#successZone').html(json.message).show();
 		})
-		.error(function(json){
-			$('#successZone').hide();
-			$('#errorZone').html(json.message).show();
-		})
+        .fail(function(json){
+            $('#successZone').hide();
+            $('#errorZone').html(json.responseJSON.message).show();
+        });
 
 	});
 
@@ -254,7 +254,7 @@ var delay = (function(){
             ipad = [],
             opad = [],
             hash;
-        ipad[15] = opad[15] = undefined;                        
+        ipad[15] = opad[15] = undefined;
         if (bkey.length > 16) {
             bkey = binl_md5(bkey, key.length * 8);
         }
@@ -304,7 +304,7 @@ var delay = (function(){
     function hex_hmac_md5(k, d) {
         return rstr2hex(raw_hmac_md5(k, d));
     }
-    
+
     $.md5 = function (string, key, raw) {
         if (!key) {
             if (!raw) {
@@ -319,7 +319,7 @@ var delay = (function(){
             return raw_hmac_md5(key, string);
         }
     };
-    
+
 }(typeof jQuery === 'function' ? jQuery : this));
 </script>
 @endsection

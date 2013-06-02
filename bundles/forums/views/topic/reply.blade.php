@@ -25,7 +25,7 @@
     </div>
 </div>
 
-
+    <p>Besoin d'insérer un grand bloc de code ? Utilisez notre paste pucket ! <a href="http://paste.laravel.fr" target="_blank">Accès au Paste Bucket Laravel France</a></p>
 
 	{{ Form::open(URL::to_action('forums::topic@reply', array($topic->slug, $topic->id)), null, array('id'=>'new_reply_form', 'class'=>'form')) }}
     {{ Form::token() }}
@@ -55,7 +55,7 @@
     @foreach($messages as $k => $message)
     <?php $i++; ?>
     <div class="row">
-        <div class="forum-message span12 @if(!($k%2))bg1@elsebg2@endif"> 
+        <div class="forum-message span12 @if(!($k%2))bg1@elsebg2@endif">
             <div class="info_posted"><small><em><a href="#">Posté le {{ date('d/m/Y - H:i:s', strtotime($message->created_at)) }}</a></em></small></div>
 
         	<div class="span3">
@@ -80,7 +80,7 @@
 
     @if($i != $total)
     <div class="row">
-        <div class="span12"> 
+        <div class="span12">
             <div class="forum-message-sep"></div>
         </div>
     </div>
@@ -108,6 +108,7 @@ $(function() {
 		style: "{{ URL::to_asset('bundles/forums/jquery.sceditor.default.min.css') }}",
 		emoticonsRoot: "{{ URL::to_asset('bundles/forums/') }}"
     });
+    $("textarea").sceditor('instance').sourceMode(true);
 });
 </script>
 
