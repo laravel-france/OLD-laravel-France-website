@@ -29,7 +29,7 @@ Route::get('/users/(:num)', function($user_id) {
 
         <section>
             <h2>Intuitif</h2>
-            <p>Laravel est intuitif, "<span class="inline-quote" title="Phill Sparks">Il parle votre langage</span>" :</p>
+            <p>Laravel est intuitif, "<span class="inline-quote" title="Phill Sparks">Il parle votre langue</span>" :</p>
 <pre class="prettyprint lang-php">
 Route::post('login', function() {
     // On récupère les données du formulaire
@@ -39,7 +39,7 @@ Route::post('login', function() {
     );
 
     if (Auth::attempt($userdata)) {
-        // nous sommes connécté !
+        // nous sommes connecté !
         return Redirect::to('home');
     } else {
         // Redirection vers login 
@@ -74,7 +74,7 @@ $monMailer = IoC::resolve('mailer');
 <pre class="prettyprint lang-php">
 // Besoin d'utiliser oauth2 ?
 // http://bundles.laravel.com/bundle/laravel-oauth2
-$ php artistan bundle:install laravel-oauth2
+$ php artisan bundle:install laravel-oauth2
 </pre>
         </section>
 
