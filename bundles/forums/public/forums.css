@@ -84,3 +84,7 @@ cite {
 .forum-message-content {
     padding: 15px 10px 20px 10px;
 }
+
+ol > br, ul > br {
+    display: none;
+}
