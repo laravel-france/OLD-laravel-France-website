@@ -2,6 +2,7 @@ body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     margin-bottom:100px;
     font-size: 12px;
+    filter: none!important;
 }
 
 h1 {
@@ -22,6 +23,7 @@ font-size: 20.5px;
 */
 .navbar-inner {
     background: #272727 none;
+    filter: none;
 }
 
 .navbar-inner,.navbar-static-top .navbar-inner {
@@ -53,7 +55,7 @@ font-size: 20.5px;
 }
 
 .navbar .nav > li a:hover,.navbar .nav > li a:focus,.navbar .nav > .active > a,.navbar .nav > .active > a:hover,.navbar .nav > .active > a:focus, .navbar .nav li a.downloadlink,
-.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus 
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus
 .navbar .nav li.dropdown.open>.dropdown-toggle, .navbar .nav li.dropdown.active>.dropdown-toggle, .navbar .nav li.dropdown.open.active>.dropdown-toggle
 {
     background: #FB503C;
