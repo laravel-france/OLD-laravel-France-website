@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!--[if lt IE 9]>
+        {{ HTML::script('/js/dist/html5shiv.js') }}
+    <![endif]-->
     <title>
     @section('title')
     Bienvenue sur Laravel France
@@ -126,6 +129,6 @@
   })();
 
 </script>
-  
+
 </html>
 @yield('afterhtml')
