@@ -82,7 +82,7 @@
                 </li>
 
                   <li class="divider-vertical"></li>
-                  <li><a href="{{URL::to('telecharger')}}" class='downloadlink btn btn-large'><i class="icon-download-alt icon-white"></i> Télécharger</a></li>
+                  <li><a href="http://laravel.fr/docs/4/installation" class='downloadlink btn btn-large'><i class="icon-download-alt icon-white"></i> Télécharger</a></li>
                 </ul>
               </div><!--/.nav-collapse -->
             </div>
